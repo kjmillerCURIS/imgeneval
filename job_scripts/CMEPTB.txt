@@ -1,0 +1,2 @@
+qstat -u nivek | awk '{ print $1 }' | tail -n +3 | while read ln; do qdel ${ln}; done
+

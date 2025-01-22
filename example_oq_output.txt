@@ -1,0 +1,1263 @@
+EXAMPLE 0:
+A team of sheep and a team of farmers are having a tug-of-war, and there are more sheep than farmers.
+
+SEMANTIC GRAPH:
+{
+  "objects": [
+    {
+      "object_id": 1,
+      "name": "sheep",
+      "is_group": "Yes",
+      "attributes": []
+    },
+    {
+      "object_id": 2,
+      "name": "farmer",
+      "is_group": "Yes",
+      "attributes": []
+    }
+  ],
+  "relationships": [
+    {
+      "subject_ids": [1, 2],
+      "object_ids": [],
+      "type": "spatial semantic",
+      "predicate": "having a tug-of-war"
+    },
+    {
+      "subject_ids": [1],
+      "object_ids": [2],
+      "type": "attribute comparison",
+      "predicate": "more than"
+    }
+  ]
+}
+
+GENERATED TOOL-USE INSTRUCTIONS:
+detections = []
+detections.extend(objDet("farmer"))
+detections.extend(objDet("sheep"))
+For each possible match of nodes to detections:
+(note: "detection_i" will denote the detection matched to node with object_id "i")
+(note: "detection_[i,:]" will denote the detections matched to node with object_id "i", which represents an uncountable group of objects)
+- objectPresenceCheck(detection_[1,:], "sheep")
+- objectPresenceCheck(detection_[2,:], "farmer")
+- attributeComparisonCheck("", "sheep", detection_[1,:], >, "farmer", detection_[2,:])
+
+
+
+EXAMPLE 1:
+Five canvas bags sit to the right of three woolen hats.
+
+SEMANTIC GRAPH:
+{
+    "objects": [
+        {
+            "object_id": 1,
+            "name": "canvas bag",
+            "is_group": "No",
+            "attributes": [
+                {
+                    "attribute_name": "canvas",
+                    "is_negation": "No"
+                }
+            ]
+        },
+        {
+            "object_id": 2,
+            "name": "canvas bag",
+            "is_group": "No",
+            "attributes": [
+                {
+                    "attribute_name": "canvas",
+                    "is_negation": "No"
+                }
+            ]
+        },
+        {
+            "object_id": 3,
+            "name": "canvas bag",
+            "is_group": "No",
+            "attributes": [
+                {
+                    "attribute_name": "canvas",
+                    "is_negation": "No"
+                }
+            ]
+        },
+        {
+            "object_id": 4,
+            "name": "canvas bag",
+            "is_group": "No",
+            "attributes": [
+                {
+                    "attribute_name": "canvas",
+                    "is_negation": "No"
+                }
+            ]
+        },
+        {
+            "object_id": 5,
+            "name": "canvas bag",
+            "is_group": "No",
+            "attributes": [
+                {
+                    "attribute_name": "canvas",
+                    "is_negation": "No"
+                }
+            ]
+        },
+        {
+            "object_id": 6,
+            "name": "woolen hat",
+            "is_group": "No",
+            "attributes": [
+                {
+                    "attribute_name": "woolen",
+                    "is_negation": "No"
+                }
+            ]
+        },
+        {
+            "object_id": 7,
+            "name": "woolen hat",
+            "is_group": "No",
+            "attributes": [
+                {
+                    "attribute_name": "woolen",
+                    "is_negation": "No"
+                }
+            ]
+        },
+        {
+            "object_id": 8,
+            "name": "woolen hat",
+            "is_group": "No",
+            "attributes": [
+                {
+                    "attribute_name": "woolen",
+                    "is_negation": "No"
+                }
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "subject_ids": [1, 2, 3, 4, 5],
+            "object_ids": [6, 7, 8],
+            "type": "spatial only",
+            "predicate": "to the right of"
+        }
+    ]
+}
+
+GENERATED TOOL-USE INSTRUCTIONS:
+detections = []
+detections.extend(objDet("canvas bag"))
+detections.extend(objDet("woolen hat"))
+- countCheck(detections, "canvas bag", 5)
+- countCheck(detections, "woolen hat", 3)
+For each possible match of nodes to detections:
+(note: "detection_i" will denote the detection matched to node with object_id "i")
+(note: "detection_[i,:]" will denote the detections matched to node with object_id "i", which represents an uncountable group of objects)
+- objectPresenceCheck(detection_1, "canvas bag")
+- objectAttributeCheck(detection_1, "canvas", "canvas bag")
+- objectPresenceCheck(detection_2, "canvas bag")
+- objectAttributeCheck(detection_2, "canvas", "canvas bag")
+- objectPresenceCheck(detection_3, "canvas bag")
+- objectAttributeCheck(detection_3, "canvas", "canvas bag")
+- objectPresenceCheck(detection_4, "canvas bag")
+- objectAttributeCheck(detection_4, "canvas", "canvas bag")
+- objectPresenceCheck(detection_5, "canvas bag")
+- objectAttributeCheck(detection_5, "canvas", "canvas bag")
+- objectPresenceCheck(detection_6, "woolen hat")
+- objectAttributeCheck(detection_6, "woolen", "woolen hat")
+- objectPresenceCheck(detection_7, "woolen hat")
+- objectAttributeCheck(detection_7, "woolen", "woolen hat")
+- objectPresenceCheck(detection_8, "woolen hat")
+- objectAttributeCheck(detection_8, "woolen", "woolen hat")
+- predefinedSpatialRelationshipCheck("to the right of", detection_1, detection_6)
+- predefinedSpatialRelationshipCheck("to the right of", detection_1, detection_7)
+- predefinedSpatialRelationshipCheck("to the right of", detection_1, detection_8)
+- predefinedSpatialRelationshipCheck("to the right of", detection_2, detection_6)
+- predefinedSpatialRelationshipCheck("to the right of", detection_2, detection_7)
+- predefinedSpatialRelationshipCheck("to the right of", detection_2, detection_8)
+- predefinedSpatialRelationshipCheck("to the right of", detection_3, detection_6)
+- predefinedSpatialRelationshipCheck("to the right of", detection_3, detection_7)
+- predefinedSpatialRelationshipCheck("to the right of", detection_3, detection_8)
+- predefinedSpatialRelationshipCheck("to the right of", detection_4, detection_6)
+- predefinedSpatialRelationshipCheck("to the right of", detection_4, detection_7)
+- predefinedSpatialRelationshipCheck("to the right of", detection_4, detection_8)
+- predefinedSpatialRelationshipCheck("to the right of", detection_5, detection_6)
+- predefinedSpatialRelationshipCheck("to the right of", detection_5, detection_7)
+- predefinedSpatialRelationshipCheck("to the right of", detection_5, detection_8)
+
+
+
+EXAMPLE 2:
+Two cats with striped tails sitting side-by-side, one with a bow tie and the other without.
+
+SEMANTIC GRAPH:
+{
+    "objects": [
+        {
+            "object_id": 1,
+            "name": "cat",
+            "is_group": "No",
+            "attributes": [
+                {
+                    "attribute_name": "striped tail",
+                    "is_negation": "No"
+                },
+                {
+                    "attribute_name": "with a bow tie",
+                    "is_negation": "No"
+                }
+            ]
+        },
+        {
+            "object_id": 2,
+            "name": "cat",
+            "is_group": "No",
+            "attributes": [
+                {
+                    "attribute_name": "striped tail",
+                    "is_negation": "No"
+                },
+                {
+                    "attribute_name": "without a bow tie",
+                    "is_negation": "Yes"
+                }
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "subject_ids": [1, 2],
+            "object_ids": [],
+            "type": "spatial only",
+            "predicate": "side-by-side"
+        }
+    ]
+}
+
+GENERATED TOOL-USE INSTRUCTIONS:
+detections = []
+detections.extend(objDet("cat"))
+- countCheck(detections, "cat", 2)
+For each possible match of nodes to detections:
+(note: "detection_i" will denote the detection matched to node with object_id "i")
+(note: "detection_[i,:]" will denote the detections matched to node with object_id "i", which represents an uncountable group of objects)
+- objectPresenceCheck(detection_1, "cat")
+- objectAttributeCheck(detection_1, "striped tail", "cat")
+- objectAttributeCheck(detection_1, "with a bow tie", "cat")
+- objectPresenceCheck(detection_2, "cat")
+- objectAttributeCheck(detection_2, "striped tail", "cat")
+- negate(objectAttributeCheck(detection_2, "with a bow tie", "cat"))
+
+
+
+EXAMPLE 3:
+A rabbit standing on a stump looks more nervous than another rabbit not on a stump.
+
+SEMANTIC GRAPH:
+{
+  "objects": [
+    {
+      "object_id": 1,
+      "name": "rabbit",
+      "is_group": "No",
+      "attributes": []
+    },
+    {
+      "object_id": 2,
+      "name": "stump",
+      "is_group": "No",
+      "attributes": []
+    },
+    {
+      "object_id": 3,
+      "name": "rabbit",
+      "is_group": "No",
+      "attributes": []
+    },
+    {
+      "object_id": 4,
+      "name": "stump",
+      "is_group": "No",
+      "attributes": []
+    }
+  ],
+  "relationships": [
+    {
+      "subject_ids": [1],
+      "object_ids": [2],
+      "type": "spatial semantic",
+      "predicate": "standing on"
+    },
+    {
+      "subject_ids": [3],
+      "object_ids": [4],
+      "type": "negative spatial only",
+      "predicate": "not on"
+    },
+    {
+      "subject_ids": [1],
+      "object_ids": [3],
+      "type": "attribute comparison",
+      "predicate": "more nervous than"
+    }
+  ]
+}
+
+GENERATED TOOL-USE INSTRUCTIONS:
+detections = []
+detections.extend(objDet("rabbit"))
+detections.extend(objDet("stump"))
+- countCheck(detections, "rabbit", 2)
+- countCheck(detections, "stump", 2)
+For each possible match of nodes to detections:
+(note: "detection_i" will denote the detection matched to node with object_id "i")
+(note: "detection_[i,:]" will denote the detections matched to node with object_id "i", which represents an uncountable group of objects)
+- objectPresenceCheck(detection_1, "rabbit")
+- objectPresenceCheck(detection_2, "stump")
+- objectPresenceCheck(detection_3, "rabbit")
+- objectPresenceCheck(detection_4, "stump")
+- semanticRelationshipCheck("standing on", detection_1, "rabbit", detection_2, "stump")
+- predefinedSpatialRelationshipCheck("on", detection_1, detection_2)
+- negate(predefinedSpatialRelationshipCheck("on", detection_3, detection_4))
+- attributeComparisonCheck("nervous", "rabbit", detection_1, >, "rabbit", detection_3)
+
+
+
+EXAMPLE 4:
+A plastic bag is placed on the chair, but it contains nothing.
+
+SEMANTIC GRAPH:
+{
+  "objects": [
+    {
+      "object_id": 1,
+      "name": "bag",
+      "is_group": "No",
+      "attributes": [
+        {
+          "attribute_name": "plastic",
+          "is_negation": "No"
+        }
+      ]
+    },
+    {
+      "object_id": 2,
+      "name": "chair",
+      "is_group": "No",
+      "attributes": []
+    }
+  ],
+  "relationships": [
+    {
+      "subject_ids": [1],
+      "object_ids": [2],
+      "type": "spatial only",
+      "predicate": "on"
+    }
+  ]
+}
+
+GENERATED TOOL-USE INSTRUCTIONS:
+detections = []
+detections.extend(objDet("bag"))
+detections.extend(objDet("chair"))
+- countCheck(detections, "bag", 1)
+- countCheck(detections, "chair", 1)
+For each possible match of nodes to detections:
+(note: "detection_i" will denote the detection matched to node with object_id "i")
+(note: "detection_[i,:]" will denote the detections matched to node with object_id "i", which represents an uncountable group of objects)
+- objectPresenceCheck(detection_1, "bag")
+- objectAttributeCheck(detection_1, "plastic", "bag")
+- objectPresenceCheck(detection_2, "chair")
+- predefinedSpatialRelationshipCheck("above", detection_1, detection_2)
+
+
+
+EXAMPLE 5:
+On display, a long, white dress contrasts sharply with a short, dark dress beside it.
+
+SEMANTIC GRAPH:
+{
+  "objects": [
+    {
+      "object_id": 1,
+      "name": "dress",
+      "is_group": "No",
+      "attributes": [
+        {
+          "attribute_name": "white",
+          "is_negation": "No"
+        }
+      ]
+    },
+    {
+      "object_id": 2,
+      "name": "dress",
+      "is_group": "No",
+      "attributes": [
+        {
+          "attribute_name": "dark",
+          "is_negation": "No"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "subject_ids": [1],
+      "object_ids": [2],
+      "type": "attribute comparison",
+      "predicate": "contrasts sharply with"
+    },
+    {
+      "subject_ids": [1],
+      "object_ids": [2],
+      "type": "spatial only",
+      "predicate": "beside"
+    }
+  ]
+}
+
+GENERATED TOOL-USE INSTRUCTIONS:
+detections = []
+detections.extend(objDet("dress"))
+- countCheck(detections, "dress", 2)
+For each possible match of nodes to detections:
+(note: "detection_i" will denote the detection matched to node with object_id "i")
+(note: "detection_[i,:]" will denote the detections matched to node with object_id "i", which represents an uncountable group of objects)
+- objectPresenceCheck(detection_1, "dress")
+- objectAttributeCheck(detection_1, "white", "dress")
+- objectPresenceCheck(detection_2, "dress")
+- objectAttributeCheck(detection_2, "dark", "dress")
+- attributeComparisonCheck("contrasting", "dress", detection_1, >, "dress", detection_2)
+- predefinedSpatialRelationshipCheck("next to", detection_1, detection_2)
+
+
+
+EXAMPLE 6:
+A playful cat not batting at a dangling string but chasing a laser pointer.
+
+SEMANTIC GRAPH:
+{
+  "objects": [
+    {
+      "object_id": 1,
+      "name": "cat",
+      "is_group": "No",
+      "attributes": [
+        {
+          "attribute_name": "playful",
+          "is_negation": "No"
+        }
+      ]
+    },
+    {
+      "object_id": 2,
+      "name": "string",
+      "is_group": "No",
+      "attributes": [
+        {
+          "attribute_name": "dangling",
+          "is_negation": "No"
+        }
+      ]
+    },
+    {
+      "object_id": 3,
+      "name": "laser pointer",
+      "is_group": "No",
+      "attributes": []
+    }
+  ],
+  "relationships": [
+    {
+      "subject_ids": [1],
+      "object_ids": [2],
+      "type": "negative spatial semantic",
+      "predicate": "not batting at"
+    },
+    {
+      "subject_ids": [1],
+      "object_ids": [3],
+      "type": "spatial semantic",
+      "predicate": "chasing"
+    }
+  ]
+}
+
+GENERATED TOOL-USE INSTRUCTIONS:
+detections = []
+detections.extend(objDet("cat"))
+detections.extend(objDet("laser pointer"))
+detections.extend(objDet("string"))
+- countCheck(detections, "cat", 1)
+- countCheck(detections, "laser pointer", 1)
+- countCheck(detections, "string", 1)
+For each possible match of nodes to detections:
+(note: "detection_i" will denote the detection matched to node with object_id "i")
+(note: "detection_[i,:]" will denote the detections matched to node with object_id "i", which represents an uncountable group of objects)
+- objectPresenceCheck(detection_1, "cat")
+- objectAttributeCheck(detection_1, "playful", "cat")
+- objectPresenceCheck(detection_2, "string")
+- objectAttributeCheck(detection_2, "dangling", "string")
+- objectPresenceCheck(detection_3, "laser pointer")
+- negate(semanticRelationshipCheck("not batting at", detection_1, "cat", detection_2, "string"))
+- negate(predefinedSpatialRelationshipCheck("near", detection_1, detection_2))
+- semanticRelationshipCheck("chasing", detection_1, "cat", detection_3, "laser pointer")
+- predefinedSpatialRelationshipCheck("near", detection_1, detection_3)
+
+
+
+EXAMPLE 7:
+A cyclist racing down a winding mountain path.
+
+SEMANTIC GRAPH:
+{
+  "objects": [
+    {
+      "object_id": 1,
+      "name": "cyclist",
+      "is_group": "No",
+      "attributes": []
+    },
+    {
+      "object_id": 2,
+      "name": "path",
+      "is_group": "No",
+      "attributes": []
+    }
+  ],
+  "relationships": [
+    {
+      "subject_ids": [1],
+      "object_ids": [2],
+      "type": "spatial semantic",
+      "predicate": "racing down"
+    }
+  ]
+}
+
+GENERATED TOOL-USE INSTRUCTIONS:
+detections = []
+detections.extend(objDet("cyclist"))
+detections.extend(objDet("path"))
+- countCheck(detections, "cyclist", 1)
+- countCheck(detections, "path", 1)
+For each possible match of nodes to detections:
+(note: "detection_i" will denote the detection matched to node with object_id "i")
+(note: "detection_[i,:]" will denote the detections matched to node with object_id "i", which represents an uncountable group of objects)
+- objectPresenceCheck(detection_1, "cyclist")
+- objectPresenceCheck(detection_2, "path")
+- semanticRelationshipCheck("racing down", detection_1, "cyclist", detection_2, "path")
+- predefinedSpatialRelationshipCheck("on", detection_1, detection_2)
+
+
+
+EXAMPLE 8:
+a person without a hat pushes a person with a hat sitting in a box.
+
+SEMANTIC GRAPH:
+{
+  "objects": [
+    {
+      "object_id": 1,
+      "name": "person",
+      "is_group": "No",
+      "attributes": [
+        {
+          "attribute_name": "without a hat",
+          "is_negation": "Yes"
+        }
+      ]
+    },
+    {
+      "object_id": 2,
+      "name": "person",
+      "is_group": "No",
+      "attributes": [
+        {
+          "attribute_name": "with a hat",
+          "is_negation": "No"
+        }
+      ]
+    },
+    {
+      "object_id": 3,
+      "name": "box",
+      "is_group": "No",
+      "attributes": []
+    }
+  ],
+  "relationships": [
+    {
+      "subject_ids": [1],
+      "object_ids": [2],
+      "type": "spatial semantic",
+      "predicate": "pushes"
+    },
+    {
+      "subject_ids": [2],
+      "object_ids": [3],
+      "type": "spatial semantic",
+      "predicate": "sitting in"
+    }
+  ]
+}
+
+GENERATED TOOL-USE INSTRUCTIONS:
+detections = []
+detections.extend(objDet("box"))
+detections.extend(objDet("person"))
+- countCheck(detections, "box", 1)
+- countCheck(detections, "person", 2)
+For each possible match of nodes to detections:
+(note: "detection_i" will denote the detection matched to node with object_id "i")
+(note: "detection_[i,:]" will denote the detections matched to node with object_id "i", which represents an uncountable group of objects)
+- objectPresenceCheck(detection_1, "person")
+- negate(objectAttributeCheck(detection_1, "With a hat", "person"))
+- objectPresenceCheck(detection_2, "person")
+- objectAttributeCheck(detection_2, "with a hat", "person")
+- objectPresenceCheck(detection_3, "box")
+- semanticRelationshipCheck("pushes", detection_1, "person", detection_2, "person")
+- predefinedSpatialRelationshipCheck("in front of", detection_1, detection_2)
+- semanticRelationshipCheck("sitting in", detection_2, "person", detection_3, "box")
+- predefinedSpatialRelationshipCheck("in", detection_2, detection_3)
+
+
+
+EXAMPLE 9:
+Five ants are carrying biscuits, and an ant that is not carrying biscuits is standing on a green leaf directing them.
+
+SEMANTIC GRAPH:
+{
+  "objects": [
+    {
+      "object_id": 1,
+      "name": "ant",
+      "is_group": "No",
+      "attributes": []
+    },
+    {
+      "object_id": 2,
+      "name": "ant",
+      "is_group": "No",
+      "attributes": []
+    },
+    {
+      "object_id": 3,
+      "name": "biscuit",
+      "is_group": "Yes",
+      "attributes": []
+    },
+    {
+      "object_id": 4,
+      "name": "leaf",
+      "is_group": "No",
+      "attributes": [
+        {
+          "attribute_name": "green",
+          "is_negation": "No"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "subject_ids": [1],
+      "object_ids": [3],
+      "type": "spatial semantic",
+      "predicate": "carrying"
+    },
+    {
+      "subject_ids": [2],
+      "object_ids": [3],
+      "type": "negative spatial semantic",
+      "predicate": "not carrying"
+    },
+    {
+      "subject_ids": [2],
+      "object_ids": [4],
+      "type": "spatial semantic",
+      "predicate": "standing on"
+    },
+    {
+      "subject_ids": [2],
+      "object_ids": [1],
+      "type": "spatial semantic",
+      "predicate": "directing"
+    }
+  ]
+}
+
+GENERATED TOOL-USE INSTRUCTIONS:
+detections = []
+detections.extend(objDet("ant"))
+detections.extend(objDet("biscuit"))
+detections.extend(objDet("leaf"))
+- countCheck(detections, "ant", 2)
+- countCheck(detections, "leaf", 1)
+For each possible match of nodes to detections:
+(note: "detection_i" will denote the detection matched to node with object_id "i")
+(note: "detection_[i,:]" will denote the detections matched to node with object_id "i", which represents an uncountable group of objects)
+- objectPresenceCheck(detection_1, "ant")
+- objectPresenceCheck(detection_2, "ant")
+- objectPresenceCheck(detection_[3,:], "biscuit")
+- objectPresenceCheck(detection_4, "leaf")
+- objectAttributeCheck(detection_4, "green", "leaf")
+- semanticRelationshipCheck("carrying", detection_1, "ant", detection_[3,:], "biscuit")
+- predefinedSpatialRelationshipCheck("on", detection_[3,:], detection_1)
+- negate(semanticRelationshipCheck("not carrying", detection_2, "ant", detection_[3,:], "biscuit"))
+- negate(predefinedSpatialRelationshipCheck("near", detection_2, detection_[3,:]))
+- semanticRelationshipCheck("standing on", detection_2, "ant", detection_4, "leaf")
+- predefinedSpatialRelationshipCheck("on", detection_2, detection_4)
+- semanticRelationshipCheck("directing", detection_2, "ant", detection_1, "ant")
+- predefinedSpatialRelationshipCheck("in front of", detection_2, detection_1)
+
+
+
+EXAMPLE 10:
+A girl has three flower decorations in her hair, all of them daisies.
+
+SEMANTIC GRAPH:
+{
+  "objects": [
+    {
+      "object_id": 1,
+      "name": "girl",
+      "is_group": "No",
+      "attributes": []
+    },
+    {
+      "object_id": 2,
+      "name": "flower decoration",
+      "is_group": "No",
+      "attributes": []
+    },
+    {
+      "object_id": 3,
+      "name": "flower decoration",
+      "is_group": "No",
+      "attributes": []
+    },
+    {
+      "object_id": 4,
+      "name": "flower decoration",
+      "is_group": "No",
+      "attributes": []
+    },
+    {
+      "object_id": 5,
+      "name": "hair",
+      "is_group": "No",
+      "attributes": [
+        {
+          "attribute_name": "her",
+          "is_negation": "No"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "subject_ids": [2],
+      "object_ids": [5],
+      "type": "spatial only",
+      "predicate": "in"
+    },
+    {
+      "subject_ids": [3],
+      "object_ids": [5],
+      "type": "spatial only",
+      "predicate": "in"
+    },
+    {
+      "subject_ids": [4],
+      "object_ids": [5],
+      "type": "spatial only",
+      "predicate": "in"
+    }
+  ]
+}
+
+GENERATED TOOL-USE INSTRUCTIONS:
+detections = []
+detections.extend(objDet("flower decoration"))
+detections.extend(objDet("girl"))
+detections.extend(objDet("hair"))
+- countCheck(detections, "flower decoration", 3)
+- countCheck(detections, "girl", 1)
+- countCheck(detections, "hair", 1)
+For each possible match of nodes to detections:
+(note: "detection_i" will denote the detection matched to node with object_id "i")
+(note: "detection_[i,:]" will denote the detections matched to node with object_id "i", which represents an uncountable group of objects)
+- objectPresenceCheck(detection_1, "girl")
+- objectPresenceCheck(detection_2, "flower decoration")
+- objectPresenceCheck(detection_3, "flower decoration")
+- objectPresenceCheck(detection_4, "flower decoration")
+- objectPresenceCheck(detection_5, "hair")
+- objectAttributeCheck(detection_5, "her", "hair")
+- predefinedSpatialRelationshipCheck("in", detection_2, detection_5)
+- predefinedSpatialRelationshipCheck("in", detection_3, detection_5)
+- predefinedSpatialRelationshipCheck("in", detection_4, detection_5)
+
+
+
+EXAMPLE 11:
+and old person kisses a young person
+
+SEMANTIC GRAPH:
+{
+  "objects": [
+    {
+      "object_id": 1,
+      "name": "person",
+      "is_group": "No",
+      "attributes": [
+        {
+          "attribute_name": "old",
+          "is_negation": "No"
+        }
+      ]
+    },
+    {
+      "object_id": 2,
+      "name": "person",
+      "is_group": "No",
+      "attributes": [
+        {
+          "attribute_name": "young",
+          "is_negation": "No"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "subject_ids": [1],
+      "object_ids": [2],
+      "type": "spatial semantic",
+      "predicate": "kisses"
+    }
+  ]
+}
+
+GENERATED TOOL-USE INSTRUCTIONS:
+detections = []
+detections.extend(objDet("person"))
+- countCheck(detections, "person", 2)
+For each possible match of nodes to detections:
+(note: "detection_i" will denote the detection matched to node with object_id "i")
+(note: "detection_[i,:]" will denote the detections matched to node with object_id "i", which represents an uncountable group of objects)
+- objectPresenceCheck(detection_1, "person")
+- objectAttributeCheck(detection_1, "old", "person")
+- objectPresenceCheck(detection_2, "person")
+- objectAttributeCheck(detection_2, "young", "person")
+- semanticRelationshipCheck("kisses", detection_1, "person", detection_2, "person")
+- predefinedSpatialRelationshipCheck("near", detection_1, detection_2)
+
+
+
+EXAMPLE 12:
+a young person kisses an old person
+
+SEMANTIC GRAPH:
+{
+  "objects": [
+    {
+      "object_id": 1,
+      "name": "person",
+      "is_group": "No",
+      "attributes": [
+        {
+          "attribute_name": "young",
+          "is_negation": "No"
+        }
+      ]
+    },
+    {
+      "object_id": 2,
+      "name": "person",
+      "is_group": "No",
+      "attributes": [
+        {
+          "attribute_name": "old",
+          "is_negation": "No"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "subject_ids": [1],
+      "object_ids": [2],
+      "type": "spatial semantic",
+      "predicate": "kisses"
+    }
+  ]
+}
+
+GENERATED TOOL-USE INSTRUCTIONS:
+detections = []
+detections.extend(objDet("person"))
+- countCheck(detections, "person", 2)
+For each possible match of nodes to detections:
+(note: "detection_i" will denote the detection matched to node with object_id "i")
+(note: "detection_[i,:]" will denote the detections matched to node with object_id "i", which represents an uncountable group of objects)
+- objectPresenceCheck(detection_1, "person")
+- objectAttributeCheck(detection_1, "young", "person")
+- objectPresenceCheck(detection_2, "person")
+- objectAttributeCheck(detection_2, "old", "person")
+- semanticRelationshipCheck("kisses", detection_1, "person", detection_2, "person")
+- predefinedSpatialRelationshipCheck("in front of", detection_1, detection_2)
+
+
+
+EXAMPLE 13:
+the taller person hugs the shorter person
+
+SEMANTIC GRAPH:
+{
+  "objects": [
+    {
+      "object_id": 1,
+      "name": "person",
+      "is_group": "No",
+      "attributes": []
+    },
+    {
+      "object_id": 2,
+      "name": "person",
+      "is_group": "No",
+      "attributes": []
+    }
+  ],
+  "relationships": [
+    {
+      "subject_ids": [1],
+      "object_ids": [2],
+      "type": "spatial semantic",
+      "predicate": "hugs"
+    },
+    {
+      "subject_ids": [1],
+      "object_ids": [2],
+      "type": "attribute comparison",
+      "predicate": "taller"
+    }
+  ]
+}
+
+GENERATED TOOL-USE INSTRUCTIONS:
+detections = []
+detections.extend(objDet("person"))
+- countCheck(detections, "person", 2)
+For each possible match of nodes to detections:
+(note: "detection_i" will denote the detection matched to node with object_id "i")
+(note: "detection_[i,:]" will denote the detections matched to node with object_id "i", which represents an uncountable group of objects)
+- objectPresenceCheck(detection_1, "person")
+- objectPresenceCheck(detection_2, "person")
+- semanticRelationshipCheck("hugs", detection_1, "person", detection_2, "person")
+- predefinedSpatialRelationshipCheck("next to", detection_1, detection_2)
+- attributeComparisonCheck("tall", "person", detection_1, >, "person", detection_2)
+
+
+
+EXAMPLE 14:
+the shorter person hugs the taller person
+
+SEMANTIC GRAPH:
+{
+  "objects": [
+    {"object_id": 1, "name": "person", "is_group": "No", "attributes": []},
+    {"object_id": 2, "name": "person", "is_group": "No", "attributes": []}
+  ],
+  "relationships": [
+    {"subject_ids": [1], "object_ids": [2], "type": "attribute comparison", "predicate": "shorter"},
+    {"subject_ids": [1], "object_ids": [2], "type": "spatial semantic", "predicate": "hugs"}
+  ]
+}
+
+GENERATED TOOL-USE INSTRUCTIONS:
+detections = []
+detections.extend(objDet("person"))
+- countCheck(detections, "person", 2)
+For each possible match of nodes to detections:
+(note: "detection_i" will denote the detection matched to node with object_id "i")
+(note: "detection_[i,:]" will denote the detections matched to node with object_id "i", which represents an uncountable group of objects)
+- objectPresenceCheck(detection_1, "person")
+- objectPresenceCheck(detection_2, "person")
+- attributeComparisonCheck("tall", "person", detection_1, <, "person", detection_2)
+- semanticRelationshipCheck("hugs", detection_1, "person", detection_2, "person")
+- predefinedSpatialRelationshipCheck("near", detection_1, detection_2)
+
+
+
+EXAMPLE 15:
+the masked wrestler hits the unmasked wrestler
+
+SEMANTIC GRAPH:
+{
+  "objects": [
+    {
+      "object_id": 1,
+      "name": "wrestler",
+      "is_group": "No",
+      "attributes": [
+        {
+          "attribute_name": "masked",
+          "is_negation": "No"
+        }
+      ]
+    },
+    {
+      "object_id": 2,
+      "name": "wrestler",
+      "is_group": "No",
+      "attributes": [
+        {
+          "attribute_name": "unmasked",
+          "is_negation": "No"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "subject_ids": [1],
+      "object_ids": [2],
+      "type": "spatial semantic",
+      "predicate": "hits"
+    }
+  ]
+}
+
+GENERATED TOOL-USE INSTRUCTIONS:
+detections = []
+detections.extend(objDet("wrestler"))
+- countCheck(detections, "wrestler", 2)
+For each possible match of nodes to detections:
+(note: "detection_i" will denote the detection matched to node with object_id "i")
+(note: "detection_[i,:]" will denote the detections matched to node with object_id "i", which represents an uncountable group of objects)
+- objectPresenceCheck(detection_1, "wrestler")
+- objectAttributeCheck(detection_1, "masked", "wrestler")
+- objectPresenceCheck(detection_2, "wrestler")
+- objectAttributeCheck(detection_2, "unmasked", "wrestler")
+- semanticRelationshipCheck("hits", detection_1, "wrestler", detection_2, "wrestler")
+- predefinedSpatialRelationshipCheck("in front of", detection_1, detection_2)
+
+
+
+EXAMPLE 16:
+the unmasked wrestler hits the masked wrestler
+
+SEMANTIC GRAPH:
+{
+  "objects": [
+    {
+      "object_id": 1,
+      "name": "wrestler",
+      "is_group": "No",
+      "attributes": [
+        {
+          "attribute_name": "unmasked",
+          "is_negation": "No"
+        }
+      ]
+    },
+    {
+      "object_id": 2,
+      "name": "wrestler",
+      "is_group": "No",
+      "attributes": [
+        {
+          "attribute_name": "masked",
+          "is_negation": "No"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "subject_ids": [1],
+      "object_ids": [2],
+      "type": "spatial semantic",
+      "predicate": "hits"
+    }
+  ]
+}
+
+GENERATED TOOL-USE INSTRUCTIONS:
+detections = []
+detections.extend(objDet("wrestler"))
+- countCheck(detections, "wrestler", 2)
+For each possible match of nodes to detections:
+(note: "detection_i" will denote the detection matched to node with object_id "i")
+(note: "detection_[i,:]" will denote the detections matched to node with object_id "i", which represents an uncountable group of objects)
+- objectPresenceCheck(detection_1, "wrestler")
+- objectAttributeCheck(detection_1, "unmasked", "wrestler")
+- objectPresenceCheck(detection_2, "wrestler")
+- objectAttributeCheck(detection_2, "masked", "wrestler")
+- semanticRelationshipCheck("hits", detection_1, "wrestler", detection_2, "wrestler")
+- predefinedSpatialRelationshipCheck("in front of", detection_1, detection_2)
+
+
+
+EXAMPLE 17:
+a person watches an animal
+
+SEMANTIC GRAPH:
+{
+  "objects": [
+    {
+      "object_id": 1,
+      "name": "person",
+      "is_group": "No",
+      "attributes": []
+    },
+    {
+      "object_id": 2,
+      "name": "animal",
+      "is_group": "No",
+      "attributes": []
+    }
+  ],
+  "relationships": [
+    {
+      "subject_ids": [1],
+      "object_ids": [2],
+      "type": "spatial semantic",
+      "predicate": "watches"
+    }
+  ]
+}
+
+GENERATED TOOL-USE INSTRUCTIONS:
+detections = []
+detections.extend(objDet("animal"))
+detections.extend(objDet("person"))
+- countCheck(detections, "animal", 1)
+- countCheck(detections, "person", 1)
+For each possible match of nodes to detections:
+(note: "detection_i" will denote the detection matched to node with object_id "i")
+(note: "detection_[i,:]" will denote the detections matched to node with object_id "i", which represents an uncountable group of objects)
+- objectPresenceCheck(detection_1, "person")
+- objectPresenceCheck(detection_2, "animal")
+- semanticRelationshipCheck("watches", detection_1, "person", detection_2, "animal")
+- predefinedSpatialRelationshipCheck("in front of", detection_1, detection_2)
+
+
+
+EXAMPLE 18:
+an animal watches a person
+
+SEMANTIC GRAPH:
+{
+  "objects": [
+    {"object_id": 1, "name": "animal", "is_group": "No", "attributes": []},
+    {"object_id": 2, "name": "person", "is_group": "No", "attributes": []}
+  ],
+  "relationships": [
+    {"subject_ids": [1], "object_ids": [2], "type": "spatial semantic", "predicate": "watches"}
+  ]
+}
+
+GENERATED TOOL-USE INSTRUCTIONS:
+detections = []
+detections.extend(objDet("animal"))
+detections.extend(objDet("person"))
+- countCheck(detections, "animal", 1)
+- countCheck(detections, "person", 1)
+For each possible match of nodes to detections:
+(note: "detection_i" will denote the detection matched to node with object_id "i")
+(note: "detection_[i,:]" will denote the detections matched to node with object_id "i", which represents an uncountable group of objects)
+- objectPresenceCheck(detection_1, "animal")
+- objectPresenceCheck(detection_2, "person")
+- semanticRelationshipCheck("watches", detection_1, "animal", detection_2, "person")
+- predefinedSpatialRelationshipCheck("in front of", detection_1, detection_2)
+
+
+
+EXAMPLE 19:
+the person without earrings pays the person with earrings
+
+SEMANTIC GRAPH:
+{
+  "objects": [
+    {
+      "object_id": 1,
+      "name": "person",
+      "is_group": "No",
+      "attributes": [
+        {
+          "attribute_name": "without earrings",
+          "is_negation": "Yes"
+        }
+      ]
+    },
+    {
+      "object_id": 2,
+      "name": "person",
+      "is_group": "No",
+      "attributes": [
+        {
+          "attribute_name": "with earrings",
+          "is_negation": "No"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "subject_ids": [1],
+      "object_ids": [2],
+      "type": "spatial semantic",
+      "predicate": "pays"
+    }
+  ]
+}
+
+GENERATED TOOL-USE INSTRUCTIONS:
+detections = []
+detections.extend(objDet("person"))
+- countCheck(detections, "person", 2)
+For each possible match of nodes to detections:
+(note: "detection_i" will denote the detection matched to node with object_id "i")
+(note: "detection_[i,:]" will denote the detections matched to node with object_id "i", which represents an uncountable group of objects)
+- objectPresenceCheck(detection_1, "person")
+- negate(objectAttributeCheck(detection_1, "with earrings", "person"))
+- objectPresenceCheck(detection_2, "person")
+- objectAttributeCheck(detection_2, "with earrings", "person")
+- semanticRelationshipCheck("pays", detection_1, "person", detection_2, "person")
+- predefinedSpatialRelationshipCheck("near", detection_1, detection_2)
+
+
+
+EXAMPLE 20:
+the person with earrings pays the person without earrings
+
+SEMANTIC GRAPH:
+{"objects": [ {"object_id": 1, "name": "person", "is_group": "No", "attributes":[{"attribute_name":"with earrings", "is_negation":"No"}]}, {"object_id": 2, "name": "person", "is_group": "No", "attributes":[{"attribute_name":"without earrings", "is_negation":"Yes"}]} ], "relationships": [{"subject_ids": [1], "object_ids": [2], "type": "spatial semantic", "predicate": "pays"}]}
+
+GENERATED TOOL-USE INSTRUCTIONS:
+detections = []
+detections.extend(objDet("person"))
+- countCheck(detections, "person", 2)
+For each possible match of nodes to detections:
+(note: "detection_i" will denote the detection matched to node with object_id "i")
+(note: "detection_[i,:]" will denote the detections matched to node with object_id "i", which represents an uncountable group of objects)
+- objectPresenceCheck(detection_1, "person")
+- objectAttributeCheck(detection_1, "with earrings", "person")
+- objectPresenceCheck(detection_2, "person")
+- negate(objectAttributeCheck(detection_2, "with earrings", "person"))
+- semanticRelationshipCheck("pays", detection_1, "person", detection_2, "person")
+- predefinedSpatialRelationshipCheck("next to", detection_1, detection_2)
+
+
+
