@@ -1,0 +1,68 @@
+EXAMPLE 1:
+A plastic bag is placed on the chair, but it contains nothing.
+/usr3/graduate/nivek/data/vislang-domain-exploration-data/imgeneval-data/GenAIBenchImages/DALLE_3/01511.jpeg
+Generating candidate graph 0...
+Semantic graph is good enough, no need to regenerate!
+Generating candidate graph 1...
+Semantic graph is good enough, no need to regenerate!
+Generating candidate graph 2...
+Semantic graph is good enough, no need to regenerate!
+Candidate graph json colon-counts are: [16, 16, 16]
+
+SEMANTIC GRAPH:
+{
+    "objects": [
+        {
+            "object_id": 1,
+            "name": "bag",
+            "is_group": "No",
+            "attributes": [
+                {
+                    "attribute_name": "plastic",
+                    "is_negation": "No"
+                }
+            ]
+        },
+        {
+            "object_id": 2,
+            "name": "chair",
+            "is_group": "No",
+            "attributes": []
+        }
+    ],
+    "relationships": [
+        {
+            "subject_ids": [1],
+            "object_ids": [2],
+            "type": "spatial only",
+            "predicate": "on"
+        }
+    ]
+}
+
+RUNNING OBJECT DETECTOR...
+Detected 0 instances of "bag" in image
+Detected 1 instances of "chair" in image
+EVALUATING MATCHES...
+CANDIDATE MATCH:
+bag{1} ==> None
+chair{2} ==> chair(123,139)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 1 bags detected', 0),
+ ('Check that there are 1 chairs detected', 1),
+ ('Check attribute "plastic" for bag(None)', 0),
+ ('Check spatial relationship: bag(None) on chair(123,139)', 0)]
+score = 0.25
+
+BEST MATCH:
+bag{1} ==> None
+chair{2} ==> chair(123,139)
+CHECKLIST RESULTS FOR BEST MATCH:
+[('Check that there are 1 bags detected', 0),
+ ('Check that there are 1 chairs detected', 1),
+ ('Check attribute "plastic" for bag(None)', 0),
+ ('Check spatial relationship: bag(None) on chair(123,139)', 0)]
+best_score = 0.25
+
+
+

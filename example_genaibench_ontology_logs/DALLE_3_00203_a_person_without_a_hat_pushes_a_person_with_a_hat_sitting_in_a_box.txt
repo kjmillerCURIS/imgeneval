@@ -1,0 +1,110 @@
+EXAMPLE 6:
+a person without a hat pushes a person with a hat sitting in a box.
+/usr3/graduate/nivek/data/vislang-domain-exploration-data/imgeneval-data/GenAIBenchImages/DALLE_3/00203.jpeg
+Generating candidate graph 0...
+Semantic graph is good enough, no need to regenerate!
+Generating candidate graph 1...
+Semantic graph is good enough, no need to regenerate!
+Generating candidate graph 2...
+Semantic graph is good enough, no need to regenerate!
+Candidate graph json colon-counts are: [24, 26, 26]
+
+SEMANTIC GRAPH:
+{
+  "objects": [
+    {
+      "object_id": 1,
+      "name": "person",
+      "is_group": "No",
+      "attributes": [
+        {
+          "attribute_name": "without a hat",
+          "is_negation": "Yes"
+        }
+      ]
+    },
+    {
+      "object_id": 2,
+      "name": "person",
+      "is_group": "No",
+      "attributes": [
+        {
+          "attribute_name": "with a hat",
+          "is_negation": "No"
+        }
+      ]
+    },
+    {
+      "object_id": 3,
+      "name": "box",
+      "is_group": "No",
+      "attributes": []
+    }
+  ],
+  "relationships": [
+    {
+      "subject_ids": [1],
+      "object_ids": [2],
+      "type": "spatial semantic",
+      "predicate": "pushes"
+    },
+    {
+      "subject_ids": [2],
+      "object_ids": [3],
+      "type": "spatial semantic",
+      "predicate": "sitting in"
+    }
+  ]
+}
+
+RUNNING OBJECT DETECTOR...
+Detected 1 instances of "box" in image
+Detected 2 instances of "person" in image
+EVALUATING MATCHES...
+CANDIDATE MATCH:
+person{1} ==> person(66,104)
+person{2} ==> person(166,140)
+box{3} ==> box(157,205)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 1 boxs detected', 1),
+ ('Check that there are 2 persons detected', 1),
+ ('Check negate(attribute "with a hat") for person(66,104)', 1),
+ ('Check attribute "with a hat" for person(166,140)', 1),
+ ('Check semantic relationship: person(66,104) pushes person(166,140)', 0.0),
+ ('Check spatial relationship: person(66,104) behind person(166,140)', 0.0),
+ ('Check semantic relationship: person(166,140) sitting in box(157,205)', 0.0),
+ ('Check spatial relationship: person(166,140) in box(157,205)', 1.0)]
+score = 0.625
+
+CANDIDATE MATCH:
+person{1} ==> person(166,140)
+person{2} ==> person(66,104)
+box{3} ==> box(157,205)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 1 boxs detected', 1),
+ ('Check that there are 2 persons detected', 1),
+ ('Check negate(attribute "with a hat") for person(166,140)', 0),
+ ('Check attribute "with a hat" for person(66,104)', 0),
+ ('Check semantic relationship: person(166,140) pushes person(66,104)', 0.0),
+ ('Check spatial relationship: person(166,140) behind person(66,104)', 1.0),
+ ('Check semantic relationship: person(66,104) sitting in box(157,205)', 0.0),
+ ('Check spatial relationship: person(66,104) in box(157,205)', 0.0)]
+score = 0.375
+
+BEST MATCH:
+person{1} ==> person(66,104)
+person{2} ==> person(166,140)
+box{3} ==> box(157,205)
+CHECKLIST RESULTS FOR BEST MATCH:
+[('Check that there are 1 boxs detected', 1),
+ ('Check that there are 2 persons detected', 1),
+ ('Check negate(attribute "with a hat") for person(66,104)', 1),
+ ('Check attribute "with a hat" for person(166,140)', 1),
+ ('Check semantic relationship: person(66,104) pushes person(166,140)', 0.0),
+ ('Check spatial relationship: person(66,104) behind person(166,140)', 0.0),
+ ('Check semantic relationship: person(166,140) sitting in box(157,205)', 0.0),
+ ('Check spatial relationship: person(166,140) in box(157,205)', 1.0)]
+best_score = 0.625
+
+
+

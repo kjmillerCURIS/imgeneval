@@ -1,0 +1,103 @@
+EXAMPLE 9:
+A team of sheep and a team of farmers are having a tug-of-war, and there are more sheep than farmers.
+/usr3/graduate/nivek/data/vislang-domain-exploration-data/imgeneval-data/GenAIBenchImages/DALLE_3/01389.jpeg
+Generating candidate graph 0...
+Found bad relationship (empty subj or obj):
+{'subject_ids': [1, 2], 'object_ids': [], 'type': 'spatial semantic', 'predicate': 'having a tug-of-war'}
+Regenerating semantic graph...
+Found bad relationship (empty subj or obj):
+{'subject_ids': [1, 2], 'object_ids': [], 'type': 'spatial semantic', 'predicate': 'having a tug-of-war'}
+Regenerating semantic graph...
+Found bad relationship (empty subj or obj):
+{'subject_ids': [1, 2], 'object_ids': [], 'type': 'spatial semantic', 'predicate': 'having a tug-of-war'}
+Regenerating semantic graph...
+Found bad relationship (empty subj or obj):
+{'subject_ids': [1, 2], 'object_ids': [], 'type': 'spatial semantic', 'predicate': 'having a tug-of-war'}
+Regenerating semantic graph...
+Found bad relationship (empty subj or obj):
+{'subject_ids': [1, 2], 'object_ids': [], 'type': 'spatial semantic', 'predicate': 'having a tug-of-war'}
+Regenerating semantic graph...
+Found bad relationship (empty subj or obj):
+{'subject_ids': [1, 2], 'object_ids': [], 'type': 'spatial semantic', 'predicate': 'having a tug-of-war'}
+Regenerating semantic graph...
+Found bad relationship (empty subj or obj):
+{'subject_ids': [1, 2], 'object_ids': [], 'type': 'spatial semantic', 'predicate': 'having a tug-of-war'}
+Regenerating semantic graph...
+Semantic graph is good enough, no need to regenerate!
+Generating candidate graph 1...
+Found bad relationship (empty subj or obj):
+{'subject_ids': [1, 2], 'object_ids': [], 'type': 'spatial semantic', 'predicate': 'having a tug-of-war'}
+Regenerating semantic graph...
+Found bad relationship (empty subj or obj):
+{'subject_ids': [1, 2], 'object_ids': [], 'type': 'spatial semantic', 'predicate': 'having a tug-of-war'}
+Regenerating semantic graph...
+Found bad relationship (empty subj or obj):
+{'subject_ids': [1, 2], 'object_ids': [], 'type': 'spatial semantic', 'predicate': 'having a tug-of-war'}
+Regenerating semantic graph...
+Semantic graph is good enough, no need to regenerate!
+Generating candidate graph 2...
+Semantic graph is good enough, no need to regenerate!
+Candidate graph json colon-counts are: [18, 18, 18]
+
+SEMANTIC GRAPH:
+{
+  "objects": [
+    {
+      "object_id": 1,
+      "name": "sheep",
+      "is_group": "Yes",
+      "attributes": []
+    },
+    {
+      "object_id": 2,
+      "name": "farmer",
+      "is_group": "Yes",
+      "attributes": []
+    }
+  ],
+  "relationships": [
+    {
+      "subject_ids": [1],
+      "object_ids": [2],
+      "type": "spatial semantic",
+      "predicate": "having a tug-of-war"
+    },
+    {
+      "subject_ids": [1],
+      "object_ids": [2],
+      "type": "count comparison",
+      "predicate": "more"
+    }
+  ]
+}
+
+RUNNING OBJECT DETECTOR...
+Detected 17 instances of "farmer" in image
+Detected 9 instances of "sheep" in image
+EVALUATING MATCHES...
+CANDIDATE MATCH:
+sheep{1} ==> sheeps[9]
+farmer{2} ==> farmers[17]
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are at least 2 farmers detected', 1),
+ ('Check that there are at least 2 sheeps detected', 1),
+ ('Check semantic relationship: sheeps[9] having a tug-of-war farmers[17]',
+  0.0),
+ ('Check spatial relationship: sheeps[9] near farmers[17]', 0.0),
+ ('Check count comparison relationship: sheeps[9] > farmers[17]', 0)]
+score = 0.4
+
+BEST MATCH:
+sheep{1} ==> sheeps[9]
+farmer{2} ==> farmers[17]
+CHECKLIST RESULTS FOR BEST MATCH:
+[('Check that there are at least 2 farmers detected', 1),
+ ('Check that there are at least 2 sheeps detected', 1),
+ ('Check semantic relationship: sheeps[9] having a tug-of-war farmers[17]',
+  0.0),
+ ('Check spatial relationship: sheeps[9] near farmers[17]', 0.0),
+ ('Check count comparison relationship: sheeps[9] > farmers[17]', 0)]
+best_score = 0.4
+
+
+

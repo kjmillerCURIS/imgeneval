@@ -1,0 +1,4001 @@
+EXAMPLE 10:
+A girl has three flower decorations in her hair, all of them daisies.
+/usr3/graduate/nivek/data/vislang-domain-exploration-data/imgeneval-data/GenAIBenchImages/DALLE_3/01580.jpeg
+Generating candidate graph 0...
+Semantic graph is good enough, no need to regenerate!
+Generating candidate graph 1...
+Semantic graph is good enough, no need to regenerate!
+Generating candidate graph 2...
+Semantic graph is good enough, no need to regenerate!
+Candidate graph json colon-counts are: [32, 44, 36]
+
+SEMANTIC GRAPH:
+{
+  "objects": [
+    {
+      "object_id": 1,
+      "name": "girl",
+      "is_group": "No",
+      "attributes": []
+    },
+    {
+      "object_id": 2,
+      "name": "flower decoration",
+      "is_group": "No",
+      "attributes": [
+        {
+          "attribute_name": "daisy",
+          "is_negation": "No"
+        }
+      ]
+    },
+    {
+      "object_id": 3,
+      "name": "flower decoration",
+      "is_group": "No",
+      "attributes": [
+        {
+          "attribute_name": "daisy",
+          "is_negation": "No"
+        }
+      ]
+    },
+    {
+      "object_id": 4,
+      "name": "flower decoration",
+      "is_group": "No",
+      "attributes": [
+        {
+          "attribute_name": "daisy",
+          "is_negation": "No"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "subject_ids": [1],
+      "object_ids": [2],
+      "type": "spatial only",
+      "predicate": "in hair"
+    },
+    {
+      "subject_ids": [1],
+      "object_ids": [3],
+      "type": "spatial only",
+      "predicate": "in hair"
+    },
+    {
+      "subject_ids": [1],
+      "object_ids": [4],
+      "type": "spatial only",
+      "predicate": "in hair"
+    }
+  ]
+}
+
+RUNNING OBJECT DETECTOR...
+Detected 7 instances of "flower decoration" in image
+Detected 1 instances of "girl" in image
+EVALUATING MATCHES...
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(79,147)
+flower decoration{3} ==> flower decoration(151,182)
+flower decoration{4} ==> flower decoration(154,93)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(79,147)
+flower decoration{3} ==> flower decoration(151,182)
+flower decoration{4} ==> flower decoration(190,120)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(79,147)
+flower decoration{3} ==> flower decoration(151,182)
+flower decoration{4} ==> flower decoration(82,82)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(79,147)
+flower decoration{3} ==> flower decoration(151,182)
+flower decoration{4} ==> flower decoration(53,101)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(79,147)
+flower decoration{3} ==> flower decoration(151,182)
+flower decoration{4} ==> flower decoration(106,73)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(79,147)
+flower decoration{3} ==> flower decoration(154,93)
+flower decoration{4} ==> flower decoration(151,182)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(79,147)
+flower decoration{3} ==> flower decoration(154,93)
+flower decoration{4} ==> flower decoration(190,120)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(79,147)
+flower decoration{3} ==> flower decoration(154,93)
+flower decoration{4} ==> flower decoration(82,82)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(79,147)
+flower decoration{3} ==> flower decoration(154,93)
+flower decoration{4} ==> flower decoration(53,101)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(79,147)
+flower decoration{3} ==> flower decoration(154,93)
+flower decoration{4} ==> flower decoration(106,73)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(79,147)
+flower decoration{3} ==> flower decoration(190,120)
+flower decoration{4} ==> flower decoration(151,182)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(79,147)
+flower decoration{3} ==> flower decoration(190,120)
+flower decoration{4} ==> flower decoration(154,93)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(79,147)
+flower decoration{3} ==> flower decoration(190,120)
+flower decoration{4} ==> flower decoration(82,82)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(79,147)
+flower decoration{3} ==> flower decoration(190,120)
+flower decoration{4} ==> flower decoration(53,101)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(79,147)
+flower decoration{3} ==> flower decoration(190,120)
+flower decoration{4} ==> flower decoration(106,73)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(79,147)
+flower decoration{3} ==> flower decoration(82,82)
+flower decoration{4} ==> flower decoration(151,182)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(79,147)
+flower decoration{3} ==> flower decoration(82,82)
+flower decoration{4} ==> flower decoration(154,93)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(79,147)
+flower decoration{3} ==> flower decoration(82,82)
+flower decoration{4} ==> flower decoration(190,120)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(79,147)
+flower decoration{3} ==> flower decoration(82,82)
+flower decoration{4} ==> flower decoration(53,101)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(79,147)
+flower decoration{3} ==> flower decoration(82,82)
+flower decoration{4} ==> flower decoration(106,73)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(79,147)
+flower decoration{3} ==> flower decoration(53,101)
+flower decoration{4} ==> flower decoration(151,182)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(79,147)
+flower decoration{3} ==> flower decoration(53,101)
+flower decoration{4} ==> flower decoration(154,93)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(79,147)
+flower decoration{3} ==> flower decoration(53,101)
+flower decoration{4} ==> flower decoration(190,120)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(79,147)
+flower decoration{3} ==> flower decoration(53,101)
+flower decoration{4} ==> flower decoration(82,82)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(79,147)
+flower decoration{3} ==> flower decoration(53,101)
+flower decoration{4} ==> flower decoration(106,73)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(79,147)
+flower decoration{3} ==> flower decoration(106,73)
+flower decoration{4} ==> flower decoration(151,182)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(79,147)
+flower decoration{3} ==> flower decoration(106,73)
+flower decoration{4} ==> flower decoration(154,93)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(79,147)
+flower decoration{3} ==> flower decoration(106,73)
+flower decoration{4} ==> flower decoration(190,120)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(79,147)
+flower decoration{3} ==> flower decoration(106,73)
+flower decoration{4} ==> flower decoration(82,82)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(79,147)
+flower decoration{3} ==> flower decoration(106,73)
+flower decoration{4} ==> flower decoration(53,101)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(151,182)
+flower decoration{3} ==> flower decoration(79,147)
+flower decoration{4} ==> flower decoration(154,93)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(151,182)
+flower decoration{3} ==> flower decoration(79,147)
+flower decoration{4} ==> flower decoration(190,120)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(151,182)
+flower decoration{3} ==> flower decoration(79,147)
+flower decoration{4} ==> flower decoration(82,82)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(151,182)
+flower decoration{3} ==> flower decoration(79,147)
+flower decoration{4} ==> flower decoration(53,101)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(151,182)
+flower decoration{3} ==> flower decoration(79,147)
+flower decoration{4} ==> flower decoration(106,73)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(151,182)
+flower decoration{3} ==> flower decoration(154,93)
+flower decoration{4} ==> flower decoration(79,147)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(151,182)
+flower decoration{3} ==> flower decoration(154,93)
+flower decoration{4} ==> flower decoration(190,120)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(151,182)
+flower decoration{3} ==> flower decoration(154,93)
+flower decoration{4} ==> flower decoration(82,82)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(151,182)
+flower decoration{3} ==> flower decoration(154,93)
+flower decoration{4} ==> flower decoration(53,101)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(151,182)
+flower decoration{3} ==> flower decoration(154,93)
+flower decoration{4} ==> flower decoration(106,73)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(151,182)
+flower decoration{3} ==> flower decoration(190,120)
+flower decoration{4} ==> flower decoration(79,147)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(151,182)
+flower decoration{3} ==> flower decoration(190,120)
+flower decoration{4} ==> flower decoration(154,93)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(151,182)
+flower decoration{3} ==> flower decoration(190,120)
+flower decoration{4} ==> flower decoration(82,82)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(151,182)
+flower decoration{3} ==> flower decoration(190,120)
+flower decoration{4} ==> flower decoration(53,101)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(151,182)
+flower decoration{3} ==> flower decoration(190,120)
+flower decoration{4} ==> flower decoration(106,73)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(151,182)
+flower decoration{3} ==> flower decoration(82,82)
+flower decoration{4} ==> flower decoration(79,147)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(151,182)
+flower decoration{3} ==> flower decoration(82,82)
+flower decoration{4} ==> flower decoration(154,93)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(151,182)
+flower decoration{3} ==> flower decoration(82,82)
+flower decoration{4} ==> flower decoration(190,120)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(151,182)
+flower decoration{3} ==> flower decoration(82,82)
+flower decoration{4} ==> flower decoration(53,101)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(151,182)
+flower decoration{3} ==> flower decoration(82,82)
+flower decoration{4} ==> flower decoration(106,73)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(151,182)
+flower decoration{3} ==> flower decoration(53,101)
+flower decoration{4} ==> flower decoration(79,147)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(151,182)
+flower decoration{3} ==> flower decoration(53,101)
+flower decoration{4} ==> flower decoration(154,93)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(151,182)
+flower decoration{3} ==> flower decoration(53,101)
+flower decoration{4} ==> flower decoration(190,120)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(151,182)
+flower decoration{3} ==> flower decoration(53,101)
+flower decoration{4} ==> flower decoration(82,82)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(151,182)
+flower decoration{3} ==> flower decoration(53,101)
+flower decoration{4} ==> flower decoration(106,73)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(151,182)
+flower decoration{3} ==> flower decoration(106,73)
+flower decoration{4} ==> flower decoration(79,147)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(151,182)
+flower decoration{3} ==> flower decoration(106,73)
+flower decoration{4} ==> flower decoration(154,93)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(151,182)
+flower decoration{3} ==> flower decoration(106,73)
+flower decoration{4} ==> flower decoration(190,120)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(151,182)
+flower decoration{3} ==> flower decoration(106,73)
+flower decoration{4} ==> flower decoration(82,82)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(151,182)
+flower decoration{3} ==> flower decoration(106,73)
+flower decoration{4} ==> flower decoration(53,101)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(154,93)
+flower decoration{3} ==> flower decoration(79,147)
+flower decoration{4} ==> flower decoration(151,182)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(154,93)
+flower decoration{3} ==> flower decoration(79,147)
+flower decoration{4} ==> flower decoration(190,120)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(154,93)
+flower decoration{3} ==> flower decoration(79,147)
+flower decoration{4} ==> flower decoration(82,82)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(154,93)
+flower decoration{3} ==> flower decoration(79,147)
+flower decoration{4} ==> flower decoration(53,101)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(154,93)
+flower decoration{3} ==> flower decoration(79,147)
+flower decoration{4} ==> flower decoration(106,73)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(154,93)
+flower decoration{3} ==> flower decoration(151,182)
+flower decoration{4} ==> flower decoration(79,147)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(154,93)
+flower decoration{3} ==> flower decoration(151,182)
+flower decoration{4} ==> flower decoration(190,120)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(154,93)
+flower decoration{3} ==> flower decoration(151,182)
+flower decoration{4} ==> flower decoration(82,82)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(154,93)
+flower decoration{3} ==> flower decoration(151,182)
+flower decoration{4} ==> flower decoration(53,101)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(154,93)
+flower decoration{3} ==> flower decoration(151,182)
+flower decoration{4} ==> flower decoration(106,73)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(154,93)
+flower decoration{3} ==> flower decoration(190,120)
+flower decoration{4} ==> flower decoration(79,147)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(154,93)
+flower decoration{3} ==> flower decoration(190,120)
+flower decoration{4} ==> flower decoration(151,182)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(154,93)
+flower decoration{3} ==> flower decoration(190,120)
+flower decoration{4} ==> flower decoration(82,82)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(154,93)
+flower decoration{3} ==> flower decoration(190,120)
+flower decoration{4} ==> flower decoration(53,101)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(154,93)
+flower decoration{3} ==> flower decoration(190,120)
+flower decoration{4} ==> flower decoration(106,73)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(154,93)
+flower decoration{3} ==> flower decoration(82,82)
+flower decoration{4} ==> flower decoration(79,147)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(154,93)
+flower decoration{3} ==> flower decoration(82,82)
+flower decoration{4} ==> flower decoration(151,182)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(154,93)
+flower decoration{3} ==> flower decoration(82,82)
+flower decoration{4} ==> flower decoration(190,120)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(154,93)
+flower decoration{3} ==> flower decoration(82,82)
+flower decoration{4} ==> flower decoration(53,101)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(154,93)
+flower decoration{3} ==> flower decoration(82,82)
+flower decoration{4} ==> flower decoration(106,73)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(154,93)
+flower decoration{3} ==> flower decoration(53,101)
+flower decoration{4} ==> flower decoration(79,147)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(154,93)
+flower decoration{3} ==> flower decoration(53,101)
+flower decoration{4} ==> flower decoration(151,182)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(154,93)
+flower decoration{3} ==> flower decoration(53,101)
+flower decoration{4} ==> flower decoration(190,120)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(154,93)
+flower decoration{3} ==> flower decoration(53,101)
+flower decoration{4} ==> flower decoration(82,82)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(154,93)
+flower decoration{3} ==> flower decoration(53,101)
+flower decoration{4} ==> flower decoration(106,73)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(154,93)
+flower decoration{3} ==> flower decoration(106,73)
+flower decoration{4} ==> flower decoration(79,147)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(154,93)
+flower decoration{3} ==> flower decoration(106,73)
+flower decoration{4} ==> flower decoration(151,182)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(154,93)
+flower decoration{3} ==> flower decoration(106,73)
+flower decoration{4} ==> flower decoration(190,120)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(154,93)
+flower decoration{3} ==> flower decoration(106,73)
+flower decoration{4} ==> flower decoration(82,82)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(154,93)
+flower decoration{3} ==> flower decoration(106,73)
+flower decoration{4} ==> flower decoration(53,101)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(190,120)
+flower decoration{3} ==> flower decoration(79,147)
+flower decoration{4} ==> flower decoration(151,182)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(190,120)
+flower decoration{3} ==> flower decoration(79,147)
+flower decoration{4} ==> flower decoration(154,93)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(190,120)
+flower decoration{3} ==> flower decoration(79,147)
+flower decoration{4} ==> flower decoration(82,82)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(190,120)
+flower decoration{3} ==> flower decoration(79,147)
+flower decoration{4} ==> flower decoration(53,101)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(190,120)
+flower decoration{3} ==> flower decoration(79,147)
+flower decoration{4} ==> flower decoration(106,73)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(190,120)
+flower decoration{3} ==> flower decoration(151,182)
+flower decoration{4} ==> flower decoration(79,147)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(190,120)
+flower decoration{3} ==> flower decoration(151,182)
+flower decoration{4} ==> flower decoration(154,93)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(190,120)
+flower decoration{3} ==> flower decoration(151,182)
+flower decoration{4} ==> flower decoration(82,82)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(190,120)
+flower decoration{3} ==> flower decoration(151,182)
+flower decoration{4} ==> flower decoration(53,101)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(190,120)
+flower decoration{3} ==> flower decoration(151,182)
+flower decoration{4} ==> flower decoration(106,73)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(190,120)
+flower decoration{3} ==> flower decoration(154,93)
+flower decoration{4} ==> flower decoration(79,147)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(190,120)
+flower decoration{3} ==> flower decoration(154,93)
+flower decoration{4} ==> flower decoration(151,182)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(190,120)
+flower decoration{3} ==> flower decoration(154,93)
+flower decoration{4} ==> flower decoration(82,82)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(190,120)
+flower decoration{3} ==> flower decoration(154,93)
+flower decoration{4} ==> flower decoration(53,101)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(190,120)
+flower decoration{3} ==> flower decoration(154,93)
+flower decoration{4} ==> flower decoration(106,73)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(190,120)
+flower decoration{3} ==> flower decoration(82,82)
+flower decoration{4} ==> flower decoration(79,147)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(190,120)
+flower decoration{3} ==> flower decoration(82,82)
+flower decoration{4} ==> flower decoration(151,182)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(190,120)
+flower decoration{3} ==> flower decoration(82,82)
+flower decoration{4} ==> flower decoration(154,93)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(190,120)
+flower decoration{3} ==> flower decoration(82,82)
+flower decoration{4} ==> flower decoration(53,101)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(190,120)
+flower decoration{3} ==> flower decoration(82,82)
+flower decoration{4} ==> flower decoration(106,73)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(190,120)
+flower decoration{3} ==> flower decoration(53,101)
+flower decoration{4} ==> flower decoration(79,147)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(190,120)
+flower decoration{3} ==> flower decoration(53,101)
+flower decoration{4} ==> flower decoration(151,182)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(190,120)
+flower decoration{3} ==> flower decoration(53,101)
+flower decoration{4} ==> flower decoration(154,93)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(190,120)
+flower decoration{3} ==> flower decoration(53,101)
+flower decoration{4} ==> flower decoration(82,82)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(190,120)
+flower decoration{3} ==> flower decoration(53,101)
+flower decoration{4} ==> flower decoration(106,73)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(190,120)
+flower decoration{3} ==> flower decoration(106,73)
+flower decoration{4} ==> flower decoration(79,147)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(190,120)
+flower decoration{3} ==> flower decoration(106,73)
+flower decoration{4} ==> flower decoration(151,182)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(190,120)
+flower decoration{3} ==> flower decoration(106,73)
+flower decoration{4} ==> flower decoration(154,93)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(190,120)
+flower decoration{3} ==> flower decoration(106,73)
+flower decoration{4} ==> flower decoration(82,82)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(190,120)
+flower decoration{3} ==> flower decoration(106,73)
+flower decoration{4} ==> flower decoration(53,101)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(82,82)
+flower decoration{3} ==> flower decoration(79,147)
+flower decoration{4} ==> flower decoration(151,182)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(82,82)
+flower decoration{3} ==> flower decoration(79,147)
+flower decoration{4} ==> flower decoration(154,93)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(82,82)
+flower decoration{3} ==> flower decoration(79,147)
+flower decoration{4} ==> flower decoration(190,120)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(82,82)
+flower decoration{3} ==> flower decoration(79,147)
+flower decoration{4} ==> flower decoration(53,101)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(82,82)
+flower decoration{3} ==> flower decoration(79,147)
+flower decoration{4} ==> flower decoration(106,73)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(82,82)
+flower decoration{3} ==> flower decoration(151,182)
+flower decoration{4} ==> flower decoration(79,147)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(82,82)
+flower decoration{3} ==> flower decoration(151,182)
+flower decoration{4} ==> flower decoration(154,93)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(82,82)
+flower decoration{3} ==> flower decoration(151,182)
+flower decoration{4} ==> flower decoration(190,120)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(82,82)
+flower decoration{3} ==> flower decoration(151,182)
+flower decoration{4} ==> flower decoration(53,101)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(82,82)
+flower decoration{3} ==> flower decoration(151,182)
+flower decoration{4} ==> flower decoration(106,73)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(82,82)
+flower decoration{3} ==> flower decoration(154,93)
+flower decoration{4} ==> flower decoration(79,147)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(82,82)
+flower decoration{3} ==> flower decoration(154,93)
+flower decoration{4} ==> flower decoration(151,182)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(82,82)
+flower decoration{3} ==> flower decoration(154,93)
+flower decoration{4} ==> flower decoration(190,120)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(82,82)
+flower decoration{3} ==> flower decoration(154,93)
+flower decoration{4} ==> flower decoration(53,101)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(82,82)
+flower decoration{3} ==> flower decoration(154,93)
+flower decoration{4} ==> flower decoration(106,73)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(82,82)
+flower decoration{3} ==> flower decoration(190,120)
+flower decoration{4} ==> flower decoration(79,147)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(82,82)
+flower decoration{3} ==> flower decoration(190,120)
+flower decoration{4} ==> flower decoration(151,182)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(82,82)
+flower decoration{3} ==> flower decoration(190,120)
+flower decoration{4} ==> flower decoration(154,93)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(82,82)
+flower decoration{3} ==> flower decoration(190,120)
+flower decoration{4} ==> flower decoration(53,101)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(82,82)
+flower decoration{3} ==> flower decoration(190,120)
+flower decoration{4} ==> flower decoration(106,73)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(82,82)
+flower decoration{3} ==> flower decoration(53,101)
+flower decoration{4} ==> flower decoration(79,147)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(82,82)
+flower decoration{3} ==> flower decoration(53,101)
+flower decoration{4} ==> flower decoration(151,182)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(82,82)
+flower decoration{3} ==> flower decoration(53,101)
+flower decoration{4} ==> flower decoration(154,93)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(82,82)
+flower decoration{3} ==> flower decoration(53,101)
+flower decoration{4} ==> flower decoration(190,120)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(82,82)
+flower decoration{3} ==> flower decoration(53,101)
+flower decoration{4} ==> flower decoration(106,73)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(82,82)
+flower decoration{3} ==> flower decoration(106,73)
+flower decoration{4} ==> flower decoration(79,147)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(82,82)
+flower decoration{3} ==> flower decoration(106,73)
+flower decoration{4} ==> flower decoration(151,182)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(82,82)
+flower decoration{3} ==> flower decoration(106,73)
+flower decoration{4} ==> flower decoration(154,93)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(82,82)
+flower decoration{3} ==> flower decoration(106,73)
+flower decoration{4} ==> flower decoration(190,120)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(82,82)
+flower decoration{3} ==> flower decoration(106,73)
+flower decoration{4} ==> flower decoration(53,101)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(53,101)
+flower decoration{3} ==> flower decoration(79,147)
+flower decoration{4} ==> flower decoration(151,182)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(53,101)
+flower decoration{3} ==> flower decoration(79,147)
+flower decoration{4} ==> flower decoration(154,93)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(53,101)
+flower decoration{3} ==> flower decoration(79,147)
+flower decoration{4} ==> flower decoration(190,120)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(53,101)
+flower decoration{3} ==> flower decoration(79,147)
+flower decoration{4} ==> flower decoration(82,82)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(53,101)
+flower decoration{3} ==> flower decoration(79,147)
+flower decoration{4} ==> flower decoration(106,73)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(53,101)
+flower decoration{3} ==> flower decoration(151,182)
+flower decoration{4} ==> flower decoration(79,147)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(53,101)
+flower decoration{3} ==> flower decoration(151,182)
+flower decoration{4} ==> flower decoration(154,93)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(53,101)
+flower decoration{3} ==> flower decoration(151,182)
+flower decoration{4} ==> flower decoration(190,120)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(53,101)
+flower decoration{3} ==> flower decoration(151,182)
+flower decoration{4} ==> flower decoration(82,82)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(53,101)
+flower decoration{3} ==> flower decoration(151,182)
+flower decoration{4} ==> flower decoration(106,73)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(53,101)
+flower decoration{3} ==> flower decoration(154,93)
+flower decoration{4} ==> flower decoration(79,147)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(53,101)
+flower decoration{3} ==> flower decoration(154,93)
+flower decoration{4} ==> flower decoration(151,182)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(53,101)
+flower decoration{3} ==> flower decoration(154,93)
+flower decoration{4} ==> flower decoration(190,120)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(53,101)
+flower decoration{3} ==> flower decoration(154,93)
+flower decoration{4} ==> flower decoration(82,82)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(53,101)
+flower decoration{3} ==> flower decoration(154,93)
+flower decoration{4} ==> flower decoration(106,73)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(53,101)
+flower decoration{3} ==> flower decoration(190,120)
+flower decoration{4} ==> flower decoration(79,147)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(53,101)
+flower decoration{3} ==> flower decoration(190,120)
+flower decoration{4} ==> flower decoration(151,182)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(53,101)
+flower decoration{3} ==> flower decoration(190,120)
+flower decoration{4} ==> flower decoration(154,93)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(53,101)
+flower decoration{3} ==> flower decoration(190,120)
+flower decoration{4} ==> flower decoration(82,82)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(53,101)
+flower decoration{3} ==> flower decoration(190,120)
+flower decoration{4} ==> flower decoration(106,73)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(53,101)
+flower decoration{3} ==> flower decoration(82,82)
+flower decoration{4} ==> flower decoration(79,147)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(53,101)
+flower decoration{3} ==> flower decoration(82,82)
+flower decoration{4} ==> flower decoration(151,182)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(53,101)
+flower decoration{3} ==> flower decoration(82,82)
+flower decoration{4} ==> flower decoration(154,93)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(53,101)
+flower decoration{3} ==> flower decoration(82,82)
+flower decoration{4} ==> flower decoration(190,120)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(53,101)
+flower decoration{3} ==> flower decoration(82,82)
+flower decoration{4} ==> flower decoration(106,73)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(53,101)
+flower decoration{3} ==> flower decoration(106,73)
+flower decoration{4} ==> flower decoration(79,147)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(53,101)
+flower decoration{3} ==> flower decoration(106,73)
+flower decoration{4} ==> flower decoration(151,182)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(53,101)
+flower decoration{3} ==> flower decoration(106,73)
+flower decoration{4} ==> flower decoration(154,93)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(53,101)
+flower decoration{3} ==> flower decoration(106,73)
+flower decoration{4} ==> flower decoration(190,120)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(53,101)
+flower decoration{3} ==> flower decoration(106,73)
+flower decoration{4} ==> flower decoration(82,82)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(106,73)
+flower decoration{3} ==> flower decoration(79,147)
+flower decoration{4} ==> flower decoration(151,182)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(106,73)
+flower decoration{3} ==> flower decoration(79,147)
+flower decoration{4} ==> flower decoration(154,93)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(106,73)
+flower decoration{3} ==> flower decoration(79,147)
+flower decoration{4} ==> flower decoration(190,120)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(106,73)
+flower decoration{3} ==> flower decoration(79,147)
+flower decoration{4} ==> flower decoration(82,82)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(106,73)
+flower decoration{3} ==> flower decoration(79,147)
+flower decoration{4} ==> flower decoration(53,101)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(106,73)
+flower decoration{3} ==> flower decoration(151,182)
+flower decoration{4} ==> flower decoration(79,147)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(106,73)
+flower decoration{3} ==> flower decoration(151,182)
+flower decoration{4} ==> flower decoration(154,93)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(106,73)
+flower decoration{3} ==> flower decoration(151,182)
+flower decoration{4} ==> flower decoration(190,120)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(106,73)
+flower decoration{3} ==> flower decoration(151,182)
+flower decoration{4} ==> flower decoration(82,82)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(106,73)
+flower decoration{3} ==> flower decoration(151,182)
+flower decoration{4} ==> flower decoration(53,101)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(106,73)
+flower decoration{3} ==> flower decoration(154,93)
+flower decoration{4} ==> flower decoration(79,147)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(106,73)
+flower decoration{3} ==> flower decoration(154,93)
+flower decoration{4} ==> flower decoration(151,182)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(106,73)
+flower decoration{3} ==> flower decoration(154,93)
+flower decoration{4} ==> flower decoration(190,120)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(106,73)
+flower decoration{3} ==> flower decoration(154,93)
+flower decoration{4} ==> flower decoration(82,82)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(106,73)
+flower decoration{3} ==> flower decoration(154,93)
+flower decoration{4} ==> flower decoration(53,101)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(106,73)
+flower decoration{3} ==> flower decoration(190,120)
+flower decoration{4} ==> flower decoration(79,147)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(106,73)
+flower decoration{3} ==> flower decoration(190,120)
+flower decoration{4} ==> flower decoration(151,182)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(106,73)
+flower decoration{3} ==> flower decoration(190,120)
+flower decoration{4} ==> flower decoration(154,93)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(106,73)
+flower decoration{3} ==> flower decoration(190,120)
+flower decoration{4} ==> flower decoration(82,82)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(106,73)
+flower decoration{3} ==> flower decoration(190,120)
+flower decoration{4} ==> flower decoration(53,101)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(106,73)
+flower decoration{3} ==> flower decoration(82,82)
+flower decoration{4} ==> flower decoration(79,147)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(106,73)
+flower decoration{3} ==> flower decoration(82,82)
+flower decoration{4} ==> flower decoration(151,182)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(106,73)
+flower decoration{3} ==> flower decoration(82,82)
+flower decoration{4} ==> flower decoration(154,93)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(106,73)
+flower decoration{3} ==> flower decoration(82,82)
+flower decoration{4} ==> flower decoration(190,120)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(106,73)
+flower decoration{3} ==> flower decoration(82,82)
+flower decoration{4} ==> flower decoration(53,101)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(106,73)
+flower decoration{3} ==> flower decoration(53,101)
+flower decoration{4} ==> flower decoration(79,147)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(106,73)
+flower decoration{3} ==> flower decoration(53,101)
+flower decoration{4} ==> flower decoration(151,182)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(106,73)
+flower decoration{3} ==> flower decoration(53,101)
+flower decoration{4} ==> flower decoration(154,93)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0)]
+score = 0.5
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(106,73)
+flower decoration{3} ==> flower decoration(53,101)
+flower decoration{4} ==> flower decoration(190,120)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(190,120)', 0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(190,120)',
+  0.0)]
+score = 0.375
+
+CANDIDATE MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(106,73)
+flower decoration{3} ==> flower decoration(53,101)
+flower decoration{4} ==> flower decoration(82,82)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(106,73)', 1),
+ ('Check attribute "daisy" for flower decoration(53,101)', 1),
+ ('Check attribute "daisy" for flower decoration(82,82)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(106,73)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(53,101)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(82,82)', 0.0)]
+score = 0.5
+
+BEST MATCH:
+girl{1} ==> girl(123,133)
+flower decoration{2} ==> flower decoration(79,147)
+flower decoration{3} ==> flower decoration(151,182)
+flower decoration{4} ==> flower decoration(154,93)
+CHECKLIST RESULTS FOR BEST MATCH:
+[('Check that there are 3 flower decorations detected', 0),
+ ('Check that there are 1 girls detected', 1),
+ ('Check attribute "daisy" for flower decoration(79,147)', 1),
+ ('Check attribute "daisy" for flower decoration(151,182)', 1),
+ ('Check attribute "daisy" for flower decoration(154,93)', 1),
+ ('Check spatial relationship: girl(123,133) in flower decoration(79,147)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(151,182)',
+  0.0),
+ ('Check spatial relationship: girl(123,133) in flower decoration(154,93)',
+  0.0)]
+best_score = 0.5
+
+
+

@@ -1,36 +1,51 @@
 import os
 import sys
+import copy
 from collections import Counter
+from PIL import Image
 import json
+import numpy as np
 import openai
 from openai_utils import OPENAI_API_KEY
 openai.api_key = OPENAI_API_KEY
+import re
+import shutil
 import tiktoken
+from influence_on_human_ratings import load_human_ratings_data, adjust_impath
+from ontology_toolset import setup_models, run_object_detector, check_semantic_relationship, check_predefined_spatial_relationship, check_attribute_comparison_relationship, check_attribute, make_bbox_description
+from ontology_match_generator import match_generator
+from ontology_logger import Logger
 
 
 PRINT_NUM_TOKENS = 0
+
+#generate this many graphs, then pick the one with the median colon-count
+#this is a quick-n-dirty way to do a "voting" scheme
+#(assume there are only two possible answers. Median will pick the more frequent one.)
+NUM_FOR_MEDIAN_LENGTH = 3
+
 MY_INPUTS = [
-        'A team of sheep and a team of farmers are having a tug-of-war, and there are more sheep than farmers.',
-        'Five canvas bags sit to the right of three woolen hats.',
-        'Two cats with striped tails sitting side-by-side, one with a bow tie and the other without.',
-        'A rabbit standing on a stump looks more nervous than another rabbit not on a stump.',
+        'Two cats with striped tails sitting side by side, one with a bow tie and the other without.',
         'A plastic bag is placed on the chair, but it contains nothing.',
+        'A rabbit standing on a stump looks more nervous than another rabbit not on a stump.',
         'On display, a long, white dress contrasts sharply with a short, dark dress beside it.',
         'A playful cat not batting at a dangling string but chasing a laser pointer.',
         'A cyclist racing down a winding mountain path.',
         'a person without a hat pushes a person with a hat sitting in a box.',
         'Five ants are carrying biscuits, and an ant that is not carrying biscuits is standing on a green leaf directing them.',
-        'A girl has three flower decorations in her hair, all of them daisies.',
-        'and old person kisses a young person',
-        'a young person kisses an old person',
-        'the taller person hugs the shorter person',
-        'the shorter person hugs the taller person',
-        'the masked wrestler hits the unmasked wrestler',
-        'the unmasked wrestler hits the masked wrestler',
-        'a person watches an animal',
-        'an animal watches a person',
-        'the person without earrings pays the person with earrings',
-        'the person with earrings pays the person without earrings']
+        'Five canvas bags sit to the right of three woolen hats.',
+        'A team of sheep and a team of farmers are having a tug-of-war, and there are more sheep than farmers.',
+        'A girl has three flower decorations in her hair, all of them daisies.']
+#        'an old person kisses a young person',
+#        'a young person kisses an old person',
+#        'the taller person hugs the shorter person',
+#        'the shorter person hugs the taller person',
+#        'the masked wrestler hits the unmasked wrestler',
+#        'the unmasked wrestler hits the masked wrestler',
+#        'a person watches an animal',
+#        'an animal watches a person',
+#        'the person without earrings pays the person with earrings',
+#        'the person with earrings pays the person without earrings']
 
 TASK_DESCRIPTION = '''
 You are an expert in semantic graph generation. Your task is to analyze the provided text and generate a detailed semantic graph in JSON format. The semantic graph should include:
@@ -50,15 +65,20 @@ You are an expert in semantic graph generation. Your task is to analyze the prov
 – 'spatial semantic': relationship has a spatial layout, but isn't 'spatial only', e.g. “lying on”, “chasing”, “fighting”
 – 'negative spatial only': relationship can be described as the negation of a 'spatial only', e.g. “not next to”, "not in"
 – 'negative spatial semantic': relationship can be described as the negation of a 'spatial semantic', e.g. “not lying on”, “not chasing”, “not fighting”
+-- 'count comparison': comparing the cardinality of two groups, e.g. "more apples than oranges", "less flies than mosquitoes", "fewer fish than deer". Both subject and object must have "is_group" set to "Yes".
 - 'predicate': 1-5 words describing the relationship
 '''
 
 ICL_PART = '''
 Here are examples:
+Example text: "three children eating cookies, and a child not eating any"
+Example graph: {"objects": [ {"object_id": 1, "name": "child", "is_group": "No", "attributes": []}, {"object_id": 2, "name": "child", "is_group": "No", "attributes": []}, {"object_id": 3, "name": "child", "is_group": "No", "attributes": []}, {"object_id": 4, "name": "child", "is_group": "No", "attributes": []}, {"object_id": 5, "name": "cookie", "is_group": "Yes", "attributes": []} ], "relationships": [ {"subject_ids": [1,2,3], "object_ids": [5], "type": "spatial semantic", "predicate": "eating"}, {"subject_ids": [4], "object_ids": [5], "type": "negative spatial semantic", "predicate": "not eating"} ]}
 Example text: "two succulent potatoes on top of each other"
 Example graph: {"objects": [ {"object_id": 1, "name": "potato", "is_group" : "No", "attributes": [{"attribute_name": "succulent", "is_negation": "No"}]}, {"object_id" : 2, "name" : "potato", "is_group" : "No", "attributes": [{"attribute_name" : "succulent", "is_negation": "No"}]} ], "relationships": [ {"subject_ids": [1], "object_ids": [2], "type" : "spatial only", "predicate" : "on top of"}]}
 Example text: “The zebra who is not lying on the table is redder than the panda without a tie who is biting the table”
-Example graph: { "objects": [ { "object_id": 1, "name": "zebra", "is_group" : "No", "attributes": [ ] }, { "object_id": 2, "name": "panda", "is_group" : "No", "attributes": [{“attribute_name”: “without a tie”, “is_negation”: “Yes” }] }, { "object_id": 3, "name": "table", "is_group" : "No", "attributes": [] }], "relationships": [ { "subject_ids": [1], "object_ids": [3], "type": "negative spatial semantic", "predicate": "not lying on" }, { "subject_ids": [2], "object_ids": [3], "type": "spatial semantic", "predicate": "biting"},  { "subject_ids": [1], "object_ids": [2], "type": “attribute comparison", "predicate": "redder than"}] }
+Example graph: {"objects": [ {"object_id": 1, "name": "zebra", "is_group" : "No", "attributes": [ ] }, { "object_id": 2, "name": "panda", "is_group" : "No", "attributes": [{“attribute_name”: “without a tie”, “is_negation”: “Yes” }] }, { "object_id": 3, "name": "table", "is_group" : "No", "attributes": [] }], "relationships": [ { "subject_ids": [1], "object_ids": [3], "type": "negative spatial semantic", "predicate": "not lying on" }, { "subject_ids": [2], "object_ids": [3], "type": "spatial semantic", "predicate": "biting"},  { "subject_ids": [1], "object_ids": [2], "type": “attribute comparison", "predicate": "redder than"}] }
+Example text: "there are more orange penguins than spotted zebras"
+Example graph: {"objects": [ {"object_id": 1, "name": "penguin", "is_group": "Yes", "attributes": [{"attribute_name": "orange", "is_negation": "No"}]}, {"object_id": 2, "name": "zebra", "is_group": "Yes", "attributes": [{"attribute_name": "spotted", "is_negation": "No"}]}], "relationships": [ {"subject_ids": [1], "object_ids": [2], "type": "count comparison", "predicate": "more"}]}
 Example text: "a thinner squirrel and a fatter one"
 Example graph: {"objects": [ {"object_id": 1, "name": "squirrel", "is_group": "No"}, {"object_id": 2, "name": "squirrel", "is_group": "No"} ], "relationships":[{"subject_ids": [1], "object_ids": [2], "type": "attribute comparison", "predicate": "thinner"}]}
 Example text: "a thinner squirrel chasing a fatter one"
@@ -73,6 +93,10 @@ Example text: "a man in a house and a woman not in a house"
 Example graph: {"objects": [ {"object_id": 1, "name": "man", "is_group" : "No", "attributes":[]}, {"object_id": 2, "name": "woman", "is_group" : "No", "attributes":[]}, {"object_id" : 3, "name": "house", "is_group" : "No", "attributes":[]} ], "relationships" : [ {"subject_ids" : [1], "object_ids": [3], "type": "spatial", "predicate": "in"}, {"subject_ids": [2], "object_ids": [3], "type": "negative spatial only", "predicate": "not in"} ]}
 Example text: “a fish on top and a fish on bottom”
 Example graph: {“objects”: [ {“object_id”: 1, “name”: “fish”, "is_group" : "No", “attributes”:[]}, {“object_id”: 2, “name”: “fish”, "is_group" : "No", "attributes":[]} ], “relationships”:[{“subject_ids” : [1], “object_ids” : [2], “type” : “spatial only”, “predicate” : "above"}]}
+Example text: "an orange peanut with a monocle"
+Example graph: {"objects": [ {"object_id": 1, "name": "peanut", "is_group" : "No", "attributes":[{"attribute_name" : "orange", "is_negation" : "No"}, {"attribute_name" : "with a monocle", "is_negation" : "No"}]} ], "relationships" : []}
+Example text: "an orange peanut without a monocle"
+Example graph: {"objects": [ {"object_id": 1, "name": "peanut", "is_group" : "No", "attributes":[{"attribute_name" : "orange", "is_negation" : "No"}, {"attribute_name" : "without a monocle", "is_negation" : "Yes"}]} ], "relationships" : []}
 Example text: “three oranges in front of four pears”
 Example graph: {“objects”: [ {“object_id”: 1, “name”: "orange”, "is_group" : "No", “attributes”:[]}, {“object_id”: 2, “name”: “orange”, "is_group" : "No", "attributes":[]}, {“object_id”: 3, “name”: “orange”, "is_group": "No", "attributes":[]}, {“object_id”: 4, “name”: “pear”, "is_group": "No", "attributes":[]}, {“object_id”: 5, “name”: “pear”, "is_group" : "No", "attributes":[]}, {“object_id”: 6, “name”: “pear”, "is_group": "No", "attributes":[]}, {“object_id”: 7, “name”: “pear”, "is_group" : "No", "attributes":[]}], “relationships”:[{“subject_ids” : [1,2,3], “object_ids” : [4,5,6,7], “type” : “spatial only”, “predicate” : "in front of"}]}
 Example text: "some purple pigeons and some violet wigeons"
@@ -83,6 +107,10 @@ Example text: "a murder of crows chasing a boy"
 Example graph: {"objects": [ {"object_id": 1, "name": "crow", "is_group": "Yes", "attributes":[]}, {"object_id": 2, "name": "boy", "is_group": "No", "attributes":[], "relationships": [{"subject_ids": [1], "object_ids": [2], "type" : "spatial semantic", "predicate" : "chasing"}]}
 Example text: "a boy chasing a murder of crows"
 Example graph: {"objects": [ {"object_id": 1, "name": "boy", "is_group": "No", "attributes":[]}, {"object_id": 2, "name": "crow", "is_group": "Yes", "attributes":[], "relationships": [{"subject_ids": [1], "object_ids": [2], "type" : "spatial semantic", "predicate" : "chasing"}]}
+Example text: "a smaller murder of crows chasing a bigger gaggle of geese"
+Example graph: {"objects": [ {"object_id": 1, "name": "crow", "is_group": "Yes", "attributes":[]}, {"object_id": 2, "name": "goose", "is_group": "Yes", "attributes":[], "relationships": [{"subject_ids": [1], "object_ids": [2], "type" : "spatial semantic", "predicate" : "chasing"}, {"subject_ids": [1], "object_ids": [2], "type": "count comparison", "predicate": "smaller"}]}
+Example text: "a murder of crows chasing a gaggle of geese, with more crows than geese"
+Example graph: {"objects": [ {"object_id": 1, "name": "crow", "is_group": "Yes", "attributes":[]}, {"object_id": 2, "name": "goose", "is_group": "Yes", "attributes":[], "relationships": [{"subject_ids": [1], "object_ids": [2], "type" : "spatial semantic", "predicate" : "chasing"}, {"subject_ids": [1], "object_ids": [2], "type": "count comparison", "predicate": "more"}]}
 '''
 
 INPUT_TEMPLATE = 'Here is the text: "%s"'
@@ -114,7 +142,7 @@ def generate_semantic_graph(my_input):
     
     encoding = tiktoken.encoding_for_model('gpt-4o')
     if PRINT_NUM_TOKENS:
-        print('Initial graph-generation prompt has %d tokens'%(len(encoding.encode(messages[0]['content']))))
+        logger.log('Initial graph-generation prompt has %d tokens'%(len(encoding.encode(messages[0]['content']))))
 
     # Send the API request
     response = openai.chat.completions.create(
@@ -147,7 +175,7 @@ def generate_semantic_graph(my_input):
     messages.append({"role": "user", "content": REDUNDANT_EDGE_PROMPT})
     
     if PRINT_NUM_TOKENS:
-        print('Final graph-generation messages have %d tokens total'%(sum([len(encoding.encode(msg['content'])) for msg in messages])))
+        logger.log('Final graph-generation messages have %d tokens total'%(sum([len(encoding.encode(msg['content'])) for msg in messages])))
     
     # Send the API request again
     response = openai.chat.completions.create(
@@ -174,13 +202,12 @@ def process_yesno(yesno):
     return {'Yes' : True, 'No' : False}[yesno]
 
 
-#FIXME: handle count-comparision relationships
 def parse_relationship(relationship):
     assert('subject_ids' in relationship)
     assert('object_ids' in relationship)
     assert('predicate' in relationship)
     assert('type' in relationship)
-    assert(relationship['type'] in ['spatial only', 'spatial semantic', 'negative spatial only', 'negative spatial semantic', 'attribute comparison'])
+    assert(relationship['type'] in ['spatial only', 'spatial semantic', 'negative spatial only', 'negative spatial semantic', 'attribute comparison', 'count comparison'])
     return relationship
 
 
@@ -213,44 +240,34 @@ def parse_semantic_graph(semantic_graph):
     return objects, relationships
 
 
-#TODO: implement actual detection here
-#will return None for now
-def run_detector(objects):
-    names = sorted(set([objects[k]['name'] for k in sorted(objects.keys())]))
-    print('detections = []')
-    for name in names:
-        print('detections.extend(objDet("%s"))'%(name))
-
-    return None
-
-
-#TODO: implement actual stuff here
-#will yield map-to-Nones once for now
-def match_generator(objects, detections):
-    print('For each possible match of nodes to detections:')
-    print('(note: "detection_i" will denote the detection matched to node with object_id "i")')
-    print('(note: "detection_[i,:]" will denote the detections matched to node with object_id "i", which represents an uncountable group of objects)')
-    yield {k : None for k in sorted(objects.keys())}
-
-
-def handle_negation(text):
-    message = {'role' : 'system', 'content' : 'You are an expert in negation. Please give the negation of "%s". Put your answer by itself in the last line of output.'%text}
-    response = openai.chat.completions.create(model='gpt-4o', messages=[message])
-    reply = response.choices[0].message.content
+def handle_negation(text, caches):
+    message = {'role' : 'system', 'content' : 'You are an expert in negation. Please take the negated phrase "%s" and unnegate it. Put your answer by itself in the last line of output.'%text}
+    if message['content'] in caches['LLM_cache']:
+        reply = caches['LLM_cache'][message['content']]
+    else:
+        response = openai.chat.completions.create(model='gpt-4o', messages=[message])
+        reply = response.choices[0].message.content
+        caches['LLM_cache'][message['content']] = reply
+    
     reply = reply.strip().split('\n')[-1].strip().strip('"').strip().rstrip('.')
     return reply
 
 
 #project onto predefined spatial vocab
-def handle_spatial_only_relationship(predicate):
+def handle_spatial_only_relationship(predicate, caches):
     options = []
     for spatial_vocab_entry in SPATIAL_VOCAB_ENTRIES:
         options.append('X ' + spatial_vocab_entry + ' Y')
         options.append('Y ' + spatial_vocab_entry + ' X')
 
     message = {'role' : 'system', 'content' : 'You are an expert in spatial relationships between objects. Your task is to map the spatial relationship "X %s Y" into a fixed vocabulary. Which of the following is closest to it in meaning: '%(predicate) + ', '.join(['"' + option + '"' for option in options]) + '? You must choose one of these options. Please put your answer by itself in the last line of your output.'}
-    response = openai.chat.completions.create(model='gpt-4o', messages=[message])
-    reply = response.choices[0].message.content
+    if message['content'] in caches['LLM_cache']:
+        reply = caches['LLM_cache'][message['content']]
+    else:
+        response = openai.chat.completions.create(model='gpt-4o', messages=[message])
+        reply = response.choices[0].message.content
+        caches['LLM_cache'][message['content']] = reply
+
     reply = reply.strip().split('\n')[-1].strip().strip('"').strip().rstrip('.')
     if reply not in options:
         options_in_reply = [option for option in options if option in reply]
@@ -267,7 +284,7 @@ def handle_spatial_only_relationship(predicate):
 
 
 #extract spatial in terms of predefined spatial vocab (or say that it's not spatial)
-def extract_spatial_from_spatial_semantic_relationship(predicate, subject_name, object_name):
+def extract_spatial_from_spatial_semantic_relationship(predicate, subject_name, object_name, caches, logger):
     subject_name, object_name = subject_name.lower(), object_name.lower()
     if subject_name == object_name:
         subject_name, object_name = 'first ' + subject_name, 'second ' + object_name
@@ -279,20 +296,25 @@ def extract_spatial_from_spatial_semantic_relationship(predicate, subject_name, 
 
     options.append(SPATIAL_NONANSWER_ENTRY)
     message = {'role' : 'system', 'content' : 'You are an expert on describing relationships between objects in spatial terms. Your task is to describe "%s %s %s", in which the relationship is "%s" and the objects are "%s" and "%s". Which of the following would be the most appropriate description of their spatial relationship: '%(subject_name, predicate, object_name, predicate, subject_name, object_name) + ', '.join(['"' + option + '"' for option in options]) + '? You must choose one of these options. Please put your answer by itself in the last line of your output.'}
-    response = openai.chat.completions.create(model='gpt-4o', messages=[message])
-    reply = response.choices[0].message.content
+    if message['content'] in caches['LLM_cache']:
+        reply = caches['LLM_cache'][message['content']]
+    else:
+        response = openai.chat.completions.create(model='gpt-4o', messages=[message])
+        reply = response.choices[0].message.content
+        caches['LLM_cache'][message['content']] = reply
+
     reply = reply.strip().split('\n')[-1].strip().strip('"').strip().rstrip('.').lower()
     if reply not in options:
         options_in_reply = [option for option in options if option in reply]
         if len(options_in_reply) != 1:
-            print('(could not extract spatial relationship from "%s %s %s", skipping spatial check (reply last line "%s"))'%(subject_name, predicate, object_name, reply))
+            logger.log('(could not extract spatial relationship from "%s %s %s", skipping spatial check (reply last line "%s"))'%(subject_name, predicate, object_name, reply))
             return 'N/A', False
 
         reply = options_in_reply[0]
 
     assert(reply in options)
     if reply == SPATIAL_NONANSWER_ENTRY:
-        print('(could not extract spatial relationship from "%s %s %s", skipping spatial check)'%(subject_name, predicate, object_name))
+        logger.log('(could not extract spatial relationship from "%s %s %s", skipping spatial check)'%(subject_name, predicate, object_name))
         return 'N/A', False
     else:
         flip = reply.startswith(object_name)
@@ -304,18 +326,18 @@ def extract_spatial_from_spatial_semantic_relationship(predicate, subject_name, 
 
 
 #extract attribute so they can be compared
-def extract_attribute_from_attribute_comparison_relationship(predicate):
-    messages = [
-        {"role": "system", "content": 'You are an expert in attribute comparison grammar. Please express the phrase "X %s Y" in the form "X is more ADJ than Y" or "X is less ADJ than Y", where "ADJ" is an adjective. Please put your answer by itself in the last line of your output. Change as little as possible about the original phrase.' % predicate}
-    ]
-    response = openai.chat.completions.create(
-        model="gpt-4o",  # Use the GPT-4 model
-        messages=messages
-    )
-    reply = response.choices[0].message.content
+def extract_attribute_from_attribute_comparison_relationship(predicate, caches, logger):
+    message = {"role": "system", "content": 'You are an expert in attribute comparison grammar. Please express the phrase "X %s Y" in the form "X is more ADJ than Y" or "X is less ADJ than Y", where "ADJ" is an adjective. Please put your answer by itself in the last line of your output. Change as little as possible about the original phrase.' % predicate}
+    if message['content'] in caches['LLM_cache']:
+        reply = caches['LLM_cache'][message['content']]
+    else:
+        response = openai.chat.completions.create(model='gpt-4o', messages=[message])
+        reply = response.choices[0].message.content
+        caches['LLM_cache'][message['content']] = reply
+
     reply = reply.strip().split('\n')[-1].strip().strip('"').strip().rstrip('.')
     if 'ADJ' in reply or not ((reply.startswith('X is more ') or reply.startswith('X is less ')) and reply.endswith(' than Y')):
-        print('(could not extract attribute from comparison "X %s Y", skipping attribute comparison check (LLM reply last line was "%s")'%(predicate, reply))
+        logger.log('(could not extract attribute from comparison "X %s Y", skipping attribute comparison check (LLM reply last line was "%s")'%(predicate, reply))
         return 'N/A', 'N/A'
 
     if reply.startswith('X is more '):
@@ -326,6 +348,44 @@ def extract_attribute_from_attribute_comparison_relationship(predicate):
         assert(False)
 
 
+#save some LLM calls by handling easy cases
+#return None if we can't handle it
+def handle_count_comparison_try_easy_cases(predicate):
+    could_be_greater = (predicate in ['greater', 'more', 'bigger', 'larger'])
+    could_be_less = (predicate in ['less', 'fewer', 'smaller', 'tinier', 'lesser'])
+    assert(not (could_be_greater and could_be_less))
+    if could_be_greater or could_be_less:
+        return {True: '>', False: '<'}[could_be_greater]
+    else:
+        return None
+
+
+#return ">" or "<" (or "N/A" if it can't figure it out, in which case the count-comparison is skipped)
+def handle_count_comparison(predicate, caches, logger):
+    try_crocodile = handle_count_comparison_try_easy_cases(predicate)
+    if try_crocodile is not None:
+        return try_crocodile
+
+    message = {"role": "system", "content": 'You are an expert in count comparison grammar. Please decide if the predicate "%s" is best described by the mathematical symbol ">" or "<". You must choose one or the other. Please put your answer by itself (">" or "<") in the last line of your output.' % predicate}
+    if message['content'] in caches['LLM_cache']:
+        reply = caches['LLM_cache'][message['content']]
+    else:
+        response = openai.chat.completions.create(model='gpt-4o', messages=[message])
+        reply = response.choices[0].message.content
+        caches['LLM_cache'][message['content']] = reply
+
+    reply = reply.strip().split('\n')[-1].strip().strip('"').strip().rstrip('.')
+    could_be_greater = ('>' in reply)
+    could_be_less = ('<' in reply)
+    if could_be_greater and not could_be_less:
+        return '>'
+    elif could_be_less and not could_be_greater:
+        return '<'
+    else:
+        logger.log('(could not resolve count comparison predicate "%s", skipping count comparison check (LLM reply last line was "%s"))'%(predicate, reply))
+        return 'N/A'
+
+
 def stringify_detection(my_object):
     if my_object['is_group']:
         return 'detection_[%s,:]' % str(my_object['object_id'])
@@ -334,92 +394,287 @@ def stringify_detection(my_object):
 
 
 def do_count_checks(objects, detections):
+    result = []
     group_names = [objects[k]['name'] for k in sorted(objects.keys()) if objects[k]['is_group']]
     cnt = Counter([objects[k]['name'] for k in sorted(objects.keys())])
     for name in sorted(cnt.keys()):
         if name in group_names:
+            result.append(('Check that there are at least 2 %ss detected'%(name), int(len(detections[name]) >= 2)))
             continue
 
-        print('- countCheck(detections, "%s", %d)'%(name, cnt[name]))
+        result.append(('Check that there are %d %ss detected'%(cnt[name], name), int(len(detections[name]) == cnt[name])))
+
+    return result
 
 
-def check_object(my_object, detection):
-    print('- objectPresenceCheck(%s, "%s")'%(stringify_detection(my_object), my_object['name']))
+def check_object(image_pil, my_object, detection, models, caches):
+    result = []
+
+    #FIXME: consider uncommenting this if you see the matcher "cheating" by underpopulating some groups
+    #I don't think this can happen unless there are multiple groups with the same name
+    #And even then, I'm not sure if it would successfully "cheat"
+    #But I'm keeping this code here just in case it comes up
+    #if my_object['is_group']:
+    #    result.append(('Check that %s{%s} group is matched to at least 1 detection'%(my_object['name'], str(my_object['object_id'])), int(len(detection) >= 1)))
+    #    result.append(('Check that %s{%s} group is matched to at least 2 detections'%(my_object['name'], str(my_object['object_id'])), int(len(detection) >= 2)))
+
     for attribute in my_object['attributes']:
+        attribute_name = attribute['attribute_name']
         if attribute['is_negation']:
-            unnegated_attribute_name = handle_negation(attribute['attribute_name'])
-            print('- negate(objectAttributeCheck(%s, "%s", "%s"))'%(stringify_detection(my_object), unnegated_attribute_name, my_object['name']))
-        else:
-            print('- objectAttributeCheck(%s, "%s", "%s")'%(stringify_detection(my_object), attribute['attribute_name'], my_object['name']))
+            attribute_name = handle_negation(attribute_name, caches)
+
+        result.append(check_attribute(image_pil, my_object['name'], detection, attribute_name, models, caches, negate=attribute['is_negation']))
+
+    return result
 
 
-#FIXME: handle count-comparison relationship
-def check_relationship(relationship, objects, matched_detections):
+#return dict mapping name to list of detections
+def merge_detections(ids, objects, matched_detections):
+    name2detections = {}
+    for k in ids:
+        name = objects[k]['name']
+        if name not in name2detections:
+            name2detections[name] = []
+
+        if objects[k]['is_group']:
+            name2detections[name].extend(matched_detections[k])
+        elif matched_detections[k] is not None:
+            name2detections[name].append(matched_detections[k])
+
+    return name2detections
+
+
+def check_count_comparison_relationship(relationship, objects, matched_detections, caches, logger):
+    crocodile = handle_count_comparison(relationship['predicate'], caches, logger)
+    if crocodile == 'N/A':
+        return []
+
+    assert(len(relationship['subject_ids']) == 1 and len(relationship['subject_ids']) == 1)
+    subject_id, object_id = relationship['subject_ids'][0], relationship['object_ids'][0]
+    assert(objects[subject_id]['is_group'] and objects[object_id]['is_group'])
+    subject_count = len(matched_detections[subject_id])
+    object_count = len(matched_detections[object_id])
+    if crocodile == '>':
+        answer = int(subject_count > object_count)
+    else:
+        assert(crocodile == '<')
+        answer = int(subject_count < object_count)
+
+    description = 'Check count comparison relationship: %ss[%d] %s %ss[%d]'%(objects[subject_id]['name'], subject_count, crocodile, objects[object_id]['name'], object_count)
+    return [(description, answer)]
+
+
+def check_relationship(image_pil, relationship, objects, matched_detections, models, caches, logger):
+    if relationship['type'] == 'count comparison':
+        return check_count_comparison_relationship(relationship, objects, matched_detections, caches, logger)
+
+    result = []
     predicate = relationship['predicate']
-    for the_subject_id in relationship['subject_ids']:
-        for the_object_id in relationship['object_ids']:
-            subject_obj, object_obj = objects[the_subject_id], objects[the_object_id]
+
+    subject_name2detections = merge_detections(relationship['subject_ids'], objects, matched_detections)
+    object_name2detections = merge_detections(relationship['object_ids'], objects, matched_detections)
+
+    #I'm 99% sure this will always be true
+    assert(len(subject_name2detections.keys()) == 1)
+    assert(len(object_name2detections.keys()) == 1)
+
+    for subject_name in sorted(subject_name2detections.keys()):
+        for object_name in sorted(object_name2detections.keys()):
             if relationship['type'] in ['spatial only', 'negative spatial only']:
                 if relationship['type'] == 'negative spatial only':
-                    predicate = handle_negation(predicate)
+                    predicate = handle_negation(predicate, caches)
 
-                spatial_vocab_entry, flip = handle_spatial_only_relationship(predicate)
+                spatial_vocab_entry, flip = handle_spatial_only_relationship(predicate, caches)
+                subject_name_spatial, object_name_spatial = subject_name, object_name
+                subject_name2detections_spatial, object_name2detections_spatial = subject_name2detections, object_name2detections
                 if flip:
-                    subject_obj, object_obj = object_obj, subject_obj
+                    subject_name_spatial, object_name_spatial = object_name, subject_name
+                    subject_name2detections_spatial, object_name2detections_spatial = object_name2detections, subject_name2detections
 
-                if relationship['type'] == 'negative spatial only':
-                    print('- negate(predefinedSpatialRelationshipCheck("%s", %s, %s))'%(spatial_vocab_entry, stringify_detection(subject_obj), stringify_detection(object_obj)))
-                else:
-                    print('- predefinedSpatialRelationshipCheck("%s", %s, %s)'%(spatial_vocab_entry, stringify_detection(subject_obj), stringify_detection(object_obj)))
+                result.append(check_predefined_spatial_relationship(image_pil, subject_name_spatial, subject_name2detections_spatial[subject_name_spatial], object_name_spatial, object_name2detections_spatial[object_name_spatial], spatial_vocab_entry, models, logger, negate=(relationship['type'] == 'negative spatial only')))
             elif relationship['type'] in ['spatial semantic', 'negative spatial semantic']:
-                if relationship['type'] == 'negative_spatial_semantic':
-                    predicate = handle_negation(predicate)
-
-                spatial_vocab_entry, flip = extract_spatial_from_spatial_semantic_relationship(predicate, subject_obj['name'], object_obj['name'])
-                subject_obj_spatial, object_obj_spatial = subject_obj, object_obj
-                if flip:
-                    subject_obj_spatial, object_obj_spatial = object_obj, subject_obj
-
                 if relationship['type'] == 'negative spatial semantic':
-                    print('- negate(semanticRelationshipCheck("%s", %s, "%s", %s, "%s"))'%(predicate, stringify_detection(subject_obj), subject_obj['name'], stringify_detection(object_obj), object_obj['name']))
-                    if spatial_vocab_entry != 'N/A':
-                        print('- negate(predefinedSpatialRelationshipCheck("%s", %s, %s))'%(spatial_vocab_entry, stringify_detection(subject_obj_spatial), stringify_detection(object_obj_spatial)))
-                else:
-                    print('- semanticRelationshipCheck("%s", %s, "%s", %s, "%s")'%(predicate, stringify_detection(subject_obj), subject_obj['name'], stringify_detection(object_obj), object_obj['name']))
-                    if spatial_vocab_entry != 'N/A':
-                        print('- predefinedSpatialRelationshipCheck("%s", %s, %s)'%(spatial_vocab_entry, stringify_detection(subject_obj_spatial), stringify_detection(object_obj_spatial)))
+                    predicate = handle_negation(predicate, caches)
+
+                spatial_vocab_entry, flip = extract_spatial_from_spatial_semantic_relationship(predicate,subject_name,object_name,caches,logger)
+                subject_name_spatial, object_name_spatial = subject_name, object_name
+                subject_name2detections_spatial, object_name2detections_spatial = subject_name2detections, object_name2detections
+                if flip:
+                    subject_name_spatial, object_name_spatial = object_name, subject_name
+                    subject_name2detections_spatial, object_name2detections_spatial = object_name2detections, subject_name2detections
+
+                result.append(check_semantic_relationship(image_pil, subject_name, subject_name2detections[subject_name], object_name, object_name2detections[object_name], predicate, models, caches, logger, negate=(relationship['type'] == 'negative spatial semantic')))
+                if spatial_vocab_entry != 'N/A':
+                    result.append(check_predefined_spatial_relationship(image_pil, subject_name_spatial, subject_name2detections_spatial[subject_name_spatial], object_name_spatial, object_name2detections_spatial[object_name_spatial], spatial_vocab_entry, models, logger, negate=(relationship['type'] == 'negative spatial semantic')))
             elif relationship['type'] == 'attribute comparison':
-                attribute, crocodile = extract_attribute_from_attribute_comparison_relationship(predicate)
+                attribute, crocodile = extract_attribute_from_attribute_comparison_relationship(predicate, caches, logger)
                 if attribute != 'N/A':
-                    print('- attributeComparisonCheck("%s", "%s", %s, %s, "%s", %s)'%(attribute, subject_obj['name'], stringify_detection(subject_obj), crocodile, object_obj['name'], stringify_detection(object_obj)))
+                    result.append(check_attribute_comparison_relationship(image_pil, subject_name, subject_name2detections[subject_name], object_name, object_name2detections[object_name], attribute, crocodile, models, caches))
+
             else:
                 assert(False)
 
+    return result
 
-def process_input(my_input):
-    print(my_input)
-    semantic_graph, (assistant_replyA, assistant_replyB, assistant_replyC) = generate_semantic_graph(my_input)
-    print('')
-    print('SEMANTIC GRAPH:')
-    print(semantic_graph)
-    print('')
-    print('GENERATED TOOL-USE INSTRUCTIONS:')
+
+def get_image_filename(prompt, d_image, logger=None):
+    matching_images = [d_image[k]['images']['DALLE_3']['filename'] for k in sorted(d_image.keys()) if d_image[k]['prompt'].replace('.','').strip().lower() == prompt.replace('.','').strip().lower()]
+    assert(len(matching_images) == 1)
+    image_filename = adjust_impath(matching_images[0])
+    if logger is not None:
+        logger.log(image_filename)
+
+    return image_filename
+
+
+def print_match(match, objects, image_pil, logger):
+    for k in sorted(match.keys()):
+        if match[k] is None:
+            logger.log('%s{%s} ==> None'%(objects[k]['name'], str(k)))
+        else:
+            logger.log('%s{%s} ==> %s'%(objects[k]['name'], str(k), make_bbox_description(image_pil, objects[k]['name'], match[k])))
+
+
+def is_valid_for_count_comparison(id_list, objects):
+    return (len(id_list) == 1 and objects[id_list[0]]['is_group'] == 'Yes')
+
+
+#return True if we should regenerate, False otherwise
+def should_regenerate_semantic_graph(semantic_graph, logger):
+    semantic_graph = json.loads(semantic_graph)
+    if 'objects' not in semantic_graph or 'relationships' not in semantic_graph:
+        logger.log('Missing "objects" or "relationships" section')
+        return True
+
+    objects, relationships = semantic_graph['objects'], semantic_graph['relationships']
+    objects = {my_object['object_id'] : my_object for my_object in objects}
+    for r in relationships:
+        #NOTE: if there's really subject-object ambiguity then you can just put everything as both subject and object. We can skip self-loops now.
+        if len(r['subject_ids']) == 0 or len(r['object_ids']) == 0:
+            logger.log('Found bad relationship (empty subj or obj):')
+            logger.log(r)
+            return True
+
+        if r['type'] == 'count comparison' and not (is_valid_for_count_comparison(r['subject_ids'], objects) and is_valid_for_count_comparison(r['object_ids'], objects)):
+            logger.log('Found bad relationship (invalid count comparison):')
+            logger.log(r)
+            return True
+
+    return False
+
+
+def process_input(my_input, d_image, models, logger):
+    logger.log(my_input)
+    caches = {'semantic_relationship_cache':{}, 'attribute_cache':{}, 'attribute_comparison_relationship_cache':{}, 'LLM_cache':{}}
+    image_filename = get_image_filename(my_input, d_image, logger=logger)
+    image_pil = Image.open(image_filename).convert('RGB')
+    candidate_graphs = []
+    for graph_rep in range(NUM_FOR_MEDIAN_LENGTH):
+        logger.log('Generating candidate graph %d...'%(graph_rep))
+        while True:
+            candidate_graph, (assistant_replyA, assistant_replyB, assistant_replyC) = generate_semantic_graph(my_input)
+            if not should_regenerate_semantic_graph(candidate_graph, logger):
+                logger.log('Semantic graph is good enough, no need to regenerate!')
+                break
+
+            logger.log('Regenerating semantic graph...')
+
+
+        candidate_graphs.append(candidate_graph)
+
+    logger.log('Candidate graph json colon-counts are: %s'%(str([g.count(':') for g in candidate_graphs])))
+    semantic_graph = sorted(candidate_graphs, key=lambda g: g.count(':'))[NUM_FOR_MEDIAN_LENGTH//2]
+
+    logger.log('')
+    logger.log('SEMANTIC GRAPH:')
+    logger.log(semantic_graph)
+    logger.log('')
+    logger.log('RUNNING OBJECT DETECTOR...')
     objects, relationships = parse_semantic_graph(semantic_graph)
-    detections = run_detector(objects)
-    do_count_checks(objects, detections)
-    for matched_detections in match_generator(objects, detections):
+    object_names = sorted(set([objects[k]['name'] for k in sorted(objects.keys())]))
+    detections = run_object_detector(image_pil, object_names, models)
+    for name in object_names:
+        logger.log('Detected %d instances of "%s" in image'%(len(detections[name]), name))
+
+    count_result = do_count_checks(objects, detections)
+    best_match = None
+    best_result = None
+    best_score = float('-inf')
+    logger.log('EVALUATING MATCHES...')
+    for match in match_generator(objects, detections):
+        logger.log('CANDIDATE MATCH:')
+        print_match(match, objects, image_pil, logger)
+        logger.log('CHECKLIST RESULTS FOR CANDIDATE MATCH:')
+        result = copy.deepcopy(count_result)
         for k in sorted(objects.keys()):
-            check_object(objects[k], matched_detections[k])
+            if k not in objects or k not in match:
+                logger.log(objects)
+                logger.log(relationships)
+                logger.log(detections)
+                logger.log(match)
+                assert(False)
+
+            result.extend(check_object(image_pil, objects[k], match[k], models, caches))
 
         for relationship in relationships:
-            check_relationship(relationship, objects, matched_detections)
+            result.extend(check_relationship(image_pil, relationship, objects, match, models, caches, logger))
 
-    print('')
+        score = np.mean([p[1] for p in result])
+        if score > best_score:
+            best_score = score
+            best_match = copy.deepcopy(match)
+            best_result = copy.deepcopy(result)
+
+        logger.log(result, pretty=True)
+        logger.log('score = %s'%(str(score)))
+        logger.log('')
+
+    logger.log('BEST MATCH:')
+    print_match(best_match, objects, image_pil, logger)
+    logger.log('CHECKLIST RESULTS FOR BEST MATCH:')
+    logger.log(best_result, pretty=True)
+    logger.log('best_score = %s'%(str(best_score)))
+    logger.log('')
+
+
+def get_dst_image_filename(image_filename):
+    basename = os.path.basename(image_filename)
+    dirname = os.path.basename(os.path.dirname(image_filename))
+    return os.path.join('example_genaibench_images', dirname, basename)
+
+def get_log_filename(my_input, image_filename):
+    prompt_part = re.split(r'[^A-Za-z0-9]+', my_input)
+    prompt_part = [x for x in prompt_part if len(x) > 0]
+    prompt_part = '_'.join(prompt_part)
+    image_base = os.path.splitext(os.path.basename(image_filename))[0]
+    image_dir = os.path.basename(os.path.dirname(image_filename))
+    log_filename = os.path.join('example_genaibench_ontology_logs', image_dir + '_' + image_base + '_' + prompt_part + '.txt')
+    os.makedirs(os.path.dirname(log_filename), exist_ok=True)
+    return log_filename
+
+
+def reporting_stuff(my_input, d_image, logger):
+    image_filename = get_image_filename(my_input, d_image)
+    dst_image_filename = get_dst_image_filename(image_filename)
+    if not os.path.exists(dst_image_filename):
+        os.makedirs(os.path.dirname(dst_image_filename), exist_ok=True)
+        shutil.copy(image_filename, dst_image_filename)
+
+    log_filename = get_log_filename(my_input, image_filename)
+    logger.save_and_clear(log_filename)
+
+
+def main():
+    logger = Logger()
+    d_image = load_human_ratings_data()
+    models = setup_models()
+    for t, my_input in enumerate(MY_INPUTS):
+        logger.log('EXAMPLE %d:'%(t))
+        process_input(my_input, d_image, models, logger)
+        logger.log('')
+        logger.log('')
+        reporting_stuff(my_input, d_image, logger)
 
 
 if __name__ == '__main__':
-    for t, my_input in enumerate(MY_INPUTS):
-        print('EXAMPLE %d:'%(t))
-        process_input(my_input)
-        print('')
-        print('')
+    main()

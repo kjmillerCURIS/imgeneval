@@ -1,0 +1,76 @@
+EXAMPLE 5:
+A cyclist racing down a winding mountain path.
+/usr3/graduate/nivek/data/vislang-domain-exploration-data/imgeneval-data/GenAIBenchImages/DALLE_3/00315.jpeg
+Generating candidate graph 0...
+Semantic graph is good enough, no need to regenerate!
+Generating candidate graph 1...
+Semantic graph is good enough, no need to regenerate!
+Generating candidate graph 2...
+Semantic graph is good enough, no need to regenerate!
+Candidate graph json colon-counts are: [16, 14, 16]
+
+SEMANTIC GRAPH:
+{
+  "objects": [
+    {
+      "object_id": 1,
+      "name": "cyclist",
+      "is_group": "No",
+      "attributes": []
+    },
+    {
+      "object_id": 2,
+      "name": "mountain path",
+      "is_group": "No",
+      "attributes": [
+        {
+          "attribute_name": "winding",
+          "is_negation": "No"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "subject_ids": [1],
+      "object_ids": [2],
+      "type": "spatial semantic",
+      "predicate": "racing down"
+    }
+  ]
+}
+
+RUNNING OBJECT DETECTOR...
+Detected 1 instances of "cyclist" in image
+Detected 1 instances of "mountain path" in image
+EVALUATING MATCHES...
+CANDIDATE MATCH:
+cyclist{1} ==> cyclist(128,124)
+mountain path{2} ==> mountain path(128,128)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 1 cyclists detected', 1),
+ ('Check that there are 1 mountain paths detected', 1),
+ ('Check attribute "winding" for mountain path(128,128)', 1),
+ ('Check semantic relationship: cyclist(128,124) racing down mountain '
+  'path(128,128)',
+  0.0),
+ ('Check spatial relationship: cyclist(128,124) on mountain path(128,128)',
+  0.0)]
+score = 0.6
+
+BEST MATCH:
+cyclist{1} ==> cyclist(128,124)
+mountain path{2} ==> mountain path(128,128)
+CHECKLIST RESULTS FOR BEST MATCH:
+[('Check that there are 1 cyclists detected', 1),
+ ('Check that there are 1 mountain paths detected', 1),
+ ('Check attribute "winding" for mountain path(128,128)', 1),
+ ('Check semantic relationship: cyclist(128,124) racing down mountain '
+  'path(128,128)',
+  0.0),
+ ('Check spatial relationship: cyclist(128,124) on mountain path(128,128)',
+  0.0)]
+best_score = 0.6
+
+
+

@@ -1,0 +1,99 @@
+EXAMPLE 0:
+Two cats with striped tails sitting side by side, one with a bow tie and the other without.
+/usr3/graduate/nivek/data/vislang-domain-exploration-data/imgeneval-data/GenAIBenchImages/DALLE_3/00851.jpeg
+Generating candidate graph 0...
+Semantic graph is good enough, no need to regenerate!
+Generating candidate graph 1...
+Semantic graph is good enough, no need to regenerate!
+Generating candidate graph 2...
+Found bad relationship (empty subj or obj):
+{'subject_ids': [1, 2], 'object_ids': [], 'type': 'spatial only', 'predicate': 'side by side'}
+Regenerating semantic graph...
+Semantic graph is good enough, no need to regenerate!
+Candidate graph json colon-counts are: [26, 22, 22]
+
+SEMANTIC GRAPH:
+{
+  "objects": [
+    {
+      "object_id": 1,
+      "name": "cat",
+      "is_group": "No",
+      "attributes": [
+        {
+          "attribute_name": "striped tail",
+          "is_negation": "No"
+        },
+        {
+          "attribute_name": "with a bow tie",
+          "is_negation": "No"
+        }
+      ]
+    },
+    {
+      "object_id": 2,
+      "name": "cat",
+      "is_group": "No",
+      "attributes": [
+        {
+          "attribute_name": "striped tail",
+          "is_negation": "No"
+        },
+        {
+          "attribute_name": "without a bow tie",
+          "is_negation": "Yes"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "subject_ids": [1],
+      "object_ids": [2],
+      "type": "spatial only",
+      "predicate": "side by side"
+    }
+  ]
+}
+
+RUNNING OBJECT DETECTOR...
+Detected 2 instances of "cat" in image
+EVALUATING MATCHES...
+CANDIDATE MATCH:
+cat{1} ==> cat(192,129)
+cat{2} ==> cat(63,129)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 2 cats detected', 1),
+ ('Check attribute "striped tail" for cat(192,129)', 1),
+ ('Check attribute "with a bow tie" for cat(192,129)', 1),
+ ('Check attribute "striped tail" for cat(63,129)', 1),
+ ('Check negate(attribute "with a bow tie") for cat(63,129)', 0),
+ ('Check spatial relationship: cat(192,129) next to cat(63,129)', 1.0)]
+score = 0.8333333333333334
+
+CANDIDATE MATCH:
+cat{1} ==> cat(63,129)
+cat{2} ==> cat(192,129)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 2 cats detected', 1),
+ ('Check attribute "striped tail" for cat(63,129)', 1),
+ ('Check attribute "with a bow tie" for cat(63,129)', 1),
+ ('Check attribute "striped tail" for cat(192,129)', 1),
+ ('Check negate(attribute "with a bow tie") for cat(192,129)', 0),
+ ('Check spatial relationship: cat(63,129) next to cat(192,129)', 1.0)]
+score = 0.8333333333333334
+
+BEST MATCH:
+cat{1} ==> cat(192,129)
+cat{2} ==> cat(63,129)
+CHECKLIST RESULTS FOR BEST MATCH:
+[('Check that there are 2 cats detected', 1),
+ ('Check attribute "striped tail" for cat(192,129)', 1),
+ ('Check attribute "with a bow tie" for cat(192,129)', 1),
+ ('Check attribute "striped tail" for cat(63,129)', 1),
+ ('Check negate(attribute "with a bow tie") for cat(63,129)', 0),
+ ('Check spatial relationship: cat(192,129) next to cat(63,129)', 1.0)]
+best_score = 0.8333333333333334
+
+
+
