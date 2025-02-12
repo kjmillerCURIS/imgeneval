@@ -1,4 +1,4 @@
-EXAMPLE 4:
+EXAMPLE 7:
 A playful cat not batting at a dangling string but chasing a laser pointer.
 /usr3/graduate/nivek/data/vislang-domain-exploration-data/imgeneval-data/GenAIBenchImages/DALLE_3/01415.jpeg
 Generating candidate graph 0...
@@ -7,7 +7,7 @@ Generating candidate graph 1...
 Semantic graph is good enough, no need to regenerate!
 Generating candidate graph 2...
 Semantic graph is good enough, no need to regenerate!
-Candidate graph json colon-counts are: [26, 26, 26]
+Candidate graph json colon-counts are: [27, 29, 27]
 
 SEMANTIC GRAPH:
 {
@@ -27,12 +27,7 @@ SEMANTIC GRAPH:
       "object_id": 2,
       "name": "string",
       "is_group": "No",
-      "attributes": [
-        {
-          "attribute_name": "dangling",
-          "is_negation": "No"
-        }
-      ]
+      "attributes": []
     },
     {
       "object_id": 3,
@@ -54,13 +49,19 @@ SEMANTIC GRAPH:
       "type": "spatial semantic",
       "predicate": "chasing"
     }
-  ]
+  ],
+  "scene": {
+    "description": "N/A",
+    "absent_object_names": []
+  }
 }
 
 RUNNING OBJECT DETECTOR...
 Detected 2 instances of "cat" in image
 Detected 2 instances of "laser pointer" in image
 Detected 1 instances of "string" in image
+No scene/style description specified, no need to check.
+No absent objects specified, no need to check.
 EVALUATING MATCHES...
 CANDIDATE MATCH:
 cat{1} ==> cat(84,109)
@@ -71,15 +72,13 @@ CHECKLIST RESULTS FOR CANDIDATE MATCH:
  ('Check that there are 1 laser pointers detected', 0),
  ('Check that there are 1 strings detected', 1),
  ('Check attribute "playful" for cat(84,109)', 1),
- ('Check attribute "dangling" for string(186,114)', 1),
  ('Check semantic relationship: negate(cat(84,109) batting at string(186,114))',
   1.0),
- ('Check spatial relationship: negate(cat(84,109) next to string(186,114))',
-  0.0),
+ ('Check spatial relationship: negate(cat(84,109) near string(186,114))', 1.0),
  ('Check semantic relationship: cat(84,109) chasing laser pointer(186,115)',
   0.0),
  ('Check spatial relationship: cat(84,109) near laser pointer(186,115)', 0.0)]
-score = 0.4444444444444444
+score = 0.5
 
 CANDIDATE MATCH:
 cat{1} ==> cat(84,109)
@@ -90,15 +89,13 @@ CHECKLIST RESULTS FOR CANDIDATE MATCH:
  ('Check that there are 1 laser pointers detected', 0),
  ('Check that there are 1 strings detected', 1),
  ('Check attribute "playful" for cat(84,109)', 1),
- ('Check attribute "dangling" for string(186,114)', 1),
  ('Check semantic relationship: negate(cat(84,109) batting at string(186,114))',
   1.0),
- ('Check spatial relationship: negate(cat(84,109) next to string(186,114))',
-  0.0),
+ ('Check spatial relationship: negate(cat(84,109) near string(186,114))', 1.0),
  ('Check semantic relationship: cat(84,109) chasing laser pointer(82,106)',
   0.0),
  ('Check spatial relationship: cat(84,109) near laser pointer(82,106)', 1.0)]
-score = 0.5555555555555556
+score = 0.625
 
 CANDIDATE MATCH:
 cat{1} ==> cat(96,109)
@@ -109,15 +106,13 @@ CHECKLIST RESULTS FOR CANDIDATE MATCH:
  ('Check that there are 1 laser pointers detected', 0),
  ('Check that there are 1 strings detected', 1),
  ('Check attribute "playful" for cat(96,109)', 1),
- ('Check attribute "dangling" for string(186,114)', 1),
  ('Check semantic relationship: negate(cat(96,109) batting at string(186,114))',
   1.0),
- ('Check spatial relationship: negate(cat(96,109) next to string(186,114))',
-  0.0),
+ ('Check spatial relationship: negate(cat(96,109) near string(186,114))', 1.0),
  ('Check semantic relationship: cat(96,109) chasing laser pointer(186,115)',
   0.0),
  ('Check spatial relationship: cat(96,109) near laser pointer(186,115)', 0.0)]
-score = 0.4444444444444444
+score = 0.5
 
 CANDIDATE MATCH:
 cat{1} ==> cat(96,109)
@@ -128,15 +123,13 @@ CHECKLIST RESULTS FOR CANDIDATE MATCH:
  ('Check that there are 1 laser pointers detected', 0),
  ('Check that there are 1 strings detected', 1),
  ('Check attribute "playful" for cat(96,109)', 1),
- ('Check attribute "dangling" for string(186,114)', 1),
  ('Check semantic relationship: negate(cat(96,109) batting at string(186,114))',
   1.0),
- ('Check spatial relationship: negate(cat(96,109) next to string(186,114))',
-  0.0),
+ ('Check spatial relationship: negate(cat(96,109) near string(186,114))', 1.0),
  ('Check semantic relationship: cat(96,109) chasing laser pointer(82,106)',
   0.0),
  ('Check spatial relationship: cat(96,109) near laser pointer(82,106)', 1.0)]
-score = 0.5555555555555556
+score = 0.625
 
 BEST MATCH:
 cat{1} ==> cat(84,109)
@@ -147,15 +140,13 @@ CHECKLIST RESULTS FOR BEST MATCH:
  ('Check that there are 1 laser pointers detected', 0),
  ('Check that there are 1 strings detected', 1),
  ('Check attribute "playful" for cat(84,109)', 1),
- ('Check attribute "dangling" for string(186,114)', 1),
  ('Check semantic relationship: negate(cat(84,109) batting at string(186,114))',
   1.0),
- ('Check spatial relationship: negate(cat(84,109) next to string(186,114))',
-  0.0),
+ ('Check spatial relationship: negate(cat(84,109) near string(186,114))', 1.0),
  ('Check semantic relationship: cat(84,109) chasing laser pointer(82,106)',
   0.0),
  ('Check spatial relationship: cat(84,109) near laser pointer(82,106)', 1.0)]
-best_score = 0.5555555555555556
+best_score = 0.625
 
 
 

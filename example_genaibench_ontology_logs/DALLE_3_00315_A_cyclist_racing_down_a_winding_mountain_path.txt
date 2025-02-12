@@ -1,4 +1,4 @@
-EXAMPLE 5:
+EXAMPLE 8:
 A cyclist racing down a winding mountain path.
 /usr3/graduate/nivek/data/vislang-domain-exploration-data/imgeneval-data/GenAIBenchImages/DALLE_3/00315.jpeg
 Generating candidate graph 0...
@@ -7,42 +7,48 @@ Generating candidate graph 1...
 Semantic graph is good enough, no need to regenerate!
 Generating candidate graph 2...
 Semantic graph is good enough, no need to regenerate!
-Candidate graph json colon-counts are: [16, 14, 16]
+Candidate graph json colon-counts are: [19, 19, 19]
 
 SEMANTIC GRAPH:
 {
-  "objects": [
-    {
-      "object_id": 1,
-      "name": "cyclist",
-      "is_group": "No",
-      "attributes": []
-    },
-    {
-      "object_id": 2,
-      "name": "mountain path",
-      "is_group": "No",
-      "attributes": [
+    "objects": [
         {
-          "attribute_name": "winding",
-          "is_negation": "No"
+            "object_id": 1,
+            "name": "cyclist",
+            "is_group": "No",
+            "attributes": []
+        },
+        {
+            "object_id": 2,
+            "name": "mountain path",
+            "is_group": "No",
+            "attributes": [
+                {
+                    "attribute_name": "winding",
+                    "is_negation": "No"
+                }
+            ]
         }
-      ]
+    ],
+    "relationships": [
+        {
+            "subject_ids": [1],
+            "object_ids": [2],
+            "type": "spatial semantic",
+            "predicate": "racing down"
+        }
+    ],
+    "scene": {
+        "description": "N/A",
+        "absent_object_names": []
     }
-  ],
-  "relationships": [
-    {
-      "subject_ids": [1],
-      "object_ids": [2],
-      "type": "spatial semantic",
-      "predicate": "racing down"
-    }
-  ]
 }
 
 RUNNING OBJECT DETECTOR...
 Detected 1 instances of "cyclist" in image
 Detected 1 instances of "mountain path" in image
+No scene/style description specified, no need to check.
+No absent objects specified, no need to check.
 EVALUATING MATCHES...
 CANDIDATE MATCH:
 cyclist{1} ==> cyclist(128,124)

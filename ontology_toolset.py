@@ -116,6 +116,22 @@ def query_VQA_with_bboxes(image_pil, object_name_A, bboxA, object_name_B, bboxB,
         return could_be_yes
 
 
+def check_scene_description(image_pil, scene_description, models, logger):
+    question = 'Could the scene or style of this image be described as "%s"?'%(scene_description)
+    prompt = 'Question: %s Choices: yes, no Answer:'%(question)
+    image_prepro = models['vqa_processors']["eval"](image_pil).unsqueeze(0).to('cuda')
+    answer = models['vqa_model'].generate({"image": image_prepro, "prompt": prompt})
+    answer = answer[0].strip().replace('.', '').replace('!', '').replace('"', '').lower()
+    if answer in ['yes', 'no']:
+        return (question, {'yes' : 1, 'no' : 0}[answer])
+    else:
+        logger.log('SUSPICIOUS VQA ANSWER: ' + answer)
+        could_be_yes = int('yes' in answer)
+        could_be_no = int('no' in answer)
+        assert(could_be_yes + could_be_no == 1)
+        return (question, could_be_yes)
+
+
 #will return max(CLIP(obj+attr), CLIP(attr+obj)) - CLIP(obj)
 #this could be use as an ingredient in both attribute-check and attribute comparison
 def measure_attribute(image_pil, object_name, attribute_name, bbox, models):

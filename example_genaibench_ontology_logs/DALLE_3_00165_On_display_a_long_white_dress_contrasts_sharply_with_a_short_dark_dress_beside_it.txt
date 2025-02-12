@@ -1,13 +1,19 @@
-EXAMPLE 3:
+EXAMPLE 6:
 On display, a long, white dress contrasts sharply with a short, dark dress beside it.
 /usr3/graduate/nivek/data/vislang-domain-exploration-data/imgeneval-data/GenAIBenchImages/DALLE_3/00165.jpeg
 Generating candidate graph 0...
+Found bad relationship (empty subj or obj):
+{'subject_ids': [1, 2], 'object_ids': [], 'type': 'spatial only', 'predicate': 'beside'}
+Regenerating semantic graph...
+Found bad relationship (empty subj or obj):
+{'subject_ids': [1, 2], 'object_ids': [], 'type': 'spatial only', 'predicate': 'beside'}
+Regenerating semantic graph...
 Semantic graph is good enough, no need to regenerate!
 Generating candidate graph 1...
 Semantic graph is good enough, no need to regenerate!
 Generating candidate graph 2...
 Semantic graph is good enough, no need to regenerate!
-Candidate graph json colon-counts are: [22, 14, 18]
+Candidate graph json colon-counts are: [21, 21, 17]
 
 SEMANTIC GRAPH:
 {
@@ -42,11 +48,17 @@ SEMANTIC GRAPH:
       "type": "attribute comparison",
       "predicate": "contrasts sharply with"
     }
-  ]
+  ],
+  "scene": {
+    "description": "N/A",
+    "absent_object_names": []
+  }
 }
 
 RUNNING OBJECT DETECTOR...
 Detected 2 instances of "dress" in image
+No scene/style description specified, no need to check.
+No absent objects specified, no need to check.
 EVALUATING MATCHES...
 CANDIDATE MATCH:
 dress{1} ==> dress(65,123)

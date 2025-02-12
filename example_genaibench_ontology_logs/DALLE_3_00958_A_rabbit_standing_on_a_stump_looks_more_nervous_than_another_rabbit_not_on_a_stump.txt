@@ -1,4 +1,4 @@
-EXAMPLE 2:
+EXAMPLE 5:
 A rabbit standing on a stump looks more nervous than another rabbit not on a stump.
 /usr3/graduate/nivek/data/vislang-domain-exploration-data/imgeneval-data/GenAIBenchImages/DALLE_3/00958.jpeg
 Generating candidate graph 0...
@@ -7,7 +7,7 @@ Generating candidate graph 1...
 Semantic graph is good enough, no need to regenerate!
 Generating candidate graph 2...
 Semantic graph is good enough, no need to regenerate!
-Candidate graph json colon-counts are: [26, 26, 26]
+Candidate graph json colon-counts are: [33, 29, 33]
 
 SEMANTIC GRAPH:
 {
@@ -29,6 +29,12 @@ SEMANTIC GRAPH:
       "name": "rabbit",
       "is_group": "No",
       "attributes": []
+    },
+    {
+      "object_id": 4,
+      "name": "stump",
+      "is_group": "No",
+      "attributes": []
     }
   ],
   "relationships": [
@@ -39,75 +45,118 @@ SEMANTIC GRAPH:
       "predicate": "standing on"
     },
     {
-      "subject_ids": [3],
-      "object_ids": [2],
-      "type": "negative spatial semantic",
-      "predicate": "not on"
-    },
-    {
       "subject_ids": [1],
       "object_ids": [3],
       "type": "attribute comparison",
       "predicate": "more nervous than"
+    },
+    {
+      "subject_ids": [3],
+      "object_ids": [4],
+      "type": "negative spatial semantic",
+      "predicate": "not on"
     }
-  ]
+  ],
+  "scene": {
+    "description": "N/A",
+    "absent_object_names": []
+  }
 }
 
 RUNNING OBJECT DETECTOR...
 Detected 2 instances of "rabbit" in image
 Detected 1 instances of "stump" in image
+No scene/style description specified, no need to check.
+No absent objects specified, no need to check.
 EVALUATING MATCHES...
 CANDIDATE MATCH:
 rabbit{1} ==> rabbit(76,109)
 stump{2} ==> stump(127,209)
 rabbit{3} ==> rabbit(198,100)
+stump{4} ==> None
 CHECKLIST RESULTS FOR CANDIDATE MATCH:
 [('Check that there are 2 rabbits detected', 1),
- ('Check that there are 1 stumps detected', 1),
+ ('Check that there are 2 stumps detected', 0),
  ('Check semantic relationship: rabbit(76,109) standing on stump(127,209)',
   0.0),
  ('Check spatial relationship: rabbit(76,109) on stump(127,209)', 1.0),
- ('Check semantic relationship: negate(rabbit(198,100) on stump(127,209))',
-  1.0),
- ('Check spatial relationship: negate(rabbit(198,100) on stump(127,209))', 0.0),
  ('Check attribute-comparison relationship: rabbit(76,109) >{nervous} '
   'rabbit(198,100)',
-  0.0)]
-score = 0.5714285714285714
+  0.0),
+ ('Check semantic relationship: negate(rabbit(198,100) on stump(None))', 0),
+ ('Check spatial relationship: negate(rabbit(198,100) on stump(None))', 0)]
+score = 0.2857142857142857
+
+CANDIDATE MATCH:
+rabbit{1} ==> rabbit(76,109)
+stump{2} ==> None
+rabbit{3} ==> rabbit(198,100)
+stump{4} ==> stump(127,209)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 2 rabbits detected', 1),
+ ('Check that there are 2 stumps detected', 0),
+ ('Check semantic relationship: rabbit(76,109) standing on stump(None)', 0),
+ ('Check spatial relationship: rabbit(76,109) on stump(None)', 0),
+ ('Check attribute-comparison relationship: rabbit(76,109) >{nervous} '
+  'rabbit(198,100)',
+  0.0),
+ ('Check semantic relationship: negate(rabbit(198,100) on stump(127,209))',
+  1.0),
+ ('Check spatial relationship: negate(rabbit(198,100) on stump(127,209))', 0.0)]
+score = 0.2857142857142857
 
 CANDIDATE MATCH:
 rabbit{1} ==> rabbit(198,100)
 stump{2} ==> stump(127,209)
 rabbit{3} ==> rabbit(76,109)
+stump{4} ==> None
 CHECKLIST RESULTS FOR CANDIDATE MATCH:
 [('Check that there are 2 rabbits detected', 1),
- ('Check that there are 1 stumps detected', 1),
+ ('Check that there are 2 stumps detected', 0),
  ('Check semantic relationship: rabbit(198,100) standing on stump(127,209)',
   0.0),
  ('Check spatial relationship: rabbit(198,100) on stump(127,209)', 1.0),
- ('Check semantic relationship: negate(rabbit(76,109) on stump(127,209))', 1.0),
- ('Check spatial relationship: negate(rabbit(76,109) on stump(127,209))', 0.0),
  ('Check attribute-comparison relationship: rabbit(198,100) >{nervous} '
   'rabbit(76,109)',
-  1.0)]
-score = 0.7142857142857143
+  1.0),
+ ('Check semantic relationship: negate(rabbit(76,109) on stump(None))', 0),
+ ('Check spatial relationship: negate(rabbit(76,109) on stump(None))', 0)]
+score = 0.42857142857142855
+
+CANDIDATE MATCH:
+rabbit{1} ==> rabbit(198,100)
+stump{2} ==> None
+rabbit{3} ==> rabbit(76,109)
+stump{4} ==> stump(127,209)
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 2 rabbits detected', 1),
+ ('Check that there are 2 stumps detected', 0),
+ ('Check semantic relationship: rabbit(198,100) standing on stump(None)', 0),
+ ('Check spatial relationship: rabbit(198,100) on stump(None)', 0),
+ ('Check attribute-comparison relationship: rabbit(198,100) >{nervous} '
+  'rabbit(76,109)',
+  1.0),
+ ('Check semantic relationship: negate(rabbit(76,109) on stump(127,209))', 1.0),
+ ('Check spatial relationship: negate(rabbit(76,109) on stump(127,209))', 0.0)]
+score = 0.42857142857142855
 
 BEST MATCH:
 rabbit{1} ==> rabbit(198,100)
 stump{2} ==> stump(127,209)
 rabbit{3} ==> rabbit(76,109)
+stump{4} ==> None
 CHECKLIST RESULTS FOR BEST MATCH:
 [('Check that there are 2 rabbits detected', 1),
- ('Check that there are 1 stumps detected', 1),
+ ('Check that there are 2 stumps detected', 0),
  ('Check semantic relationship: rabbit(198,100) standing on stump(127,209)',
   0.0),
  ('Check spatial relationship: rabbit(198,100) on stump(127,209)', 1.0),
- ('Check semantic relationship: negate(rabbit(76,109) on stump(127,209))', 1.0),
- ('Check spatial relationship: negate(rabbit(76,109) on stump(127,209))', 0.0),
  ('Check attribute-comparison relationship: rabbit(198,100) >{nervous} '
   'rabbit(76,109)',
-  1.0)]
-best_score = 0.7142857142857143
+  1.0),
+ ('Check semantic relationship: negate(rabbit(76,109) on stump(None))', 0),
+ ('Check spatial relationship: negate(rabbit(76,109) on stump(None))', 0)]
+best_score = 0.42857142857142855
 
 
 

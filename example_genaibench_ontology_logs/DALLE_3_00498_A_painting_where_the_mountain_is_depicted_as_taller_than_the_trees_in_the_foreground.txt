@@ -1,0 +1,72 @@
+EXAMPLE 0:
+A painting where the mountain is depicted as taller than the trees in the foreground.
+/usr3/graduate/nivek/data/vislang-domain-exploration-data/imgeneval-data/GenAIBenchImages/DALLE_3/00498.jpeg
+Generating candidate graph 0...
+Semantic graph is good enough, no need to regenerate!
+Generating candidate graph 1...
+Semantic graph is good enough, no need to regenerate!
+Generating candidate graph 2...
+Semantic graph is good enough, no need to regenerate!
+Candidate graph json colon-counts are: [17, 17, 17]
+
+SEMANTIC GRAPH:
+{
+    "objects": [
+        {
+            "object_id": 1,
+            "name": "mountain",
+            "is_group": "No",
+            "attributes": []
+        },
+        {
+            "object_id": 2,
+            "name": "tree",
+            "is_group": "Yes",
+            "attributes": []
+        }
+    ],
+    "relationships": [
+        {
+            "subject_ids": [1],
+            "object_ids": [2],
+            "type": "attribute comparison",
+            "predicate": "taller than"
+        }
+    ],
+    "scene": {
+        "description": "painting",
+        "absent_object_names": []
+    }
+}
+
+RUNNING OBJECT DETECTOR...
+Detected 1 instances of "mountain" in image
+Detected 11 instances of "tree" in image
+No absent objects specified, no need to check.
+EVALUATING MATCHES...
+CANDIDATE MATCH:
+mountain{1} ==> mountain(127,111)
+tree{2} ==> trees[11]
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are 1 mountains detected', 1),
+ ('Check that there are at least 2 trees detected', 1),
+ ('Could the scene or style of this image be described as "painting"?', 1),
+ ('Check attribute-comparison relationship: mountain(127,111) >{tall} '
+  'trees[11]',
+  0.5454545454545454)]
+score = 0.8863636363636364
+
+BEST MATCH:
+mountain{1} ==> mountain(127,111)
+tree{2} ==> trees[11]
+CHECKLIST RESULTS FOR BEST MATCH:
+[('Check that there are 1 mountains detected', 1),
+ ('Check that there are at least 2 trees detected', 1),
+ ('Could the scene or style of this image be described as "painting"?', 1),
+ ('Check attribute-comparison relationship: mountain(127,111) >{tall} '
+  'trees[11]',
+  0.5454545454545454)]
+best_score = 0.8863636363636364
+
+
+

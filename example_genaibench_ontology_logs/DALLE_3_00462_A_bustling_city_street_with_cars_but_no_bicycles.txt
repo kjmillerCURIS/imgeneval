@@ -1,0 +1,51 @@
+EXAMPLE 1:
+A bustling city street with cars, but no bicycles.
+/usr3/graduate/nivek/data/vislang-domain-exploration-data/imgeneval-data/GenAIBenchImages/DALLE_3/00462.jpeg
+Generating candidate graph 0...
+Semantic graph is good enough, no need to regenerate!
+Generating candidate graph 1...
+Semantic graph is good enough, no need to regenerate!
+Generating candidate graph 2...
+Semantic graph is good enough, no need to regenerate!
+Candidate graph json colon-counts are: [9, 9, 9]
+
+SEMANTIC GRAPH:
+{
+    "objects": [
+        {
+            "object_id": 1,
+            "name": "car",
+            "is_group": "Yes",
+            "attributes": []
+        }
+    ],
+    "relationships": [],
+    "scene": {
+        "description": "bustling",
+        "absent_object_names": ["bicycle"]
+    }
+}
+
+RUNNING OBJECT DETECTOR...
+Detected 19 instances of "car" in image
+Objects ['bicycle'] specified as absent, use detector to check for them...
+-Detected 8 instances of "bicycle" in image
+EVALUATING MATCHES...
+CANDIDATE MATCH:
+car{1} ==> cars[19]
+CHECKLIST RESULTS FOR CANDIDATE MATCH:
+[('Check that there are at least 2 cars detected', 1),
+ ('Could the scene or style of this image be described as "bustling"?', 1),
+ ('Check that there are no instances of "bicycle" detected in image', 0)]
+score = 0.6666666666666666
+
+BEST MATCH:
+car{1} ==> cars[19]
+CHECKLIST RESULTS FOR BEST MATCH:
+[('Check that there are at least 2 cars detected', 1),
+ ('Could the scene or style of this image be described as "bustling"?', 1),
+ ('Check that there are no instances of "bicycle" detected in image', 0)]
+best_score = 0.6666666666666666
+
+
+

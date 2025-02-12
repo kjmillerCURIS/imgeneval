@@ -1,16 +1,61 @@
-EXAMPLE 0:
+EXAMPLE 3:
 Two cats with striped tails sitting side by side, one with a bow tie and the other without.
 /usr3/graduate/nivek/data/vislang-domain-exploration-data/imgeneval-data/GenAIBenchImages/DALLE_3/00851.jpeg
 Generating candidate graph 0...
+Found bad relationship (empty subj or obj):
+{'subject_ids': [1, 2], 'object_ids': [], 'type': 'spatial only', 'predicate': 'side by side'}
+Regenerating semantic graph...
+Found bad relationship (empty subj or obj):
+{'subject_ids': [1, 2], 'object_ids': [], 'type': 'spatial semantic', 'predicate': 'sitting side by side'}
+Regenerating semantic graph...
 Semantic graph is good enough, no need to regenerate!
 Generating candidate graph 1...
+Found bad relationship (empty subj or obj):
+{'subject_ids': [1, 2], 'object_ids': [], 'type': 'spatial only', 'predicate': 'side by side'}
+Regenerating semantic graph...
+Found bad relationship (empty subj or obj):
+{'subject_ids': [1, 2], 'object_ids': [], 'type': 'spatial only', 'predicate': 'side by side'}
+Regenerating semantic graph...
+Found bad relationship (empty subj or obj):
+{'subject_ids': [1, 2], 'object_ids': [], 'type': 'spatial only', 'predicate': 'side by side'}
+Regenerating semantic graph...
+Found bad relationship (empty subj or obj):
+{'subject_ids': [1, 2], 'object_ids': [], 'type': 'spatial only', 'predicate': 'side by side'}
+Regenerating semantic graph...
 Semantic graph is good enough, no need to regenerate!
 Generating candidate graph 2...
 Found bad relationship (empty subj or obj):
 {'subject_ids': [1, 2], 'object_ids': [], 'type': 'spatial only', 'predicate': 'side by side'}
 Regenerating semantic graph...
+Found bad relationship (empty subj or obj):
+{'subject_ids': [1, 2], 'object_ids': [], 'type': 'spatial only', 'predicate': 'sitting side by side'}
+Regenerating semantic graph...
+Found bad relationship (empty subj or obj):
+{'subject_ids': [1, 2], 'object_ids': [], 'type': 'spatial only', 'predicate': 'sitting side by side'}
+Regenerating semantic graph...
+Found bad relationship (empty subj or obj):
+{'subject_ids': [1, 2], 'object_ids': [], 'type': 'spatial only', 'predicate': 'side by side'}
+Regenerating semantic graph...
+Found bad relationship (empty subj or obj):
+{'subject_ids': [1, 2], 'object_ids': [], 'type': 'spatial only', 'predicate': 'sitting side by side'}
+Regenerating semantic graph...
+Found bad relationship (empty subj or obj):
+{'subject_ids': [1, 2], 'object_ids': [], 'type': 'spatial only', 'predicate': 'sitting side by side'}
+Regenerating semantic graph...
+Found bad relationship (empty subj or obj):
+{'subject_ids': [1, 2], 'object_ids': [], 'type': 'spatial only', 'predicate': 'sitting side by side'}
+Regenerating semantic graph...
+Found bad relationship (empty subj or obj):
+{'subject_ids': [1, 2], 'object_ids': [], 'type': 'spatial only', 'predicate': 'side by side'}
+Regenerating semantic graph...
+Found bad relationship (empty subj or obj):
+{'subject_ids': [1, 2], 'object_ids': [], 'type': 'spatial only', 'predicate': 'side by side'}
+Regenerating semantic graph...
+Found bad relationship (empty subj or obj):
+{'subject_ids': [1, 2], 'object_ids': [], 'type': 'spatial only', 'predicate': 'side by side'}
+Regenerating semantic graph...
 Semantic graph is good enough, no need to regenerate!
-Candidate graph json colon-counts are: [26, 22, 22]
+Candidate graph json colon-counts are: [25, 25, 25]
 
 SEMANTIC GRAPH:
 {
@@ -53,11 +98,17 @@ SEMANTIC GRAPH:
       "type": "spatial only",
       "predicate": "side by side"
     }
-  ]
+  ],
+  "scene": {
+    "description": "N/A",
+    "absent_object_names": []
+  }
 }
 
 RUNNING OBJECT DETECTOR...
 Detected 2 instances of "cat" in image
+No scene/style description specified, no need to check.
+No absent objects specified, no need to check.
 EVALUATING MATCHES...
 CANDIDATE MATCH:
 cat{1} ==> cat(192,129)

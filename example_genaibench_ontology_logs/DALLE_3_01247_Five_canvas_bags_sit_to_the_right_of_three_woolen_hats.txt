@@ -1,4 +1,4 @@
-EXAMPLE 8:
+EXAMPLE 11:
 Five canvas bags sit to the right of three woolen hats.
 /usr3/graduate/nivek/data/vislang-domain-exploration-data/imgeneval-data/GenAIBenchImages/DALLE_3/01247.jpeg
 Generating candidate graph 0...
@@ -7,7 +7,7 @@ Generating candidate graph 1...
 Semantic graph is good enough, no need to regenerate!
 Generating candidate graph 2...
 Semantic graph is good enough, no need to regenerate!
-Candidate graph json colon-counts are: [38, 38, 54]
+Candidate graph json colon-counts are: [41, 41, 41]
 
 SEMANTIC GRAPH:
 {
@@ -68,12 +68,18 @@ SEMANTIC GRAPH:
       "type": "spatial only",
       "predicate": "to the right of"
     }
-  ]
+  ],
+  "scene": {
+    "description": "N/A",
+    "absent_object_names": []
+  }
 }
 
 RUNNING OBJECT DETECTOR...
 Detected 4 instances of "canvas bag" in image
 Detected 4 instances of "woolen hat" in image
+No scene/style description specified, no need to check.
+No absent objects specified, no need to check.
 EVALUATING MATCHES...
 CANDIDATE MATCH:
 canvas bag{1} ==> canvas bag(40,110)

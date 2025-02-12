@@ -1,4 +1,4 @@
-EXAMPLE 6:
+EXAMPLE 9:
 a person without a hat pushes a person with a hat sitting in a box.
 /usr3/graduate/nivek/data/vislang-domain-exploration-data/imgeneval-data/GenAIBenchImages/DALLE_3/00203.jpeg
 Generating candidate graph 0...
@@ -7,59 +7,65 @@ Generating candidate graph 1...
 Semantic graph is good enough, no need to regenerate!
 Generating candidate graph 2...
 Semantic graph is good enough, no need to regenerate!
-Candidate graph json colon-counts are: [24, 26, 26]
+Candidate graph json colon-counts are: [29, 29, 29]
 
 SEMANTIC GRAPH:
 {
-  "objects": [
-    {
-      "object_id": 1,
-      "name": "person",
-      "is_group": "No",
-      "attributes": [
+    "objects": [
         {
-          "attribute_name": "without a hat",
-          "is_negation": "Yes"
-        }
-      ]
-    },
-    {
-      "object_id": 2,
-      "name": "person",
-      "is_group": "No",
-      "attributes": [
+            "object_id": 1,
+            "name": "person",
+            "is_group": "No",
+            "attributes": [
+                {
+                    "attribute_name": "without a hat",
+                    "is_negation": "Yes"
+                }
+            ]
+        },
         {
-          "attribute_name": "with a hat",
-          "is_negation": "No"
+            "object_id": 2,
+            "name": "person",
+            "is_group": "No",
+            "attributes": [
+                {
+                    "attribute_name": "with a hat",
+                    "is_negation": "No"
+                }
+            ]
+        },
+        {
+            "object_id": 3,
+            "name": "box",
+            "is_group": "No",
+            "attributes": []
         }
-      ]
-    },
-    {
-      "object_id": 3,
-      "name": "box",
-      "is_group": "No",
-      "attributes": []
+    ],
+    "relationships": [
+        {
+            "subject_ids": [1],
+            "object_ids": [2],
+            "type": "spatial semantic",
+            "predicate": "pushes"
+        },
+        {
+            "subject_ids": [2],
+            "object_ids": [3],
+            "type": "spatial semantic",
+            "predicate": "sitting in"
+        }
+    ],
+    "scene": {
+        "description": "N/A",
+        "absent_object_names": []
     }
-  ],
-  "relationships": [
-    {
-      "subject_ids": [1],
-      "object_ids": [2],
-      "type": "spatial semantic",
-      "predicate": "pushes"
-    },
-    {
-      "subject_ids": [2],
-      "object_ids": [3],
-      "type": "spatial semantic",
-      "predicate": "sitting in"
-    }
-  ]
 }
 
 RUNNING OBJECT DETECTOR...
 Detected 1 instances of "box" in image
 Detected 2 instances of "person" in image
+No scene/style description specified, no need to check.
+No absent objects specified, no need to check.
 EVALUATING MATCHES...
 CANDIDATE MATCH:
 person{1} ==> person(66,104)

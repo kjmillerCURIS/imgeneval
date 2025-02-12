@@ -12,7 +12,7 @@ import re
 import shutil
 import tiktoken
 from influence_on_human_ratings import load_human_ratings_data, adjust_impath
-from ontology_toolset import setup_models, run_object_detector, check_semantic_relationship, check_predefined_spatial_relationship, check_attribute_comparison_relationship, check_attribute, make_bbox_description
+from ontology_toolset import setup_models, run_object_detector, check_scene_description, check_semantic_relationship, check_predefined_spatial_relationship, check_attribute_comparison_relationship, check_attribute, make_bbox_description
 from ontology_match_generator import match_generator
 from ontology_logger import Logger
 
@@ -25,6 +25,9 @@ PRINT_NUM_TOKENS = 0
 NUM_FOR_MEDIAN_LENGTH = 3
 
 MY_INPUTS = [
+        'A painting where the mountain is depicted as taller than the trees in the foreground.',
+        'A bustling city street with cars, but no bicycles.',
+        'After a snowfall, a group of kids builds a fort with blocks of snow piled up.',
         'Two cats with striped tails sitting side by side, one with a bow tie and the other without.',
         'A plastic bag is placed on the chair, but it contains nothing.',
         'A rabbit standing on a stump looks more nervous than another rabbit not on a stump.',
@@ -67,50 +70,53 @@ You are an expert in semantic graph generation. Your task is to analyze the prov
 – 'negative spatial semantic': relationship can be described as the negation of a 'spatial semantic', e.g. “not lying on”, “not chasing”, “not fighting”
 -- 'count comparison': comparing the cardinality of two groups, e.g. "more apples than oranges", "less flies than mosquitoes", "fewer fish than deer". Both subject and object must have "is_group" set to "Yes".
 - 'predicate': 1-5 words describing the relationship
+3. **Scene**: A single item containing global information about the scene in the image:
+- 'description': 1-3 words describing the scene or style, e.g. "urban", "rural", "auditorium", "painting", "playful", "amusement park", etc., or "N/A" if it is not specified.
+- 'absent_object_names': list of names of objects explicitly specified as being absent from the image. Leave it empty if no objects are specified as being absent.
 '''
 
 ICL_PART = '''
 Here are examples:
 Example text: "three children eating cookies, and a child not eating any"
-Example graph: {"objects": [ {"object_id": 1, "name": "child", "is_group": "No", "attributes": []}, {"object_id": 2, "name": "child", "is_group": "No", "attributes": []}, {"object_id": 3, "name": "child", "is_group": "No", "attributes": []}, {"object_id": 4, "name": "child", "is_group": "No", "attributes": []}, {"object_id": 5, "name": "cookie", "is_group": "Yes", "attributes": []} ], "relationships": [ {"subject_ids": [1,2,3], "object_ids": [5], "type": "spatial semantic", "predicate": "eating"}, {"subject_ids": [4], "object_ids": [5], "type": "negative spatial semantic", "predicate": "not eating"} ]}
-Example text: "two succulent potatoes on top of each other"
-Example graph: {"objects": [ {"object_id": 1, "name": "potato", "is_group" : "No", "attributes": [{"attribute_name": "succulent", "is_negation": "No"}]}, {"object_id" : 2, "name" : "potato", "is_group" : "No", "attributes": [{"attribute_name" : "succulent", "is_negation": "No"}]} ], "relationships": [ {"subject_ids": [1], "object_ids": [2], "type" : "spatial only", "predicate" : "on top of"}]}
+Example graph: {"objects": [ {"object_id": 1, "name": "child", "is_group": "No", "attributes": []}, {"object_id": 2, "name": "child", "is_group": "No", "attributes": []}, {"object_id": 3, "name": "child", "is_group": "No", "attributes": []}, {"object_id": 4, "name": "child", "is_group": "No", "attributes": []}, {"object_id": 5, "name": "cookie", "is_group": "Yes", "attributes": []} ], "relationships": [ {"subject_ids": [1,2,3], "object_ids": [5], "type": "spatial semantic", "predicate": "eating"}, {"subject_ids": [4], "object_ids": [5], "type": "negative spatial semantic", "predicate": "not eating"} ], "scene": {"description": "N/A", "absent_object_names": []}}
+Example text: "a sketch of two succulent potatoes on top of each other"
+Example graph: {"objects": [ {"object_id": 1, "name": "potato", "is_group" : "No", "attributes": [{"attribute_name": "succulent", "is_negation": "No"}]}, {"object_id" : 2, "name" : "potato", "is_group" : "No", "attributes": [{"attribute_name" : "succulent", "is_negation": "No"}]} ], "relationships": [ {"subject_ids": [1], "object_ids": [2], "type" : "spatial only", "predicate" : "on top of"}], "scene": {"description": "sketch", "absent_object_names": []}}
 Example text: “The zebra who is not lying on the table is redder than the panda without a tie who is biting the table”
-Example graph: {"objects": [ {"object_id": 1, "name": "zebra", "is_group" : "No", "attributes": [ ] }, { "object_id": 2, "name": "panda", "is_group" : "No", "attributes": [{“attribute_name”: “without a tie”, “is_negation”: “Yes” }] }, { "object_id": 3, "name": "table", "is_group" : "No", "attributes": [] }], "relationships": [ { "subject_ids": [1], "object_ids": [3], "type": "negative spatial semantic", "predicate": "not lying on" }, { "subject_ids": [2], "object_ids": [3], "type": "spatial semantic", "predicate": "biting"},  { "subject_ids": [1], "object_ids": [2], "type": “attribute comparison", "predicate": "redder than"}] }
-Example text: "there are more orange penguins than spotted zebras"
-Example graph: {"objects": [ {"object_id": 1, "name": "penguin", "is_group": "Yes", "attributes": [{"attribute_name": "orange", "is_negation": "No"}]}, {"object_id": 2, "name": "zebra", "is_group": "Yes", "attributes": [{"attribute_name": "spotted", "is_negation": "No"}]}], "relationships": [ {"subject_ids": [1], "object_ids": [2], "type": "count comparison", "predicate": "more"}]}
+Example graph: {"objects": [ {"object_id": 1, "name": "zebra", "is_group" : "No", "attributes": [ ] }, { "object_id": 2, "name": "panda", "is_group" : "No", "attributes": [{“attribute_name”: “without a tie”, “is_negation”: “Yes” }] }, { "object_id": 3, "name": "table", "is_group" : "No", "attributes": [] }], "relationships": [ { "subject_ids": [1], "object_ids": [3], "type": "negative spatial semantic", "predicate": "not lying on" }, { "subject_ids": [2], "object_ids": [3], "type": "spatial semantic", "predicate": "biting"},  { "subject_ids": [1], "object_ids": [2], "type": “attribute comparison", "predicate": "redder than"}], "scene": {"description": "N/A", "absent_object_names": []}}
+Example text: "there are more orange penguins than spotted zebras at the zoo, and no monkeys"
+Example graph: {"objects": [ {"object_id": 1, "name": "penguin", "is_group": "Yes", "attributes": [{"attribute_name": "orange", "is_negation": "No"}]}, {"object_id": 2, "name": "zebra", "is_group": "Yes", "attributes": [{"attribute_name": "spotted", "is_negation": "No"}]}], "relationships": [ {"subject_ids": [1], "object_ids": [2], "type": "count comparison", "predicate": "more"}], "scene"{"description": "zoo", "absent_object_names": ["monkey"]}}
 Example text: "a thinner squirrel and a fatter one"
-Example graph: {"objects": [ {"object_id": 1, "name": "squirrel", "is_group": "No"}, {"object_id": 2, "name": "squirrel", "is_group": "No"} ], "relationships":[{"subject_ids": [1], "object_ids": [2], "type": "attribute comparison", "predicate": "thinner"}]}
+Example graph: {"objects": [ {"object_id": 1, "name": "squirrel", "is_group": "No"}, {"object_id": 2, "name": "squirrel", "is_group": "No"} ], "relationships":[{"subject_ids": [1], "object_ids": [2], "type": "attribute comparison", "predicate": "thinner"}], "scene": {"description": "N/A", "absent_object_names": []}}
 Example text: "a thinner squirrel chasing a fatter one"
-Example graph: {"objects": [ {"object_id": 1, "name": "squirrel", "is_group": "No"}, {"object_id": 2, "name": "squirrel", "is_group": "No"} ], "relationships":[{"subject_ids": [1], "object_ids": [2], "type": "attribute comparison", "predicate": "thinner"}, {"subject_ids": [1], "object_ids": [2], "type": "spatial semantic", "predicate": "chasing"}]}
-Example text: “an orange chasing an apple”
-Example graph: {“objects”: [ {“object_id”: 1, “name”: “apple”, "is_group" : "No", “attributes”:[]}, {“object_id”: 2, “name”: “orange”, "is_group" : "No", “attributes”:[]} ], “relationships”:[{“subject_ids” : [1], “object_ids” : [2], “type” : “spatial semantic”, “predicate” : “chasing”}]}
-Example text: “a chinchilla next to an umbrella”
-Example graph: {“objects”: [ {“object_id”: 1, “name”: “chinchilla”, "is_group" : "No", “attributes”:[]}, {“object_id”: 2, “name”: “umbrella”, "is_group" : "No", “attributes”:[]} ], “relationships”:[{“subject_ids” : [1], “object_ids” : [2], “type” : “spatial only”, “predicate” : “next to”}]}
-Example text: “a mouse lying on a yellow table”
-Example graph: {“objects”: [ {“object_id”: 1, “name”: “mouse”, "is_group" : "No", “attributes”:[]}, {“object_id”: 2, “name”: “table”, "is_group" : "No", “attributes”:[{“attribute_name” : “yellow”, “is_negation”:”No”}]} ], “relationships”:[{“subject_ids” : [1], “object_ids” : [2], “type” : “semantic spatial”, “predicate” : “lying on”}]}
+Example graph: {"objects": [ {"object_id": 1, "name": "squirrel", "is_group": "No"}, {"object_id": 2, "name": "squirrel", "is_group": "No"} ], "relationships":[{"subject_ids": [1], "object_ids": [2], "type": "attribute comparison", "predicate": "thinner"}, {"subject_ids": [1], "object_ids": [2], "type": "spatial semantic", "predicate": "chasing"}], "scene": {"description": "N/A", "absent_object_names": []}}
+Example text: “an orange chasing an apple, and no grapes or pears”
+Example graph: {“objects”: [ {“object_id”: 1, “name”: “apple”, "is_group" : "No", “attributes”:[]}, {“object_id”: 2, “name”: “orange”, "is_group" : "No", “attributes”:[]} ], “relationships”:[{“subject_ids” : [1], “object_ids” : [2], “type” : “spatial semantic”, “predicate” : “chasing”}], "scene": {"description": "N/A", "absent_object_names": ["grape", "pear"]}}
+Example text: “a chinchilla next to an umbrella at the beach”
+Example graph: {“objects”: [ {“object_id”: 1, “name”: “chinchilla”, "is_group" : "No", “attributes”:[]}, {“object_id”: 2, “name”: “umbrella”, "is_group" : "No", “attributes”:[]} ], “relationships”:[{“subject_ids” : [1], “object_ids” : [2], “type” : “spatial only”, “predicate” : “next to”}], "scene": {"description": "beach", "absent_object_names": []}}
+Example text: “a painting of a mouse lying on a yellow table”
+Example graph: {“objects”: [ {“object_id”: 1, “name”: “mouse”, "is_group" : "No", “attributes”:[]}, {“object_id”: 2, “name”: “table”, "is_group" : "No", “attributes”:[{“attribute_name” : “yellow”, “is_negation”:”No”}]} ], “relationships”:[{“subject_ids” : [1], “object_ids” : [2], “type” : “semantic spatial”, “predicate” : “lying on”}], "scene": {"description": "painting", "absent_object_names": []}}
 Example text: "a man in a house and a woman not in a house"
-Example graph: {"objects": [ {"object_id": 1, "name": "man", "is_group" : "No", "attributes":[]}, {"object_id": 2, "name": "woman", "is_group" : "No", "attributes":[]}, {"object_id" : 3, "name": "house", "is_group" : "No", "attributes":[]} ], "relationships" : [ {"subject_ids" : [1], "object_ids": [3], "type": "spatial", "predicate": "in"}, {"subject_ids": [2], "object_ids": [3], "type": "negative spatial only", "predicate": "not in"} ]}
+Example graph: {"objects": [ {"object_id": 1, "name": "man", "is_group" : "No", "attributes":[]}, {"object_id": 2, "name": "woman", "is_group" : "No", "attributes":[]}, {"object_id" : 3, "name": "house", "is_group" : "No", "attributes":[]} ], "relationships" : [ {"subject_ids" : [1], "object_ids": [3], "type": "spatial", "predicate": "in"}, {"subject_ids": [2], "object_ids": [3], "type": "negative spatial only", "predicate": "not in"} ], "scene": {"description": "N/A", "absent_object_names": []}}
 Example text: “a fish on top and a fish on bottom”
-Example graph: {“objects”: [ {“object_id”: 1, “name”: “fish”, "is_group" : "No", “attributes”:[]}, {“object_id”: 2, “name”: “fish”, "is_group" : "No", "attributes":[]} ], “relationships”:[{“subject_ids” : [1], “object_ids” : [2], “type” : “spatial only”, “predicate” : "above"}]}
-Example text: "an orange peanut with a monocle"
-Example graph: {"objects": [ {"object_id": 1, "name": "peanut", "is_group" : "No", "attributes":[{"attribute_name" : "orange", "is_negation" : "No"}, {"attribute_name" : "with a monocle", "is_negation" : "No"}]} ], "relationships" : []}
-Example text: "an orange peanut without a monocle"
-Example graph: {"objects": [ {"object_id": 1, "name": "peanut", "is_group" : "No", "attributes":[{"attribute_name" : "orange", "is_negation" : "No"}, {"attribute_name" : "without a monocle", "is_negation" : "Yes"}]} ], "relationships" : []}
-Example text: “three oranges in front of four pears”
-Example graph: {“objects”: [ {“object_id”: 1, “name”: "orange”, "is_group" : "No", “attributes”:[]}, {“object_id”: 2, “name”: “orange”, "is_group" : "No", "attributes":[]}, {“object_id”: 3, “name”: “orange”, "is_group": "No", "attributes":[]}, {“object_id”: 4, “name”: “pear”, "is_group": "No", "attributes":[]}, {“object_id”: 5, “name”: “pear”, "is_group" : "No", "attributes":[]}, {“object_id”: 6, “name”: “pear”, "is_group": "No", "attributes":[]}, {“object_id”: 7, “name”: “pear”, "is_group" : "No", "attributes":[]}], “relationships”:[{“subject_ids” : [1,2,3], “object_ids” : [4,5,6,7], “type” : “spatial only”, “predicate” : "in front of"}]}
+Example graph: {“objects”: [ {“object_id”: 1, “name”: “fish”, "is_group" : "No", “attributes”:[]}, {“object_id”: 2, “name”: “fish”, "is_group" : "No", "attributes":[]} ], “relationships”:[{“subject_ids” : [1], “object_ids” : [2], “type” : “spatial only”, “predicate” : "above"}], "scene": {"description": "N/A", "absent_object_names": []}}
+Example text: "a mosaic of an orange peanut with a monocle"
+Example graph: {"objects": [ {"object_id": 1, "name": "peanut", "is_group" : "No", "attributes":[{"attribute_name" : "orange", "is_negation" : "No"}, {"attribute_name" : "with a monocle", "is_negation" : "No"}]} ], "relationships" : [], "scene": {"description": "mosaic", "absent_object_names": []}}
+Example text: "a mosaic of an orange peanut without a monocle"
+Example graph: {"objects": [ {"object_id": 1, "name": "peanut", "is_group" : "No", "attributes":[{"attribute_name" : "orange", "is_negation" : "No"}, {"attribute_name" : "without a monocle", "is_negation" : "Yes"}]} ], "relationships" : [], "scene": {"description": "mosaic", "absent_object_names": []}}
+Example text: “a still life with three oranges in front of four pears, and no cheese”
+Example graph: {“objects”: [ {“object_id”: 1, “name”: "orange”, "is_group" : "No", “attributes”:[]}, {“object_id”: 2, “name”: “orange”, "is_group" : "No", "attributes":[]}, {“object_id”: 3, “name”: “orange”, "is_group": "No", "attributes":[]}, {“object_id”: 4, “name”: “pear”, "is_group": "No", "attributes":[]}, {“object_id”: 5, “name”: “pear”, "is_group" : "No", "attributes":[]}, {“object_id”: 6, “name”: “pear”, "is_group": "No", "attributes":[]}, {“object_id”: 7, “name”: “pear”, "is_group" : "No", "attributes":[]}], “relationships”:[{“subject_ids” : [1,2,3], “object_ids” : [4,5,6,7], “type” : “spatial only”, “predicate” : "in front of"}], "scene": {"description": "still life", "absent_object_names": ["cheese"]}}
 Example text: "some purple pigeons and some violet wigeons"
-Example graph: {"objects": [ {"object_id": 1, "name": "pigeon", "is_group": "Yes", "attributes":[{"attribute_name":"purple", "is_negation":"No"}]}, {"object_id": 2, "name": "wigeon", "is_group": "Yes", "attributes":[{"attribute_name":"violet", "is_negation":"No"}]} ], "relationships": []}
+Example graph: {"objects": [ {"object_id": 1, "name": "pigeon", "is_group": "Yes", "attributes":[{"attribute_name":"purple", "is_negation":"No"}]}, {"object_id": 2, "name": "wigeon", "is_group": "Yes", "attributes":[{"attribute_name":"violet", "is_negation":"No"}]} ], "relationships": [], "scene": {"description": "N/A", "absent_object_names": []}}
 Example text: "a murder of crows chasing a gaggle of geese"
-Example graph: {"objects": [ {"object_id": 1, "name": "crow", "is_group": "Yes", "attributes":[]}, {"object_id": 2, "name": "goose", "is_group": "Yes", "attributes":[], "relationships": [{"subject_ids": [1], "object_ids": [2], "type" : "spatial semantic", "predicate" : "chasing"}]}
+Example graph: {"objects": [ {"object_id": 1, "name": "crow", "is_group": "Yes", "attributes":[]}, {"object_id": 2, "name": "goose", "is_group": "Yes", "attributes":[], "relationships": [{"subject_ids": [1], "object_ids": [2], "type" : "spatial semantic", "predicate" : "chasing"}], "scene": {"description": "N/A", "absent_object_names": []}}
 Example text: "a murder of crows chasing a boy"
-Example graph: {"objects": [ {"object_id": 1, "name": "crow", "is_group": "Yes", "attributes":[]}, {"object_id": 2, "name": "boy", "is_group": "No", "attributes":[], "relationships": [{"subject_ids": [1], "object_ids": [2], "type" : "spatial semantic", "predicate" : "chasing"}]}
+Example graph: {"objects": [ {"object_id": 1, "name": "crow", "is_group": "Yes", "attributes":[]}, {"object_id": 2, "name": "boy", "is_group": "No", "attributes":[], "relationships": [{"subject_ids": [1], "object_ids": [2], "type" : "spatial semantic", "predicate" : "chasing"}], "scene": {"description": "N/A", "absent_object_names": []}}
 Example text: "a boy chasing a murder of crows"
-Example graph: {"objects": [ {"object_id": 1, "name": "boy", "is_group": "No", "attributes":[]}, {"object_id": 2, "name": "crow", "is_group": "Yes", "attributes":[], "relationships": [{"subject_ids": [1], "object_ids": [2], "type" : "spatial semantic", "predicate" : "chasing"}]}
+Example graph: {"objects": [ {"object_id": 1, "name": "boy", "is_group": "No", "attributes":[]}, {"object_id": 2, "name": "crow", "is_group": "Yes", "attributes":[], "relationships": [{"subject_ids": [1], "object_ids": [2], "type" : "spatial semantic", "predicate" : "chasing"}], "scene": {"description": "N/A", "absent_object_names": []}}
 Example text: "a smaller murder of crows chasing a bigger gaggle of geese"
-Example graph: {"objects": [ {"object_id": 1, "name": "crow", "is_group": "Yes", "attributes":[]}, {"object_id": 2, "name": "goose", "is_group": "Yes", "attributes":[], "relationships": [{"subject_ids": [1], "object_ids": [2], "type" : "spatial semantic", "predicate" : "chasing"}, {"subject_ids": [1], "object_ids": [2], "type": "count comparison", "predicate": "smaller"}]}
+Example graph: {"objects": [ {"object_id": 1, "name": "crow", "is_group": "Yes", "attributes":[]}, {"object_id": 2, "name": "goose", "is_group": "Yes", "attributes":[], "relationships": [{"subject_ids": [1], "object_ids": [2], "type" : "spatial semantic", "predicate" : "chasing"}, {"subject_ids": [1], "object_ids": [2], "type": "count comparison", "predicate": "smaller"}], "scene": {"description": "N/A", "absent_object_names": []}}
 Example text: "a murder of crows chasing a gaggle of geese, with more crows than geese"
-Example graph: {"objects": [ {"object_id": 1, "name": "crow", "is_group": "Yes", "attributes":[]}, {"object_id": 2, "name": "goose", "is_group": "Yes", "attributes":[], "relationships": [{"subject_ids": [1], "object_ids": [2], "type" : "spatial semantic", "predicate" : "chasing"}, {"subject_ids": [1], "object_ids": [2], "type": "count comparison", "predicate": "more"}]}
+Example graph: {"objects": [ {"object_id": 1, "name": "crow", "is_group": "Yes", "attributes":[]}, {"object_id": 2, "name": "goose", "is_group": "Yes", "attributes":[], "relationships": [{"subject_ids": [1], "object_ids": [2], "type" : "spatial semantic", "predicate" : "chasing"}, {"subject_ids": [1], "object_ids": [2], "type": "count comparison", "predicate": "more"}], "scene": {"description": "N/A", "absent_object_names": []}}
 '''
 
 INPUT_TEMPLATE = 'Here is the text: "%s"'
@@ -229,7 +235,7 @@ def parse_object(my_object):
 
 def parse_semantic_graph(semantic_graph):
     semantic_graph = json.loads(semantic_graph)
-    object_list, relationships = semantic_graph['objects'], semantic_graph['relationships']
+    object_list, relationships, scene = semantic_graph['objects'], semantic_graph['relationships'], semantic_graph['scene']
     object_list = [parse_object(my_object) for my_object in object_list]
     objects = {}
     for my_object in object_list:
@@ -237,7 +243,10 @@ def parse_semantic_graph(semantic_graph):
         objects[my_object['object_id']] = my_object
 
     relationships = [parse_relationship(relationship) for relationship in relationships]
-    return objects, relationships
+    assert('description' in scene)
+    assert('absent_object_names' in scene)
+    assert(isinstance(scene['absent_object_names'], list))
+    return objects, relationships, scene
 
 
 def handle_negation(text, caches):
@@ -542,8 +551,13 @@ def is_valid_for_count_comparison(id_list, objects):
 #return True if we should regenerate, False otherwise
 def should_regenerate_semantic_graph(semantic_graph, logger):
     semantic_graph = json.loads(semantic_graph)
-    if 'objects' not in semantic_graph or 'relationships' not in semantic_graph:
-        logger.log('Missing "objects" or "relationships" section')
+    if 'objects' not in semantic_graph or 'relationships' not in semantic_graph or 'scene' not in semantic_graph:
+        logger.log('Missing "objects" or "relationships" or "scene" section')
+        return True
+
+    if 'description' not in semantic_graph['scene'] or 'absent_object_names' not in semantic_graph['scene'] or not isinstance(semantic_graph['scene']['absent_object_names'], list):
+        logger.log('Bad scene:')
+        logger.log(semantic_graph['scene'])
         return True
 
     objects, relationships = semantic_graph['objects'], semantic_graph['relationships']
@@ -561,6 +575,25 @@ def should_regenerate_semantic_graph(semantic_graph, logger):
             return True
 
     return False
+
+
+def do_scene_checks(scene, image_pil, models, logger):
+    results = []
+    if scene['description'].lower().strip() != 'n/a':
+        results.append(check_scene_description(image_pil, scene['description'], models, logger))
+    else:
+        logger.log('No scene/style description specified, no need to check.')
+
+    if len(scene['absent_object_names']) > 0:
+        logger.log('Objects %s specified as absent, use detector to check for them...'%(str(scene['absent_object_names'])))
+        detections = run_object_detector(image_pil, scene['absent_object_names'], models)
+        for name in scene['absent_object_names']:
+            logger.log('-Detected %d instances of "%s" in image'%(len(detections[name]), name))
+            results.append(('Check that there are no instances of "%s" detected in image'%(name), int(len(detections[name]) == 0)))
+    else:
+        logger.log('No absent objects specified, no need to check.')
+
+    return results
 
 
 def process_input(my_input, d_image, models, logger):
@@ -590,13 +623,15 @@ def process_input(my_input, d_image, models, logger):
     logger.log(semantic_graph)
     logger.log('')
     logger.log('RUNNING OBJECT DETECTOR...')
-    objects, relationships = parse_semantic_graph(semantic_graph)
+    objects, relationships, scene = parse_semantic_graph(semantic_graph)
     object_names = sorted(set([objects[k]['name'] for k in sorted(objects.keys())]))
     detections = run_object_detector(image_pil, object_names, models)
     for name in object_names:
         logger.log('Detected %d instances of "%s" in image'%(len(detections[name]), name))
 
     count_result = do_count_checks(objects, detections)
+    scene_result = do_scene_checks(scene, image_pil, models, logger)
+    base_result = count_result + scene_result
     best_match = None
     best_result = None
     best_score = float('-inf')
@@ -605,7 +640,7 @@ def process_input(my_input, d_image, models, logger):
         logger.log('CANDIDATE MATCH:')
         print_match(match, objects, image_pil, logger)
         logger.log('CHECKLIST RESULTS FOR CANDIDATE MATCH:')
-        result = copy.deepcopy(count_result)
+        result = copy.deepcopy(base_result)
         for k in sorted(objects.keys()):
             if k not in objects or k not in match:
                 logger.log(objects)
@@ -641,6 +676,7 @@ def get_dst_image_filename(image_filename):
     basename = os.path.basename(image_filename)
     dirname = os.path.basename(os.path.dirname(image_filename))
     return os.path.join('example_genaibench_images', dirname, basename)
+
 
 def get_log_filename(my_input, image_filename):
     prompt_part = re.split(r'[^A-Za-z0-9]+', my_input)
