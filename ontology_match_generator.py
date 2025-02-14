@@ -107,7 +107,7 @@ def match_generator_one_name_group(objects, detections):
 
         for my_object in objects:
             if my_object['object_id'] not in full_match:
-                full_match[my_object['object_id']] = None
+                full_match[my_object['object_id']] = []
 
         yield full_match
 

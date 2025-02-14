@@ -35,7 +35,7 @@ def draw_detections(image, detections, plot_filename):
         color = color_map(i % 10)  # Get a distinct color for each category
 
         for bbox in bboxes:
-            x1, y1, x2, y2, depth = bbox
+            x1, y1, x2, y2, depth, t = bbox
             x1, x2 = x1 * img_w, x2 * img_w
             y1, y2 = y1 * img_h, y2 * img_h
             bbox_width = x2 - x1
@@ -48,8 +48,8 @@ def draw_detections(image, detections, plot_filename):
             )
             ax.add_patch(rect)
 
-            # Text label (Object name + Depth)
-            text_label = f"{label} (Depth: {depth:.2f})"
+            # Text label (Object name + center)
+            text_label = '%s(%d,%d)'%(label, (x1+x2)/2, (y1+y2)/2)
             ax.text(
                 x1, y1 - 5, text_label, fontsize=10, color="white",
                 bbox=dict(facecolor=color, edgecolor=color, boxstyle="round,pad=0.3", alpha=0.7)
@@ -59,3 +59,4 @@ def draw_detections(image, detections, plot_filename):
     plt.axis("off")
     plt.savefig(plot_filename)
     plt.clf()
+    plt.close()

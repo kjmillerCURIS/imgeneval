@@ -8,15 +8,19 @@ import numpy as np
 import openai
 from openai_utils import OPENAI_API_KEY
 openai.api_key = OPENAI_API_KEY
+import random
 import re
 import shutil
 import tiktoken
-from influence_on_human_ratings import load_human_ratings_data, adjust_impath
+from influence_on_human_ratings import load_human_ratings_data, adjust_impath, BASE_DIR
 from ontology_toolset import setup_models, run_object_detector, check_scene_description, check_semantic_relationship, check_predefined_spatial_relationship, check_attribute_comparison_relationship, check_attribute, make_bbox_description
 from ontology_match_generator import match_generator
 from ontology_logger import Logger
 
 
+DATA_STRIDE = 6
+DATA_SEED = 1 #0
+REGEN_LIMIT = 10
 PRINT_NUM_TOKENS = 0
 
 #generate this many graphs, then pick the one with the median colon-count
@@ -94,7 +98,7 @@ Example graph: {“objects”: [ {“object_id”: 1, “name”: “apple”, "
 Example text: “a chinchilla next to an umbrella at the beach”
 Example graph: {“objects”: [ {“object_id”: 1, “name”: “chinchilla”, "is_group" : "No", “attributes”:[]}, {“object_id”: 2, “name”: “umbrella”, "is_group" : "No", “attributes”:[]} ], “relationships”:[{“subject_ids” : [1], “object_ids” : [2], “type” : “spatial only”, “predicate” : “next to”}], "scene": {"description": "beach", "absent_object_names": []}}
 Example text: “a painting of a mouse lying on a yellow table”
-Example graph: {“objects”: [ {“object_id”: 1, “name”: “mouse”, "is_group" : "No", “attributes”:[]}, {“object_id”: 2, “name”: “table”, "is_group" : "No", “attributes”:[{“attribute_name” : “yellow”, “is_negation”:”No”}]} ], “relationships”:[{“subject_ids” : [1], “object_ids” : [2], “type” : “semantic spatial”, “predicate” : “lying on”}], "scene": {"description": "painting", "absent_object_names": []}}
+Example graph: {“objects”: [ {“object_id”: 1, “name”: “mouse”, "is_group" : "No", “attributes”:[]}, {“object_id”: 2, “name”: “table”, "is_group" : "No", “attributes”:[{“attribute_name” : “yellow”, “is_negation”:”No”}]} ], “relationships”:[{“subject_ids” : [1], “object_ids” : [2], “type” : “spatial semantic”, “predicate” : “lying on”}], "scene": {"description": "painting", "absent_object_names": []}}
 Example text: "a man in a house and a woman not in a house"
 Example graph: {"objects": [ {"object_id": 1, "name": "man", "is_group" : "No", "attributes":[]}, {"object_id": 2, "name": "woman", "is_group" : "No", "attributes":[]}, {"object_id" : 3, "name": "house", "is_group" : "No", "attributes":[]} ], "relationships" : [ {"subject_ids" : [1], "object_ids": [3], "type": "spatial", "predicate": "in"}, {"subject_ids": [2], "object_ids": [3], "type": "negative spatial only", "predicate": "not in"} ], "scene": {"description": "N/A", "absent_object_names": []}}
 Example text: “a fish on top and a fish on bottom”
@@ -263,7 +267,7 @@ def handle_negation(text, caches):
 
 
 #project onto predefined spatial vocab
-def handle_spatial_only_relationship(predicate, caches):
+def handle_spatial_only_relationship(predicate, caches, logger):
     options = []
     for spatial_vocab_entry in SPATIAL_VOCAB_ENTRIES:
         options.append('X ' + spatial_vocab_entry + ' Y')
@@ -280,7 +284,10 @@ def handle_spatial_only_relationship(predicate, caches):
     reply = reply.strip().split('\n')[-1].strip().strip('"').strip().rstrip('.')
     if reply not in options:
         options_in_reply = [option for option in options if option in reply]
-        assert(len(options_in_reply) == 1)
+        if len(options_in_reply) != 1:
+            logger.log('(could not figure out which spatial vocab the LLM is giving: "%s")'%(reply))
+            return 'N/A', False
+
         reply = options_in_reply[0]
 
     assert(reply in options)
@@ -288,7 +295,12 @@ def handle_spatial_only_relationship(predicate, caches):
     a, b = len('X '), len(' Y')
     if flip:
         a, b = b, a
+
     spatial_vocab_entry = reply[a:-b]
+    if spatial_vocab_entry not in SPATIAL_VOCAB_ENTRIES:
+        logger.log('(I thought I extracted the spatial vocab entry (from spatial) correctly, but apparently I did not, so returning "N/A": "%s")'%(spatial_vocab_entry))
+        return 'N/A', False
+
     return spatial_vocab_entry, flip
 
 
@@ -331,6 +343,10 @@ def extract_spatial_from_spatial_semantic_relationship(predicate, subject_name, 
         if flip:
             a, b = b, a
         spatial_vocab_entry = reply[a:-b]
+        if spatial_vocab_entry not in SPATIAL_VOCAB_ENTRIES:
+            logger.log('(I thought I extracted the spatial vocab entry (from semantic) correctly, but apparently I did not, so returning "N/A": "%s")'%(spatial_vocab_entry))
+            return 'N/A', False
+
         return spatial_vocab_entry, flip
 
 
@@ -483,9 +499,10 @@ def check_relationship(image_pil, relationship, objects, matched_detections, mod
     subject_name2detections = merge_detections(relationship['subject_ids'], objects, matched_detections)
     object_name2detections = merge_detections(relationship['object_ids'], objects, matched_detections)
 
-    #I'm 99% sure this will always be true
-    assert(len(subject_name2detections.keys()) == 1)
-    assert(len(object_name2detections.keys()) == 1)
+    #This is usually true, so make a note if it isn't
+    if len(subject_name2detections.keys()) != 1 or len(object_name2detections.keys()) != 1:
+        logger.log('SUSPICIOUS RELATIONSHIP (but I will still process it): more than one name in subjects or objects:')
+        logger.log(relationship)
 
     for subject_name in sorted(subject_name2detections.keys()):
         for object_name in sorted(object_name2detections.keys()):
@@ -493,14 +510,15 @@ def check_relationship(image_pil, relationship, objects, matched_detections, mod
                 if relationship['type'] == 'negative spatial only':
                     predicate = handle_negation(predicate, caches)
 
-                spatial_vocab_entry, flip = handle_spatial_only_relationship(predicate, caches)
+                spatial_vocab_entry, flip = handle_spatial_only_relationship(predicate, caches, logger)
                 subject_name_spatial, object_name_spatial = subject_name, object_name
                 subject_name2detections_spatial, object_name2detections_spatial = subject_name2detections, object_name2detections
                 if flip:
                     subject_name_spatial, object_name_spatial = object_name, subject_name
                     subject_name2detections_spatial, object_name2detections_spatial = object_name2detections, subject_name2detections
 
-                result.append(check_predefined_spatial_relationship(image_pil, subject_name_spatial, subject_name2detections_spatial[subject_name_spatial], object_name_spatial, object_name2detections_spatial[object_name_spatial], spatial_vocab_entry, models, logger, negate=(relationship['type'] == 'negative spatial only')))
+                if spatial_vocab_entry != 'N/A':
+                    result.append(check_predefined_spatial_relationship(image_pil, subject_name_spatial, subject_name2detections_spatial[subject_name_spatial], object_name_spatial, object_name2detections_spatial[object_name_spatial], spatial_vocab_entry, models, logger, negate=(relationship['type'] == 'negative spatial only')))
             elif relationship['type'] in ['spatial semantic', 'negative spatial semantic']:
                 if relationship['type'] == 'negative spatial semantic':
                     predicate = handle_negation(predicate, caches)
@@ -518,7 +536,7 @@ def check_relationship(image_pil, relationship, objects, matched_detections, mod
             elif relationship['type'] == 'attribute comparison':
                 attribute, crocodile = extract_attribute_from_attribute_comparison_relationship(predicate, caches, logger)
                 if attribute != 'N/A':
-                    result.append(check_attribute_comparison_relationship(image_pil, subject_name, subject_name2detections[subject_name], object_name, object_name2detections[object_name], attribute, crocodile, models, caches))
+                    result.append(check_attribute_comparison_relationship(image_pil, subject_name, subject_name2detections[subject_name], object_name, object_name2detections[object_name], attribute, crocodile, models, caches, logger))
 
             else:
                 assert(False)
@@ -526,14 +544,14 @@ def check_relationship(image_pil, relationship, objects, matched_detections, mod
     return result
 
 
-def get_image_filename(prompt, d_image, logger=None):
-    matching_images = [d_image[k]['images']['DALLE_3']['filename'] for k in sorted(d_image.keys()) if d_image[k]['prompt'].replace('.','').strip().lower() == prompt.replace('.','').strip().lower()]
-    assert(len(matching_images) == 1)
-    image_filename = adjust_impath(matching_images[0])
-    if logger is not None:
-        logger.log(image_filename)
-
-    return image_filename
+#def get_image_filename(prompt, d_image, logger=None):
+#    matching_images = [d_image[k]['images']['DALLE_3']['filename'] for k in sorted(d_image.keys()) if d_image[k]['prompt'].replace('.','').strip().lower() == prompt.replace('.','').strip().lower()]
+#    assert(len(matching_images) == 1)
+#    image_filename = adjust_impath(matching_images[0])
+#    if logger is not None:
+#        logger.log(image_filename)
+#
+#    return image_filename
 
 
 def print_match(match, objects, image_pil, logger):
@@ -550,12 +568,17 @@ def is_valid_for_count_comparison(id_list, objects):
 
 #return True if we should regenerate, False otherwise
 def should_regenerate_semantic_graph(semantic_graph, logger):
-    semantic_graph = json.loads(semantic_graph)
+    try:
+        semantic_graph = json.loads(semantic_graph)
+    except json.JSONDecodeError as e:
+        logger.log('json exception "%s"'%(str(e)))
+        return True
+
     if 'objects' not in semantic_graph or 'relationships' not in semantic_graph or 'scene' not in semantic_graph:
         logger.log('Missing "objects" or "relationships" or "scene" section')
         return True
 
-    if 'description' not in semantic_graph['scene'] or 'absent_object_names' not in semantic_graph['scene'] or not isinstance(semantic_graph['scene']['absent_object_names'], list):
+    if 'description' not in semantic_graph['scene'] or 'absent_object_names' not in semantic_graph['scene'] or not isinstance(semantic_graph['scene']['absent_object_names'], list) or not isinstance(semantic_graph['scene']['description'], str):
         logger.log('Bad scene:')
         logger.log(semantic_graph['scene'])
         return True
@@ -574,6 +597,11 @@ def should_regenerate_semantic_graph(semantic_graph, logger):
             logger.log(r)
             return True
 
+        if r['type'] not in ['spatial semantic', 'negative spatial semantic', 'spatial only', 'negative spatial only', 'attribute comparison', 'count comparison']:
+            logger.log('Found bad relationship (invalid type):')
+            logger.log(r)
+            return True
+
     return False
 
 
@@ -586,7 +614,7 @@ def do_scene_checks(scene, image_pil, models, logger):
 
     if len(scene['absent_object_names']) > 0:
         logger.log('Objects %s specified as absent, use detector to check for them...'%(str(scene['absent_object_names'])))
-        detections = run_object_detector(image_pil, scene['absent_object_names'], models)
+        detections = run_object_detector(image_pil, scene['absent_object_names'], models, logger)
         for name in scene['absent_object_names']:
             logger.log('-Detected %d instances of "%s" in image'%(len(detections[name]), name))
             results.append(('Check that there are no instances of "%s" detected in image'%(name), int(len(detections[name]) == 0)))
@@ -596,27 +624,40 @@ def do_scene_checks(scene, image_pil, models, logger):
     return results
 
 
-def process_input(my_input, d_image, models, logger):
+def process_input(my_input, image_filename, models, logger):
     logger.log(my_input)
     caches = {'semantic_relationship_cache':{}, 'attribute_cache':{}, 'attribute_comparison_relationship_cache':{}, 'LLM_cache':{}}
-    image_filename = get_image_filename(my_input, d_image, logger=logger)
+    logger.log(image_filename)
     image_pil = Image.open(image_filename).convert('RGB')
     candidate_graphs = []
     for graph_rep in range(NUM_FOR_MEDIAN_LENGTH):
         logger.log('Generating candidate graph %d...'%(graph_rep))
+        regen_counter = 0
+        graph_success = False
         while True:
             candidate_graph, (assistant_replyA, assistant_replyB, assistant_replyC) = generate_semantic_graph(my_input)
             if not should_regenerate_semantic_graph(candidate_graph, logger):
+                graph_success = True
                 logger.log('Semantic graph is good enough, no need to regenerate!')
+                break
+
+            regen_counter += 1
+            if regen_counter >= REGEN_LIMIT:
+                logger.log('GIVE UP ON CANDIDATE GRAPH')
                 break
 
             logger.log('Regenerating semantic graph...')
 
+        if graph_success:
+            candidate_graphs.append(candidate_graph)
 
-        candidate_graphs.append(candidate_graph)
+    if len(candidate_graphs) == 0:
+        logger.log('GIVE UP ON GRAPH')
+        logger.log('best_score = 0.5')
+        return
 
     logger.log('Candidate graph json colon-counts are: %s'%(str([g.count(':') for g in candidate_graphs])))
-    semantic_graph = sorted(candidate_graphs, key=lambda g: g.count(':'))[NUM_FOR_MEDIAN_LENGTH//2]
+    semantic_graph = sorted(candidate_graphs, key=lambda g: g.count(':'))[len(candidate_graphs)//2]
 
     logger.log('')
     logger.log('SEMANTIC GRAPH:')
@@ -625,7 +666,20 @@ def process_input(my_input, d_image, models, logger):
     logger.log('RUNNING OBJECT DETECTOR...')
     objects, relationships, scene = parse_semantic_graph(semantic_graph)
     object_names = sorted(set([objects[k]['name'] for k in sorted(objects.keys())]))
-    detections = run_object_detector(image_pil, object_names, models)
+    if len(object_names) == 0:
+        logger.log('nevermind, no objects were specified, just do scene check...')
+        scene_result = do_scene_checks(scene, image_pil, models, logger)
+        if len(scene_result) == 0: #just give it a "pass"
+            logger.log('best_score = 1.0')
+        else:
+            logger.log('best_score = %s'%(str(np.mean([p[1] for p in scene_result]))))
+
+        return
+
+    log_filename = get_log_filename(my_input, image_filename)
+    bbox_vis_filename = os.path.join(os.path.dirname(log_filename),'bbox_vis',os.path.splitext(os.path.basename(log_filename))[0]+'.png')
+
+    detections = run_object_detector(image_pil, object_names, models, logger, bbox_vis_filename=bbox_vis_filename)
     for name in object_names:
         logger.log('Detected %d instances of "%s" in image'%(len(detections[name]), name))
 
@@ -684,33 +738,53 @@ def get_log_filename(my_input, image_filename):
     prompt_part = '_'.join(prompt_part)
     image_base = os.path.splitext(os.path.basename(image_filename))[0]
     image_dir = os.path.basename(os.path.dirname(image_filename))
-    log_filename = os.path.join('example_genaibench_ontology_logs', image_dir + '_' + image_base + '_' + prompt_part + '.txt')
+    log_filename = os.path.join(BASE_DIR, 'genaibench_ontology_logs', image_dir + '_' + image_base + '_' + prompt_part + '.txt')
     os.makedirs(os.path.dirname(log_filename), exist_ok=True)
     return log_filename
 
 
-def reporting_stuff(my_input, d_image, logger):
-    image_filename = get_image_filename(my_input, d_image)
-    dst_image_filename = get_dst_image_filename(image_filename)
-    if not os.path.exists(dst_image_filename):
-        os.makedirs(os.path.dirname(dst_image_filename), exist_ok=True)
-        shutil.copy(image_filename, dst_image_filename)
+#def reporting_stuff(my_input, d_image, logger):
+#    image_filename = get_image_filename(my_input, d_image)
+#    dst_image_filename = get_dst_image_filename(image_filename)
+#    if not os.path.exists(dst_image_filename):
+#        os.makedirs(os.path.dirname(dst_image_filename), exist_ok=True)
+#        shutil.copy(image_filename, dst_image_filename)
+#
+#    log_filename = get_log_filename(my_input, image_filename)
+#    logger.save_and_clear(log_filename)
 
-    log_filename = get_log_filename(my_input, image_filename)
-    logger.save_and_clear(log_filename)
 
+#return d[k] = {'prompt' : prompt, 'conditions' : conditions, 'images' : {generator : {'filename' : filename, 'rating' : rating}}}
+def main(generator, offset):
+    offset = int(offset)
+    assert(offset >= 0 and offset < DATA_STRIDE)
 
-def main():
     logger = Logger()
     d_image = load_human_ratings_data()
     models = setup_models()
-    for t, my_input in enumerate(MY_INPUTS):
+    random.seed(DATA_SEED)
+    my_keys = random.sample(sorted(d_image.keys()), len(d_image.keys()))
+    for t, k in enumerate(my_keys):
+        if t % DATA_STRIDE != offset:
+            continue
+
+        my_input = d_image[k]['prompt']
+        image_filename = adjust_impath(d_image[k]['images'][generator]['filename'])
+        log_filename = get_log_filename(my_input, image_filename)
+        if os.path.exists(log_filename):
+            print('Log file "%s" already exists, skipping.'%(log_filename))
+            continue
+
         logger.log('EXAMPLE %d:'%(t))
-        process_input(my_input, d_image, models, logger)
-        logger.log('')
-        logger.log('')
-        reporting_stuff(my_input, d_image, logger)
+        process_input(my_input, image_filename, models, logger)
+        logger.save_and_clear(log_filename)
+        print('')
+        print('')
+
+
+def usage():
+    print('Usage: python ontology_questions.py <generator> <offset>')
 
 
 if __name__ == '__main__':
-    main()
+    main(*(sys.argv[1:]))

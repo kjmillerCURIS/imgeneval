@@ -8,6 +8,7 @@ from PIL import Image
 import torch
 from tqdm import tqdm
 from lavis.models import load_model_and_preprocess
+from nltk import edit_distance
 sys.path.append('VPEval/src')
 sys.path.append('VPEval/src/dino')
 from dino.vpeval.model.modeling import Model as DinoModel
@@ -44,7 +45,7 @@ def preprocess_with_bboxes(image_pil, bboxes, sigma=BLUR_SIGMA):
     h, w, _ = numI.shape  # Get image dimensions
 
     # Convert normalized bbox coordinates to absolute pixel coordinates
-    abs_bboxes = [(int(x1 * w), int(y1 * h), int(x2 * w), int(y2 * h)) for x1, y1, x2, y2, _ in bboxes]
+    abs_bboxes = [(int(x1 * w), int(y1 * h), int(x2 * w), int(y2 * h)) for x1, y1, x2, y2, _, _ in bboxes]
 
     # Compute the tightest bounding box containing all bboxes
     x_min = min(x1 for x1, _, _, _ in abs_bboxes)
@@ -92,7 +93,7 @@ def preprocess_with_bboxes(image_pil, bboxes, sigma=BLUR_SIGMA):
 
     # Compute new bounding boxes relative to the cropped image
     new_bboxes = [((x1 - x_start) / (x_end - x_start), (y1 - y_start) / (x_end - x_start), 
-                   (x2 - x_start) / (x_end - x_start), (y2 - y_start) / (y_end - y_start), z) for (x1, y1, x2, y2), (_, _, _, _, z) in zip(abs_bboxes, bboxes)]
+                   (x2 - x_start) / (x_end - x_start), (y2 - y_start) / (y_end - y_start), z, t) for (x1, y1, x2, y2), (_, _, _, _, z, t) in zip(abs_bboxes, bboxes)]
 
     return Image.fromarray(numIout), new_bboxes
 
@@ -191,23 +192,43 @@ def predefined_spatial(bboxA, bboxB, predicate, logger):
     elif predicate == 'behind':
         return int(bboxB[4] < bboxA[4])
     else:
-        logger('Unrecognized predefined spatial predicate "%s"'%(predicate))
+        logger.log('Unrecognized predefined spatial predicate "%s"'%(predicate))
         assert(False)
 
 
 #return dict mapping from each object name to list of bboxes
 #each bbox should be [x1, y1, x2, y2, depth] on 0-1 scale (except for depth which is on its own scale)
 #for depth, I give the multiplicative inverse of what DPT gives. So what I return should give smaller depths for closer objects.
-def run_object_detector(image_pil, object_names, models):
+def run_object_detector(image_pil, object_names, models, logger, bbox_vis_filename=None):
     assert(len(set(object_names)) == len(object_names))
+    if len(object_names) == 0:
+        return {}
+
     datum = {'image_pil' : image_pil, 'gt_labels' : object_names}
     labels, bboxes, _ = models['GroundingDINO']([datum], box_threshold=DETECTION_THRESHOLD)
     labels, bboxes = labels[0], bboxes[0]
     W, H = image_pil.size
     detections = {name : [] for name in object_names}
-    for label, bbox in zip(labels, bboxes):
-        assert(label in detections)
-        detections[label].append([bbox[0] / W, bbox[1] / H, bbox[2] / W, bbox[3] / H, 1.0 / bbox[4]])
+    for t, (the_label, bbox) in enumerate(zip(labels, bboxes)):
+        label = the_label
+        if label not in detections:
+            label = None
+            best_distance = float('+inf')
+            for name in object_names:
+                distance = edit_distance(the_label, name)
+                if distance < best_distance:
+                    best_distance = distance
+                    label = name
+
+            logger.log('SUSPICIOUS DETECTOR LABEL (but I will still process it): "%s" not exactly in object_names (%s), but closest one by edit distance is "%s", so assume it was that.'%(the_label, str(object_names), label))
+
+        #I've been doing equality checks on bboxes in order to skip self-relationships
+        #Unfortunately, sometimes different bboxes have the exact same coordinates!
+        #so, I add an extra field to tell them apart
+        detections[label].append([bbox[0] / W, bbox[1] / H, bbox[2] / W, bbox[3] / H, 1.0 / bbox[4], t])
+
+    if bbox_vis_filename is not None:
+        draw_detections(image_pil, detections, bbox_vis_filename)
 
     return detections
 
@@ -321,6 +342,10 @@ def check_semantic_relationship(image_pil, object_name_A, bboxA, object_name_B, 
     A_is_list = isinstance(bboxA[0], list)
     B_is_list = isinstance(bboxB[0], list)
     if not (A_is_list or B_is_list):
+        if bboxA == bboxB:
+            logger.log('Identical bbox - returning 0')
+            return (description, 0)
+
         answer = check_semantic_relationship_helper(image_pil, object_name_A, bboxA, object_name_B, bboxB, predicate, models, caches, logger)
         assert(not np.isnan(answer))
         if negate:
@@ -340,7 +365,10 @@ def check_semantic_relationship(image_pil, object_name_A, bboxA, object_name_B, 
                  answer_matrix[i,j] = check_semantic_relationship_helper(image_pil, object_name_A, bboxA[i], object_name_B, bboxB[j], predicate, models, caches, logger)
 
         answer = 0.5 * np.nanmean(np.nanmax(answer_matrix, axis=0)) + 0.5 * np.nanmean(np.nanmax(answer_matrix, axis=1))
-        assert(not np.isnan(answer))
+        if np.isnan(answer):
+            logger.log('Too many bbox pairs must have been identical - returning 0')
+            return (description, 0)
+
         if negate:
             answer = 1 - answer
 
@@ -367,6 +395,10 @@ def check_predefined_spatial_relationship(image_pil, object_name_A, bboxA, objec
     A_is_list = isinstance(bboxA[0], list)
     B_is_list = isinstance(bboxB[0], list)
     if not (A_is_list or B_is_list):
+        if bboxA == bboxB:
+            logger.log('Identical bbox - returning 0')
+            return (description, 0)
+        
         answer = predefined_spatial(bboxA, bboxB, predicate, logger)
         assert(not np.isnan(answer))
         if negate:
@@ -386,7 +418,10 @@ def check_predefined_spatial_relationship(image_pil, object_name_A, bboxA, objec
                  answer_matrix[i,j] = predefined_spatial(bboxA[i], bboxB[j], predicate, logger)
 
         answer = 0.5 * np.nanmean(np.nanmax(answer_matrix, axis=0)) + 0.5 * np.nanmean(np.nanmax(answer_matrix, axis=1))
-        assert(not np.isnan(answer))
+        if np.isnan(answer):
+            logger.log('Too many bbox pairs must have been identical - returning 0')
+            return (description, 0)
+        
         if negate:
             answer = 1 - answer
 
@@ -397,7 +432,7 @@ def check_predefined_spatial_relationship(image_pil, object_name_A, bboxA, objec
 #if there are multiple, we will take 0.5*avg_{subject in subjects}[max_{object in objects} answer(subject, object)] + 0.5*viceversa
 #negate will subtract this final answer from 1
 #return log entry
-def check_attribute_comparison_relationship(image_pil,object_name_A,bboxA,object_name_B,bboxB,attribute_name,crocodile,models,caches):
+def check_attribute_comparison_relationship(image_pil,object_name_A,bboxA,object_name_B,bboxB,attribute_name,crocodile,models,caches,logger):
     #make description (ahead of time)
     A_desc = make_bbox_description(image_pil, object_name_A, bboxA)
     B_desc = make_bbox_description(image_pil, object_name_B, bboxB)
@@ -408,6 +443,10 @@ def check_attribute_comparison_relationship(image_pil,object_name_A,bboxA,object
     A_is_list = isinstance(bboxA[0], list)
     B_is_list = isinstance(bboxB[0], list)
     if not (A_is_list or B_is_list):
+        if bboxA == bboxB:
+            logger.log('Identical bbox - returning 0')
+            return (description, 0)
+        
         answer = check_attribute_comparison_relationship_helper(image_pil, object_name_A, bboxA, object_name_B, bboxB, attribute_name, crocodile, models, caches)
         assert(not np.isnan(answer))
         return (description, answer)
@@ -424,7 +463,9 @@ def check_attribute_comparison_relationship(image_pil,object_name_A,bboxA,object
                  answer_matrix[i,j] = check_attribute_comparison_relationship_helper(image_pil, object_name_A, bboxA[i], object_name_B, bboxB[j], attribute_name, crocodile, models, caches)
 
         answer = 0.5 * np.nanmean(np.nanmax(answer_matrix, axis=0)) + 0.5 * np.nanmean(np.nanmax(answer_matrix, axis=1))
-        assert(not np.isnan(answer))
+        if np.isnan(answer):
+            logger.log('Too many bbox pairs must have been identical - returning 0')
+            return (description, 0)
 
         return (description, answer)
 
@@ -470,10 +511,10 @@ if __name__ == '__main__':
     draw_detections(imageFocusCats_pil, {'cat' : new_cat_bboxes}, 'purr.png')
     ans01 = query_VQA_with_bboxes(imageFocusCats_pil, 'cat', new_cat_bboxes[0], 'cat', new_cat_bboxes[1], 'chasing', models)
     ans10 = query_VQA_with_bboxes(imageFocusCats_pil, 'cat', new_cat_bboxes[1], 'cat', new_cat_bboxes[0], 'chasing', models)
-    print((new_cat_bboxes[0][-1], new_cat_bboxes[1][-1], ans01))
-    print((new_cat_bboxes[1][-1], new_cat_bboxes[0][-1], ans10))
+    print((new_cat_bboxes[0][-2], new_cat_bboxes[1][-2], ans01))
+    print((new_cat_bboxes[1][-2], new_cat_bboxes[0][-2], ans10))
     for meowdex in [0,1]:
         imageOneKitty_pil, [bbox_one_kitty] = preprocess_with_bboxes(image_pil, [detections['cat'][meowdex]])
         for cattribute in ['siamese', 'tabby', 'running', 'orange', 'sleeping', 'with a bowtie', 'wearing a bowtie']:
             attr_val = measure_attribute(imageOneKitty_pil, 'cat', cattribute, bbox_one_kitty, models)
-            print('Measure attribute "%s" for kitty at depth %.3f: %f'%(cattribute, detections['cat'][meowdex][-1], attr_val))
+            print('Measure attribute "%s" for kitty at depth %.3f: %f'%(cattribute, detections['cat'][meowdex][-2], attr_val))
