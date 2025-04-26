@@ -13,7 +13,11 @@ import re
 import shutil
 import tiktoken
 from influence_on_human_ratings import load_human_ratings_data, adjust_impath, BASE_DIR
-from ontology_toolset import setup_models, run_object_detector, check_scene_description, check_semantic_relationship, check_predefined_spatial_relationship, check_attribute_comparison_relationship, check_attribute, make_bbox_description
+try:
+    from ontology_toolset import setup_models, run_object_detector, check_scene_description, check_semantic_relationship, check_predefined_spatial_relationship, check_attribute_comparison_relationship, check_attribute, make_bbox_description
+except Exception as e:
+    print(f'problem importing from ontology_toolset, {e}')
+
 from ontology_match_generator import match_generator
 from ontology_logger import Logger
 
@@ -238,6 +242,8 @@ def parse_object(my_object):
 
 
 def parse_semantic_graph(semantic_graph):
+    import pdb
+    pdb.set_trace()
     semantic_graph = json.loads(semantic_graph)
     object_list, relationships, scene = semantic_graph['objects'], semantic_graph['relationships'], semantic_graph['scene']
     object_list = [parse_object(my_object) for my_object in object_list]

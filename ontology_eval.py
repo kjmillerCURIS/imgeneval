@@ -10,6 +10,7 @@ from ontology_questions import get_log_filename
 
 
 SKIP_FILENAMES = ['SDXL_2_1_00149_Three_pink_peonies_and_four_white_daisies_in_a_garden.txt']
+ALPHAS = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
 
 
 def get_ontology_score(log_filename):
@@ -28,6 +29,7 @@ def ontology_eval():
     human_scores = []
     tifa_scores = []
     ontology_scores = []
+    combo_scores = {alpha : [] for alpha in ALPHAS}
     for k in tqdm(sorted(d_human.keys())):
         for generator in GENERATORS:
             prompt = d_human[k]['prompt']
@@ -49,10 +51,15 @@ def ontology_eval():
             human_scores.append(human_score)
             tifa_scores.append(tifa_score)
             ontology_scores.append(ontology_score)
+            for alpha in ALPHAS:
+                combo_scores[alpha].append(alpha * ontology_score + (1-alpha) * tifa_score)
 
     print('Found %d GenAI-Bench examples'%(len(human_scores)))
     print('TIFA: spearman_rho = %f'%(spearmanr(human_scores, tifa_scores).statistic))
     print('Ontology: spearman_rho = %f'%(spearmanr(human_scores, ontology_scores).statistic))
+    print('Sweeping through Ontology-TIFA blending alphas...')
+    for alpha in ALPHAS:
+        print('alpha = %f ==> spearman_rho = %f'%(alpha, spearmanr(human_scores, combo_scores[alpha]).statistic))
 
 
 if __name__ == '__main__':

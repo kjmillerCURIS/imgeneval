@@ -3,7 +3,11 @@ import sys
 import pickle
 from tqdm import tqdm
 sys.path.append('tifa')
-from tifascore import get_question_and_answers, filter_question_and_answers, UnifiedQAModel, tifa_score_single, VQAModel
+try:
+    from tifascore import get_question_and_answers, filter_question_and_answers, UnifiedQAModel, tifa_score_single, VQAModel
+except Exception as e:
+    print(f"error importing from tifascore, {e}")
+
 import openai
 from openai_utils import OPENAI_API_KEY
 os.environ['OPENAI_API_KEY'] = OPENAI_API_KEY
