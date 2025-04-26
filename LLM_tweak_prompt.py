@@ -12,7 +12,6 @@ from benchmark_negclip_on_our_synthetic_dataset import OUR_OUTPUT_FILENAME
 from explore_our_synthetic_data_negclip_outputs import is_in_range
 
 
-RANDOM_SEED = 0
 NUM_EXAMPLES = 30
 TRIPLE_TICKS = 3 * BACKTICK
 ORIGINAL_PROMPT = '''
